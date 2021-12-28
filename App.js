@@ -1,4 +1,5 @@
-import { DefaultTheme, Provider as PaperProvider, Text } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import Main from '@/Main';
 
 const theme = {
   ...DefaultTheme,
@@ -12,7 +13,7 @@ const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Main />
     </PaperProvider>
   );
 }
