@@ -47,7 +47,7 @@ export default function Main() {
             <Drawer.Screen
               name="Home"
               component={HomeScreen}
-              options={{ title: 'CasperHolders' }}
+              options={{ title: 'Casper Holders' }}
             />
             <Drawer.Screen
               name="Balance"

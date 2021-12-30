@@ -1,12 +1,21 @@
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { Image, StyleSheet, View } from 'react-native';
 import { Divider, Drawer, Headline } from 'react-native-paper';
 
 export default function DrawerContent({ navigation, ...props }) {
   return (
     <DrawerContentScrollView navigation={navigation} {...props}>
-      <Headline style={{ paddingHorizontal: 16, paddingVertical: 8 }}>
-        CasperHolders
-      </Headline>
+      <View
+        style={styles.titleWrapper}
+      >
+        <Image
+          source={require('../../../assets/icon.png')}
+          style={styles.titleLogo}
+        />
+        <Headline style={styles.titleText}>
+          Casper Holders
+        </Headline>
+      </View>
       <Divider />
       <Drawer.Item
         label="Home"
@@ -40,3 +49,20 @@ export default function DrawerContent({ navigation, ...props }) {
     </DrawerContentScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  titleWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+  },
+  titleLogo: {
+    marginRight: 8,
+    width: 32,
+    height: 32,
+  },
+  titleText: {
+    fontWeight: 'bold',
+  },
+});
