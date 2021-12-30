@@ -1,10 +1,9 @@
-import { View } from 'react-native';
-import { Text } from 'react-native-paper';
+import HomeConnected from '@/components/home/HomeConnected';
+import HomeNotConnected from '@/components/home/HomeNotConnected';
+import useConnected from '@/hooks/selectors/useConnected';
 
 export default function HomeScreen() {
-  return (
-    <View>
-      <Text>Home!</Text>
-    </View>
-  );
+  const connected = useConnected();
+
+  return connected ? <HomeConnected /> : <HomeNotConnected />;
 }
