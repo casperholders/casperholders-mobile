@@ -1,3 +1,4 @@
+import 'node-libs-react-native/globals';
 import Main from '@/Main';
 import store from '@/store';
 import { DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
@@ -7,13 +8,6 @@ import { StatusBar } from 'react-native';
 import { DarkTheme as PaperDarkTheme, Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as ReduxProvider } from 'react-redux';
-
-try {
-  console.log(require('casper-js-sdk'));
-} catch (error) {
-  console.log(error);
-  console.log(error.stack);
-}
 
 const CombinedDarkTheme = merge(NavigationDarkTheme, PaperDarkTheme, {
   dark: true,
