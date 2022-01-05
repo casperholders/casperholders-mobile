@@ -15,8 +15,8 @@ const authSlice = createSlice({
     },
     disconnect: (state) => {
       state.connected = false;
-      state.signerType = undefined;
       state.activeKey = undefined;
+      state.signerId = undefined;
     },
   },
 });

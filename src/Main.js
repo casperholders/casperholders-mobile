@@ -1,4 +1,4 @@
-import DrawerContent from '@/components/navigation/DrawerContent';
+import DrawerContent from '@/components/layout/DrawerContent';
 import BalanceScreen from '@/screens/BalanceScreen';
 import HomeScreen from '@/screens/HomeScreen';
 import TransferScreen from '@/screens/TransferScreen';

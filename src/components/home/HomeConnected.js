@@ -1,12 +1,12 @@
+import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import useDispatchDisconnect from '@/hooks/actions/useDispatchDisconnect';
-import { View } from 'react-native';
 import { Button, Paragraph, Title } from 'react-native-paper';
 
 export default function HomeConnected() {
   const dispatchDisconnect = useDispatchDisconnect();
 
   return (
-    <View>
+    <ScreenWrapper>
       <Title>Welcome back to Casper Holders!</Title>
       <Paragraph>
         TODO
@@ -17,6 +17,6 @@ export default function HomeConnected() {
       >
         Disconnect
       </Button>
-    </View>
+    </ScreenWrapper>
   );
 }
