@@ -23,6 +23,7 @@ export default function TransferScreen() {
   const [transferId, setTransferId] = useState('0');
   const [amount, setAmount] = useState('0');
 
+  // TODO Compute using useEffect (avoid useless computation).
   const balanceAmount = balanceLoading || balanceError ? undefined : balance;
   let balanceAmountAfter;
   try {
