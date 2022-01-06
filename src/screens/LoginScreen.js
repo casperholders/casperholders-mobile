@@ -1,8 +1,9 @@
+import DotsGridBackground from '@/components/common/DotsGridBackground';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
-import { Image, ImageBackground, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Button, Text, Title } from 'react-native-paper';
 
-export default function HomeNotConnected() {
+export default function LoginScreen() {
   const dispatchConnect = useDispatchConnect();
 
   const handleConnect = () => {
@@ -16,17 +17,13 @@ export default function HomeNotConnected() {
   };
 
   return (
-    <ImageBackground
-      source={require('../../../assets/background.png')}
-      resizeMode="repeat"
-      style={styles.background}
-    >
+    <DotsGridBackground>
       <KeyboardAvoidingView
         style={styles.container}
         behavior="padding"
       >
         <Image
-          source={require('../../../assets/logo.png')}
+          source={require('../../assets/logo.png')}
           style={styles.logo}
         />
         <Title style={styles.header}>Casper Holders</Title>
@@ -34,7 +31,7 @@ export default function HomeNotConnected() {
         <Button
           icon={() => (
             <Image
-              source={require('../../../assets/torus.png')}
+              source={require('../../assets/torus.png')}
               style={{ width: 32, height: 32 }}
             />
           )}
@@ -48,7 +45,7 @@ export default function HomeNotConnected() {
         <Button
           icon={() => (
             <Image
-              source={require('../../../assets/ledger_logo.png')}
+              source={require('../../assets/ledger_logo.png')}
               style={{ width: 32, height: 32 }}
             />
           )}
@@ -69,15 +66,11 @@ export default function HomeNotConnected() {
           Connect locally (Coming soon)
         </Button>
       </KeyboardAvoidingView>
-    </ImageBackground>
+    </DotsGridBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: '100%',
-  },
   container: {
     flex: 1,
     padding: 20,

@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
-import HomeNotConnected from './components/home/HomeNotConnected';
+import LoginScreen from './screens/LoginScreen';
 import useConnected from './hooks/selectors/useConnected';
 
 const Drawer = createDrawerNavigator();
@@ -14,7 +14,7 @@ export default function Main() {
   const theme = useTheme();
   const connected = useConnected();
 
-  return !connected ?  <HomeNotConnected /> : (
+  return !connected ?  <LoginScreen /> : (
     <NavigationContainer theme={theme}>
       <Drawer.Navigator
         initialRouteName="Balance"

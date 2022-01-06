@@ -1,17 +1,16 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 export default function ScreenWrapper({ children, ...other }) {
   return (
-    <ScrollView {...other}>
-      <View style={styles.wrapper}>
-        {children}
-      </View>
+    <ScrollView contentContainerStyle={styles.wrapper} {...other}>
+      {children}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
+    flexGrow: 1,
     paddingHorizontal: 12,
     paddingVertical: 16,
   },
