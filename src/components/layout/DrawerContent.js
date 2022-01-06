@@ -5,8 +5,13 @@ import useDispatchDisconnect from '../../hooks/actions/useDispatchDisconnect';
 
 export default function DrawerContent({ navigation, ...props }) {
   const dispatchDisconnect = useDispatchDisconnect();
+
   return (
-    <DrawerContentScrollView style={styles.drawer} navigation={navigation} {...props}>
+    <DrawerContentScrollView
+      style={styles.drawer}
+      navigation={navigation}
+      {...props}
+    >
       <View
         style={styles.titleWrapper}
       >
@@ -43,14 +48,13 @@ export default function DrawerContent({ navigation, ...props }) {
           onPress={() => navigation.navigate('Transfer')}
         />
       </Drawer.Section>
-      <Drawer.Section style={styles.bottom}>
+      <View style={styles.bottom}>
         <Drawer.Item
           label="Logout"
           icon="logout"
-
           onPress={() => dispatchDisconnect()}
         />
-      </Drawer.Section>
+      </View>
     </DrawerContentScrollView>
   );
 }
