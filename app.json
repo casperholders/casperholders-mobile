@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner": "casperholders",
     "name": "Casper Holders",
     "slug": "casperholders-mobile",
     "platforms": [
