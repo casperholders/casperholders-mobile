@@ -2,7 +2,9 @@
   "expo": {
     "name": "Casper Holders",
     "slug": "casperholders-mobile",
-    "version": "1.0.0",
+    "platforms": [
+      "android"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "backgroundColor": "#00012a",
@@ -18,6 +20,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.casperholders.wallet",
+      "permissions" : []
+    },
     "ios": {
       "supportsTablet": true
     }

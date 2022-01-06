@@ -1,10 +1,12 @@
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { Image, StyleSheet, View } from 'react-native';
 import { Divider, Drawer, Headline } from 'react-native-paper';
+import useDispatchDisconnect from '../../hooks/actions/useDispatchDisconnect';
 
 export default function DrawerContent({ navigation, ...props }) {
+  const dispatchDisconnect = useDispatchDisconnect();
   return (
-    <DrawerContentScrollView navigation={navigation} {...props}>
+    <DrawerContentScrollView style={styles.drawer} navigation={navigation} {...props}>
       <View
         style={styles.titleWrapper}
       >
@@ -17,11 +19,6 @@ export default function DrawerContent({ navigation, ...props }) {
         </Headline>
       </View>
       <Divider />
-      <Drawer.Item
-        label="Home"
-        icon="home"
-        onPress={() => navigation.navigate('Home')}
-      />
       <Drawer.Section title="Account">
         <Drawer.Item
           label="Balance"
@@ -46,11 +43,24 @@ export default function DrawerContent({ navigation, ...props }) {
           onPress={() => navigation.navigate('Transfer')}
         />
       </Drawer.Section>
+      <Drawer.Section style={styles.bottom}>
+        <Drawer.Item
+          label="Logout"
+          icon="logout"
+
+          onPress={() => dispatchDisconnect()}
+        />
+      </Drawer.Section>
     </DrawerContentScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  drawer: {
+    flex: 1,
+    alignContent: 'space-between',
+    flexDirection: 'row',
+  },
   titleWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -64,5 +74,9 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: 'bold',
+  },
+  bottom: {
+    justifyContent: 'flex-end',
+    flex: 1,
   },
 });

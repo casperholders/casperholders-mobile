@@ -1,21 +1,23 @@
 import DrawerContent from '@/components/layout/DrawerContent';
 import BalanceScreen from '@/screens/BalanceScreen';
-import HomeScreen from '@/screens/HomeScreen';
 import TransferScreen from '@/screens/TransferScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
+import HomeNotConnected from './components/home/HomeNotConnected';
+import useConnected from './hooks/selectors/useConnected';
 
 const Drawer = createDrawerNavigator();
 
 export default function Main() {
   const theme = useTheme();
+  const connected = useConnected();
 
-  return (
+  return !connected ?  <HomeNotConnected /> : (
     <NavigationContainer theme={theme}>
       <Drawer.Navigator
-        initialRouteName="Home"
+        initialRouteName="Balance"
         drawerContent={props => <DrawerContent {...props} />}
         screenOptions={{
           headerTintColor: '#ffffff',
@@ -27,11 +29,6 @@ export default function Main() {
           },
         }}
       >
-        <Drawer.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Casper Holders' }}
-        />
         <Drawer.Screen
           name="Balance"
           component={BalanceScreen}
