@@ -1,4 +1,4 @@
-import 'node-libs-react-native/globals';
+import '@/bootstrap';
 import Main from '@/Main';
 import store from '@/store';
 import { DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
