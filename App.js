@@ -11,6 +11,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 const CombinedDarkTheme = merge(NavigationDarkTheme, PaperDarkTheme, {
   dark: true,
+  roundness: 8,
   colors: {
     primary: '#00126b',
     background: '#00012a',

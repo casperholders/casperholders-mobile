@@ -39,6 +39,11 @@ export default function TransferScreen() {
 
   const [loading, handleSubmit] = useAsyncHandler(() => {
     return new Promise((resolve) => {
+      if (!form.validate()) {
+        resolve();
+        return;
+      }
+
       setTimeout(() => {
         console.log('Submit transfer', {
           address,

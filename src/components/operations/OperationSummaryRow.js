@@ -1,23 +1,10 @@
-import Big from 'big.js';
+import useFormattedAmount from '@/hooks/useFormattedAmount';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-function formatAmount(amount) {
-  let formattedAmount;
-  if (amount !== undefined) {
-    try {
-      formattedAmount = Big(amount).toString();
-    } catch (_) {
-      formattedAmount = '-';
-    }
-  } else {
-    formattedAmount = '-';
-  }
-
-  return `${formattedAmount} CSPR`;
-}
-
 export default function OperationSummaryRow({ label, amount }) {
+  const formattedAmount = useFormattedAmount(amount);
+
   return (
     <View style={styles.summaryRow}>
       <View style={styles.summaryCol}>
@@ -27,7 +14,7 @@ export default function OperationSummaryRow({ label, amount }) {
       </View>
       <View style={styles.summaryCol}>
         <Text style={styles.summaryColAmount}>
-          {formatAmount(amount)}
+          {formattedAmount}
         </Text>
       </View>
     </View>

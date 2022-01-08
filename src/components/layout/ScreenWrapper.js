@@ -11,7 +11,7 @@ export default function ScreenWrapper({ children, ...other }) {
 const styles = StyleSheet.create({
   wrapper: {
     flexGrow: 1,
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
     paddingVertical: 16,
   },
 });
