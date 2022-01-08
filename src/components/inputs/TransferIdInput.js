@@ -1,26 +1,27 @@
+import InputMessages from '@/components/inputs/InputMessages';
 import InputWrapper from '@/components/inputs/InputWrapper';
 import useInput from '@/hooks/inputs/useInput';
 import usePasteHandler from '@/hooks/inputs/usePasteHandler';
-import { HelperText, TextInput } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 
-export default function TransferIdInput({ form, transferId, onChangeTransferId }) {
-  const [value, setValue, valid, error] = useInput(form, transferId, [
+export default function TransferIdInput({ form, label, hint, value, onChangeValue }) {
+  const [internalValue, setInternalValue, error] = useInput(form, value, [
     (a) => !!a || 'Transfer ID is required',
     (a) => /^[0-9]+$/.test(a) || 'Transfer ID must be a number',
-  ], onChangeTransferId);
+  ], onChangeValue);
 
-  const handlePaste = usePasteHandler(setValue);
+  const handlePaste = usePasteHandler(setInternalValue);
 
   return (
     <InputWrapper>
       <TextInput
-        label="TransferId"
+        label={label}
         activeUnderlineColor="white"
         keyboardType="numeric"
-        error={!valid}
-        value={value.current}
+        error={!!error}
+        value={internalValue.current}
         dense
-        onChangeText={setValue}
+        onChangeText={setInternalValue}
         left={<TextInput.Icon name="pound" />}
         right={<TextInput.Icon
           name="content-paste"
@@ -29,9 +30,10 @@ export default function TransferIdInput({ form, transferId, onChangeTransferId }
           onPress={handlePaste}
         />}
       />
-      <HelperText type={valid ? 'info' : 'error'}>
-        {error || 'You can leave 0 if unknown'}
-      </HelperText>
+      <InputMessages
+        error={error}
+        hint={hint}
+      />
     </InputWrapper>
   );
 }

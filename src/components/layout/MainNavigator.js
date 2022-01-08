@@ -1,6 +1,6 @@
 import AccountNavigator from '@/components/layout/AccountNavigator';
+import BalanceNavigator from '@/components/layout/BalanceNavigator';
 import OperationsNavigator from '@/components/layout/OperationsNavigator';
-import BalanceScreen from '@/screens/BalanceScreen';
 import { useState } from 'react';
 import { BottomNavigation, useTheme } from 'react-native-paper';
 
@@ -14,7 +14,7 @@ export default function MainNavigator() {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    balance: BalanceScreen,
+    balance: BalanceNavigator,
     operations: OperationsNavigator,
     account: AccountNavigator,
   });

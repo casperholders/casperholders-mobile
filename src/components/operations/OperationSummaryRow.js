@@ -1,10 +1,8 @@
-import useFormattedAmount from '@/hooks/useFormattedAmount';
+import formatCasperAmount from '@/helpers/formatCasperAmount';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
 export default function OperationSummaryRow({ label, amount }) {
-  const formattedAmount = useFormattedAmount(amount);
-
   return (
     <View style={styles.summaryRow}>
       <View style={styles.summaryCol}>
@@ -14,7 +12,7 @@ export default function OperationSummaryRow({ label, amount }) {
       </View>
       <View style={styles.summaryCol}>
         <Text style={styles.summaryColAmount}>
-          {formattedAmount}
+          {formatCasperAmount(amount)}
         </Text>
       </View>
     </View>

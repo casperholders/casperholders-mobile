@@ -16,7 +16,7 @@ const CombinedDarkTheme = merge(NavigationDarkTheme, PaperDarkTheme, {
     primary: '#00126b',
     background: '#00012a',
     surface: '#00012a',
-    card: '#00126b',
+    card: '#00012a',
     error: '#ff5252',
   },
 });

@@ -8,33 +8,36 @@ import OperationSummary from '@/components/operations/OperationSummary';
 import useForm from '@/hooks/inputs/useForm';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
 import useBalance from '@/hooks/useBalance';
-import useBalanceOperation from '@/hooks/useBalanceOperation';
 import Big from 'big.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'react-native-paper';
 
 export default function TransferScreen() {
   const minAmount = 2.5;
   const transferFee = 0.1;
 
-  const [address, setAddress] = useState('');
-  const [transferId, setTransferId] = useState('0');
-  const [amount, setAmount] = useState('0');
-
-  const form = useForm();
+  const form = useForm({
+    address: '',
+    transferId: '0',
+    amount: '0',
+  });
 
   const [balanceLoading, balance, balanceError] = useBalance();
-  const balanceAmount = useBalanceOperation(balanceLoading, balance, balanceError, (b) => b);
-  const balanceAmountAfter = useBalanceOperation(
-    balanceLoading, balance, balanceError, (b) => Big(b).minus(amount).minus(transferFee), [
-      amount, transferFee,
-    ],
-  );
+  const [balanceAfter, setBalanceAfter] = useState(undefined);
+  useEffect(() => {
+    try {
+      setBalanceAfter(
+        Big(balance).minus(form.values.amount).minus(transferFee),
+      );
+    } catch (_) {
+      setBalanceAfter(undefined);
+    }
+  }, [balance, transferFee, form.values.amount]);
 
   const operationSummaryItems = [
     { label: 'Transfer fee', amount: transferFee },
-    { label: 'Balance', amount: balanceAmount },
-    { label: 'Balance after transfer', amount: balanceAmountAfter },
+    { label: 'Balance', amount: balance },
+    { label: 'Balance after transfer', amount: balanceAfter },
   ];
 
   const [loading, handleSubmit] = useAsyncHandler(() => {
@@ -45,40 +48,38 @@ export default function TransferScreen() {
       }
 
       setTimeout(() => {
-        console.log('Submit transfer', {
-          address,
-          transferId,
-          amount,
-        });
+        console.log('Submit transfer', form.values);
 
         resolve();
       }, 2000);
     });
   });
 
-  return balanceLoading ? (
-    <Loader />
-  ) : (
+  return balanceLoading ? <Loader /> : (
     <ScreenWrapper>
       {balanceError && <ErrorAlert message={balanceError.message} />}
       <AddressInput
+        label="Address"
         form={form}
-        address={address}
-        onChangeAddress={setAddress}
+        value={form.values.address}
+        onChangeValue={(address) => form.setValues({ address })}
       />
       <TransferIdInput
+        label="Transfer ID"
+        hint="You can leave 0 if unknown"
         form={form}
-        transferId={transferId}
-        onChangeTransferId={setTransferId}
+        value={form.values.transferId}
+        onChangeValue={(transferId) => form.setValues({ transferId })}
       />
       <AmountInput
-        form={form}
-        amount={amount}
+        label="Amount"
         hint={`Amount to transfer (minimum of ${minAmount} CSPR)`}
+        form={form}
         min={minAmount}
         fee={transferFee}
         funds={balance || 0}
-        onChangeAmount={setAmount}
+        value={form.values.amount}
+        onChangeValue={(amount) => form.setValues({ amount })}
       />
       <OperationSummary
         title="Transfer summary"

@@ -4,11 +4,9 @@ import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationCard from '@/components/operations/OperationCard';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Paragraph, useTheme } from 'react-native-paper';
+import { Paragraph } from 'react-native-paper';
 
 export default function OperationsScreen({ navigation }) {
-  const theme = useTheme();
-
   const operations = [
     {
       route: 'Transfer',

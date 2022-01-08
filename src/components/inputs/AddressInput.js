@@ -1,11 +1,12 @@
+import InputMessages from '@/components/inputs/InputMessages';
 import InputWrapper from '@/components/inputs/InputWrapper';
 import useInput from '@/hooks/inputs/useInput';
 import usePasteHandler from '@/hooks/inputs/usePasteHandler';
 import { CLPublicKey } from 'casper-js-sdk';
-import { HelperText, TextInput } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 
-export default function AddressInput({ form, hint, address, onChangeAddress }) {
-  const [value, setValue, valid, error] = useInput(form, address, [
+export default function AddressInput({ form, label, hint, value, onChangeValue }) {
+  const [internalValue, setInternalValue, error] = useInput(form, value, [
     (a) => !!a || 'Address is required',
     (a) => a.length >= 2 || 'Address is too short',
     (a) => {
@@ -16,19 +17,19 @@ export default function AddressInput({ form, hint, address, onChangeAddress }) {
         return e.toString();
       }
     },
-  ], onChangeAddress);
+  ], onChangeValue);
 
-  const handlePaste = usePasteHandler(setValue);
+  const handlePaste = usePasteHandler(setInternalValue);
 
   return (
     <InputWrapper>
       <TextInput
-        label="Address"
+        label={label}
         activeUnderlineColor="white"
-        error={!valid}
-        value={value.current}
+        error={!!error}
+        value={internalValue.current}
         dense
-        onChangeText={setValue}
+        onChangeText={setInternalValue}
         left={<TextInput.Icon name="account" />}
         right={<TextInput.Icon
           name="content-paste"
@@ -37,12 +38,10 @@ export default function AddressInput({ form, hint, address, onChangeAddress }) {
           onPress={handlePaste}
         />}
       />
-      <HelperText
-        type={valid ? 'info' : 'error'}
-        visible={!!error || !!hint}
-      >
-        {error || hint}
-      </HelperText>
+      <InputMessages
+        error={error}
+        hint={hint}
+      />
     </InputWrapper>
   );
 }

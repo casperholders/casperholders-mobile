@@ -1,11 +1,12 @@
+import InputMessages from '@/components/inputs/InputMessages';
 import InputWrapper from '@/components/inputs/InputWrapper';
 import useInput from '@/hooks/inputs/useInput';
 import Big from 'big.js';
 import { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, HelperText, TextInput } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 
-export default function AmountInput({ form, min, fee, funds, hint, amount, onChangeAmount }) {
+export default function AmountInput({ form, label, hint, min, fee, funds, value, onChangeValue }) {
   const getBigMin = useCallback(() => Big(min === undefined ? 0 : min), [min]);
   const getBigMax = useCallback(() => {
     const max = Big(funds === undefined ? 0 : funds).minus(fee === undefined ? 0 : fee);
@@ -13,7 +14,7 @@ export default function AmountInput({ form, min, fee, funds, hint, amount, onCha
     return max.gt(0) ? max : Big(0);
   }, [funds, fee]);
 
-  const [value, setValue, valid, error] = useInput(form, amount, [
+  const [internalValue, setInternalValue, error] = useInput(form, value, [
     (a) => !!a || 'Amount is required',
     (a) => {
       try {
@@ -26,17 +27,17 @@ export default function AmountInput({ form, min, fee, funds, hint, amount, onCha
     },
     (a) => getBigMin().lte(Big(a)) || `Amount must be at least ${min}`,
     (a) => getBigMax().gte(Big(a)) || 'Not enough funds',
-  ], onChangeAmount);
+  ], onChangeValue);
 
   const setVerifiedInternalAmount = (operation) => {
     let bigAmount;
     try {
-      bigAmount = Big(value.current === undefined ? 0 : value.current);
+      bigAmount = Big(internalValue.current === undefined ? 0 : internalValue.current);
     } catch (_) {
       bigAmount = Big(0);
     }
 
-    setValue(operation(bigAmount).toString());
+    setInternalValue(operation(bigAmount).toString());
   };
 
   const handleDecrementInternalAmount = () => setVerifiedInternalAmount((a) => a.minus(1));
@@ -63,13 +64,13 @@ export default function AmountInput({ form, min, fee, funds, hint, amount, onCha
   return (
     <InputWrapper>
       <TextInput
-        label="Amount"
+        label={label}
         activeUnderlineColor="white"
         keyboardType="numeric"
-        error={!valid}
-        value={value.current}
+        error={!!error}
+        value={internalValue.current}
         dense
-        onChangeText={setValue}
+        onChangeText={setInternalValue}
         left={
           <TextInput.Icon
             name="minus"
@@ -88,12 +89,10 @@ export default function AmountInput({ form, min, fee, funds, hint, amount, onCha
           />
         }
       />
-      <HelperText
-        type={valid ? 'info' : 'error'}
-        visible={!!error || !!hint}
-      >
-        {error || hint}
-      </HelperText>
+      <InputMessages
+        error={error}
+        hint={hint}
+      />
       <View style={styles.quickButtons}>
         {amountQuickActions.map(({ text, handler }, index) => (
           <Button

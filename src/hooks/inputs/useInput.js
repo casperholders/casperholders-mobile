@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function useInput(form, defaultValue, rules, onChange) {
   const value = useRef(defaultValue);
-  const [valid, setValid] = useState(true);
   const [error, setError] = useState(undefined);
 
   const validate = () => {
@@ -18,8 +17,6 @@ export default function useInput(form, defaultValue, rules, onChange) {
 
       return false;
     });
-
-    setValid(!hasError);
 
     return !hasError;
   };
@@ -38,5 +35,5 @@ export default function useInput(form, defaultValue, rules, onChange) {
     onChange(value.current);
   };
 
-  return [value, setValue, valid, error];
+  return [value, setValue, error];
 }

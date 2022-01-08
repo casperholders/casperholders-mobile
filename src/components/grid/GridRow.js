@@ -10,7 +10,6 @@ export default function GridRow({ children }) {
 
 const styles = StyleSheet.create({
   row: {
-    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     margin: -8,
