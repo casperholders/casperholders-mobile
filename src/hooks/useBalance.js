@@ -1,4 +1,4 @@
-import useActiveKey from '@/hooks/selectors/useActiveKey';
+import useActiveKey from '@/hooks/selectors/auth/useActiveKey';
 import useAsyncData from '@/hooks/useAsyncData';
 import balanceService from '@/services/balanceService';
 

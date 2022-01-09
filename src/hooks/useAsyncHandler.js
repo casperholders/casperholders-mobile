@@ -4,18 +4,16 @@ export default function useAsyncHandler(handler) {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    async function callHandler() {
-      try {
-        await handler();
-      } catch (error) {
-        throw error;
-      } finally {
-        setSubmitting(false);
-      }
-    }
-
     if (submitting) {
-      callHandler();
+      (async () => {
+        try {
+          await handler();
+        } catch (error) {
+          throw error;
+        } finally {
+          setSubmitting(false);
+        }
+      })();
     }
   }, [submitting]);
 

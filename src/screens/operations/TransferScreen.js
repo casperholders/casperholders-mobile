@@ -6,16 +6,27 @@ import AmountInput from '@/components/inputs/AmountInput';
 import TransferIdInput from '@/components/inputs/TransferIdInput';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationSummary from '@/components/operations/OperationSummary';
+import { NETWORK } from '@/env';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import getMatchedExchange from '@/helpers/getMatchedExchange';
+import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
 import useForm from '@/hooks/inputs/useForm';
+import useActiveKey from '@/hooks/selectors/auth/useActiveKey';
+import useSigner from '@/hooks/selectors/auth/useSigner';
+import useTransferOptions from '@/hooks/selectors/auth/useTransferOptions';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
 import useBalance from '@/hooks/useBalance';
+import deployManager from '@/services/deployManager';
+import { TransferDeployParameters } from '@casperholders/core';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Button, Paragraph } from 'react-native-paper';
 
 export default function TransferScreen({ jumpTo }) {
+  const activeKey = useActiveKey();
+  const signer = useSigner();
+  const transferOptions = useTransferOptions();
+
   const minAmount = 2.5;
   const transferFee = 0.1;
 
@@ -54,16 +65,27 @@ export default function TransferScreen({ jumpTo }) {
 
     setDialogVisible(true);
   };
-  const [loading, handleDialogConfirm] = useAsyncHandler(() => {
-    return new Promise((resolve) => {
-      handleDialogClose();
-      setTimeout(() => {
-        console.log('Submit transfer', form.values);
-        jumpTo('account');
 
-        resolve();
-      }, 2000);
-    });
+  const dispatchSetDeployResult = useDispatchSetDeployResult();
+  const [loading, handleDialogConfirm] = useAsyncHandler(async () => {
+    handleDialogClose();
+
+    try {
+      const deployResult = await deployManager.prepareSignAndSendDeploy(
+        new TransferDeployParameters(
+          activeKey, NETWORK, form.values.amount, form.values.address, form.values.transferId,
+        ),
+        signer,
+        transferOptions,
+      );
+
+      dispatchSetDeployResult({ deployResult });
+
+      jumpTo('account');
+    } catch (error) {
+      console.error(error);
+      // TODO manage error
+    }
   });
 
   return balanceLoading ? <Loader /> : (

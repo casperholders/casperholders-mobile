@@ -6,7 +6,7 @@ export default function useAsyncData(resolver, deps = []) {
   const [result, setResult] = useState(undefined);
 
   useEffect(() => {
-    async function callResolver() {
+    (async () => {
       setLoading(true);
 
       try {
@@ -18,9 +18,7 @@ export default function useAsyncData(resolver, deps = []) {
       } finally {
         setLoading(false);
       }
-    }
-
-    callResolver();
+    })();
   }, deps);
 
   return [loading, result, error];

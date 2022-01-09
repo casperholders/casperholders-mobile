@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-export default function Icon({ name, size, left, right, color }) {
+export default function Icon({ name, size, left, right, color, style }) {
   const theme = useTheme();
   const styles = StyleSheet.create({
     iconWrapper: {
@@ -13,7 +13,7 @@ export default function Icon({ name, size, left, right, color }) {
   });
 
   return (
-    <View style={styles.iconWrapper}>
+    <View style={{ ...styles.iconWrapper, ...style }}>
       <MaterialCommunityIcons
         name={name}
         size={size}

@@ -85,10 +85,10 @@ export default function BalanceScreen() {
             </Caption>
           </CardWithIcons>
         </GridCol>
-        <GridCol style={{ flexDirection: 'row' }}>
-          <Title>
-            Details
-          </Title>
+        <GridCol>
+          <Subheading style={{ textAlign: 'center' }}>
+            Operations
+          </Subheading>
         </GridCol>
         {stakeData?.totalStaked ? (
           <>
