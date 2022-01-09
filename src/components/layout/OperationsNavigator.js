@@ -6,7 +6,7 @@ import React from 'react';
 
 const Stack = createNativeStackNavigator();
 
-export default function OperationsNavigator() {
+export default function OperationsNavigator(props) {
   return (
     <NavigatorWrapper>
       <Stack.Navigator initialRouteName="Operations">
@@ -14,10 +14,9 @@ export default function OperationsNavigator() {
           name="Operations"
           component={OperationsScreen}
         />
-        <Stack.Screen
-          name="Transfer"
-          children={(props) => <TransferScreen {...props} />}
-        />
+        <Stack.Screen name="Transfer">
+          {(subProps) => <TransferScreen {...props} {...subProps} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigatorWrapper>
   );

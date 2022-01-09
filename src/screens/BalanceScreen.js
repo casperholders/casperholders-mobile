@@ -1,6 +1,6 @@
-import BalanceCard from '@/components/balance/BalanceCard';
 import StakeBalanceCard from '@/components/balance/StakeBalanceCard';
-import ErrorAlert from '@/components/common/ErrorAlert';
+import Alert from '@/components/common/Alert';
+import CardWithIcons from '@/components/common/CardWithIcons';
 import Icon from '@/components/common/Icon';
 import Loader from '@/components/common/Loader';
 import GridCol from '@/components/grid/GridCol';
@@ -65,10 +65,13 @@ export default function BalanceScreen() {
 
   return loading ? <Loader /> : (
     <ScreenWrapper onRefresh={updateUniqueKey}>
-      {error && <ErrorAlert message={error.message} />}
+      {error && <Alert
+        type="error"
+        message={error.message}
+      />}
       <GridRow>
         <GridCol>
-          <BalanceCard
+          <CardWithIcons
             left={<Image
               source={require('../../assets/casper_logo.png')}
               style={styles.balanceCasperLogo}
@@ -80,7 +83,7 @@ export default function BalanceScreen() {
             <Caption>
               Total CSPR funds
             </Caption>
-          </BalanceCard>
+          </CardWithIcons>
         </GridCol>
         <GridCol style={{ flexDirection: 'row' }}>
           <Title>
@@ -90,7 +93,7 @@ export default function BalanceScreen() {
         {stakeData?.totalStaked ? (
           <>
             <GridCol>
-              <BalanceCard
+              <CardWithIcons
                 left={<Icon
                   name="lock-open"
                   size={24}
@@ -103,10 +106,10 @@ export default function BalanceScreen() {
                 <Caption>
                   Unstaked CSPR funds
                 </Caption>
-              </BalanceCard>
+              </CardWithIcons>
             </GridCol>
             <GridCol>
-              <BalanceCard
+              <CardWithIcons
                 onPress={() => setStakeDetails(!stakeDetails)}
                 left={<Icon
                   name="safe"
@@ -125,7 +128,7 @@ export default function BalanceScreen() {
                 <Caption>
                   Total staked CSPR funds
                 </Caption>
-              </BalanceCard>
+              </CardWithIcons>
             </GridCol>
             {stakeDetails && <GridCol>
               {stakeData.stakes.map((stake, index) =>

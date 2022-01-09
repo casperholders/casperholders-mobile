@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { Card } from 'react-native-paper';
 
-export default function BalanceCard({ left, right, children, ...other }) {
+export default function CardWithIcons({ left, right, children, ...other }) {
   return (
     <Card {...other}>
       <Card.Content style={styles.contentWrapper}>

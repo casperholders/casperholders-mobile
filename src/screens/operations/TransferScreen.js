@@ -1,18 +1,21 @@
-import ErrorAlert from '@/components/common/ErrorAlert';
+import Alert from '@/components/common/Alert';
+import ConfirmDialog from '@/components/common/ConfirmDialog';
 import Loader from '@/components/common/Loader';
 import AddressInput from '@/components/inputs/AddressInput';
 import AmountInput from '@/components/inputs/AmountInput';
 import TransferIdInput from '@/components/inputs/TransferIdInput';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationSummary from '@/components/operations/OperationSummary';
+import formatCasperAmount from '@/helpers/formatCasperAmount';
+import getMatchedExchange from '@/helpers/getMatchedExchange';
 import useForm from '@/hooks/inputs/useForm';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
 import useBalance from '@/hooks/useBalance';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
-import { Button } from 'react-native-paper';
+import { Button, Paragraph } from 'react-native-paper';
 
-export default function TransferScreen() {
+export default function TransferScreen({ jumpTo }) {
   const minAmount = 2.5;
   const transferFee = 0.1;
 
@@ -21,6 +24,8 @@ export default function TransferScreen() {
     transferId: '0',
     amount: '0',
   });
+
+  const matchedExchange = getMatchedExchange(form.values.address);
 
   const [balanceLoading, balance, balanceError] = useBalance();
   const [balanceAfter, setBalanceAfter] = useState(undefined);
@@ -40,15 +45,21 @@ export default function TransferScreen() {
     { label: 'Balance after transfer', amount: balanceAfter },
   ];
 
-  const [loading, handleSubmit] = useAsyncHandler(() => {
-    return new Promise((resolve) => {
-      if (!form.validate()) {
-        resolve();
-        return;
-      }
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const handleDialogClose = () => setDialogVisible(false);
+  const handleDialogOpen = () => {
+    if (!form.validate()) {
+      return;
+    }
 
+    setDialogVisible(true);
+  };
+  const [loading, handleDialogConfirm] = useAsyncHandler(() => {
+    return new Promise((resolve) => {
+      handleDialogClose();
       setTimeout(() => {
         console.log('Submit transfer', form.values);
+        jumpTo('account');
 
         resolve();
       }, 2000);
@@ -57,13 +68,20 @@ export default function TransferScreen() {
 
   return balanceLoading ? <Loader /> : (
     <ScreenWrapper>
-      {balanceError && <ErrorAlert message={balanceError.message} />}
+      {balanceError && <Alert
+        type="error"
+        message={balanceError.message}
+      />}
       <AddressInput
         label="Address"
         form={form}
         value={form.values.address}
         onChangeValue={(address) => form.setValues({ address })}
       />
+      {
+        matchedExchange &&
+        <Alert message={`Looks like you're transferring the funds to ${matchedExchange}. Please verify your transfer ID before sending the deploy.`} />
+      }
       <TransferIdInput
         label="Transfer ID"
         hint="You can leave 0 if unknown"
@@ -91,10 +109,28 @@ export default function TransferScreen() {
         style={{ marginTop: 'auto' }}
         disabled={balanceError}
         loading={loading}
-        onPress={handleSubmit}
+        onPress={handleDialogOpen}
       >
         Transfer
       </Button>
+      <ConfirmDialog
+        visible={dialogVisible}
+        title="Confirm transfer"
+        confirmLabel="Transfer"
+        onClose={handleDialogClose}
+        onConfirm={handleDialogConfirm}
+      >
+        <Paragraph style={{ marginBottom: 12 }}>
+          You are about to transfer {formatCasperAmount(form.values.amount)} to the following
+          address:
+        </Paragraph>
+        <Paragraph style={{ marginBottom: 12 }}>
+          {form.values.address}
+        </Paragraph>
+        <Paragraph>
+          Please verify those information are correct before transferring the funds!
+        </Paragraph>
+      </ConfirmDialog>
     </ScreenWrapper>
   );
 }
