@@ -1,8 +1,17 @@
-import { ScrollView, StyleSheet } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
 
-export default function ScreenWrapper({ children, ...other }) {
+export default function ScreenWrapper({ children, onRefresh, ...other }) {
+  const refreshControl = onRefresh ? <RefreshControl
+    refreshing={false}
+    onRefresh={onRefresh}
+  /> : undefined;
+
   return (
-    <ScrollView contentContainerStyle={styles.wrapper} {...other}>
+    <ScrollView
+      contentContainerStyle={styles.wrapper}
+      refreshControl={refreshControl}
+      {...other}
+    >
       {children}
     </ScrollView>
   );

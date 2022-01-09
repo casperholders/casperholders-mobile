@@ -25,6 +25,8 @@ export default function MainNavigator() {
       onIndexChange={setTabIndex}
       renderScene={renderScene}
       barStyle={{ backgroundColor: theme.colors.primary }}
+      sceneAnimationEnabled={true}
+      shifting={true}
     />
   );
 }

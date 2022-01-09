@@ -1,4 +1,5 @@
 import BalanceCard from '@/components/balance/BalanceCard';
+import StakeBalanceCard from '@/components/balance/StakeBalanceCard';
 import ErrorAlert from '@/components/common/ErrorAlert';
 import Icon from '@/components/common/Icon';
 import Loader from '@/components/common/Loader';
@@ -6,21 +7,24 @@ import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
-import truncateInMiddle from '@/helpers/truncateInMiddle';
 import useBalance from '@/hooks/useBalance';
 import useStakeBalance from '@/hooks/useStakeBalance';
+import useUniqueKey from '@/hooks/useUniqueKey';
 import Big from 'big.js';
-import { useMemo } from 'react';
+import { orderBy } from 'lodash';
+import { useMemo, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Caption, Card, Paragraph, Subheading, Title } from 'react-native-paper';
+import { Caption, Paragraph, Subheading, Title } from 'react-native-paper';
 
 export default function BalanceScreen() {
-  const [balanceLoading, balance, balanceError] = useBalance();
-  const [stakeLoading, validators, stakeError] = useStakeBalance();
+  const [uniqueKey, updateUniqueKey] = useUniqueKey();
+  const [balanceLoading, balance, balanceError] = useBalance([uniqueKey]);
+  const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
 
   const loading = balanceLoading || stakeLoading;
   const error = balanceError || stakeError;
 
+  const [stakeDetails, setStakeDetails] = useState(false);
   const stakeData = useMemo(() => {
     if (!validators) {
       return undefined;
@@ -43,10 +47,15 @@ export default function BalanceScreen() {
     return {
       totalStaked: totalStaked.toString(),
       averageDelegationRate: totalFees.div(validators.length || 1).toString(),
-      stakes: stakes.map((stake) => ({
-        ...stake,
-        percentOfTotal: Big(stake.staked).div(totalStaked).times(100).toFormat(1),
-      })),
+      stakes: orderBy(stakes.map((stake) => {
+        const percentOfTotal = Big(stake.staked).div(totalStaked).times(100);
+
+        return {
+          ...stake,
+          percentOfTotal: percentOfTotal.toNumber(),
+          formattedPercentOfTotal: percentOfTotal.toFormat(1),
+        };
+      }), ['percentOfTotal'], ['desc']),
     };
   }, [validators]);
 
@@ -55,7 +64,7 @@ export default function BalanceScreen() {
   }, [balance, stakeData]);
 
   return loading ? <Loader /> : (
-    <ScreenWrapper>
+    <ScreenWrapper onRefresh={updateUniqueKey}>
       {error && <ErrorAlert message={error.message} />}
       <GridRow>
         <GridCol>
@@ -73,13 +82,13 @@ export default function BalanceScreen() {
             </Caption>
           </BalanceCard>
         </GridCol>
-        {stakeData?.totalStaked && (
+        <GridCol style={{ flexDirection: 'row' }}>
+          <Title>
+            Details
+          </Title>
+        </GridCol>
+        {stakeData?.totalStaked ? (
           <>
-            <GridCol style={{ flexDirection: 'row' }}>
-              <Title>
-                Details
-              </Title>
-            </GridCol>
             <GridCol>
               <BalanceCard
                 left={<Icon
@@ -98,10 +107,16 @@ export default function BalanceScreen() {
             </GridCol>
             <GridCol>
               <BalanceCard
+                onPress={() => setStakeDetails(!stakeDetails)}
                 left={<Icon
                   name="safe"
                   size={24}
                   left
+                />}
+                right={<Icon
+                  name={stakeDetails ? 'chevron-up' : 'chevron-down'}
+                  size={24}
+                  right
                 />}
               >
                 <Subheading>
@@ -112,32 +127,17 @@ export default function BalanceScreen() {
                 </Caption>
               </BalanceCard>
             </GridCol>
-            <GridCol>
-              {stakeData.stakes.map(({
-                                       validator,
-                                       staked,
-                                       percentOfTotal,
-                                       delegationRate,
-                                     }, index) => (
-                <Card
-                  key={index}
-                  style={{ marginLeft: 12, marginBottom: 12 }}
-                >
-                  <Card.Content>
-                    <Paragraph>
-                      {formatCasperAmount(staked)}
-                    </Paragraph>
-                    <Caption>
-                      {percentOfTotal}% of your staked funds
-                    </Caption>
-                    <Caption>
-                      Validator {truncateInMiddle(validator)}
-                    </Caption>
-                  </Card.Content>
-                </Card>
-              ))}
-            </GridCol>
+            {stakeDetails && <GridCol>
+              {stakeData.stakes.map((stake, index) =>
+                <StakeBalanceCard key={index} {...stake} />)}
+            </GridCol>}
           </>
+        ) : (
+          <GridCol>
+            <Paragraph>
+              You currently do not have any staking funds.
+            </Paragraph>
+          </GridCol>
         )}
       </GridRow>
     </ScreenWrapper>
