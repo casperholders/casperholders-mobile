@@ -10,7 +10,7 @@ export default function MainNavigator() {
   const [routes] = useState([
     { key: 'balance', title: 'Balance', icon: 'wallet' },
     { key: 'operations', title: 'Operations', icon: 'transfer' },
-    { key: 'account', title: 'Account', icon: 'account' },
+    { key: 'account', title: 'Account', icon: 'account-circle' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
