@@ -13,9 +13,9 @@ import {
 import { useEffect, useState } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import RNEventSource from 'react-native-event-source';
-import { Caption, Paragraph, ProgressBar, useTheme } from 'react-native-paper';
+import { Caption, Paragraph, ProgressBar, Title, useTheme } from 'react-native-paper';
 
-const WATCHER_MAX_WAIT_IN_SECONDS = 60; // TODO 180
+const WATCHER_MAX_WAIT_IN_SECONDS = 60;
 
 export default function OperationResult({ hash }) {
   const theme = useTheme();
@@ -57,6 +57,7 @@ export default function OperationResult({ hash }) {
 
   const dispatchSetDeployResult = useDispatchSetDeployResult();
   const updateDeployResult = async () => {
+    console.log(deployResult);
     if (deployResult.status !== STATUS_UNKNOWN) {
       return deployResult;
     }
@@ -64,6 +65,11 @@ export default function OperationResult({ hash }) {
     try {
       const updatedDeployResult = await deployManager.getDeployResult({
         hash: deployResult.hash,
+        cost: deployResult.cost,
+        status: deployResult.status,
+        message: deployResult.message,
+        amount: deployResult.amount,
+        name: deployResult.name,
       });
       if (updatedDeployResult.status !== STATUS_UNKNOWN) {
         dispatchSetDeployResult({ deployResult: updatedDeployResult });
@@ -122,6 +128,9 @@ export default function OperationResult({ hash }) {
         left
       />}
     >
+      <Title>
+        {deployResult.name}
+      </Title>
       <View style={styles.deployHashWrapper}>
         <Paragraph
           numberOfLines={1}
