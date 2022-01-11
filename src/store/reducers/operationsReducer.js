@@ -12,11 +12,7 @@ const operationsSlice = createSlice({
     unsetDeployResult: (state, action) => {
       const lowerHash = action.payload.deployResult.hash.toLowerCase();
       if (lowerHash in state.deployResultsByHash) {
-        const {
-          [action.payload.deployResult.hash.toLowerCase()]: _,
-          ...newDeployResults
-        } = state.deployResultsByHash;
-        return newDeployResults;
+        delete state.deployResultsByHash[lowerHash];
       }
     },
   },

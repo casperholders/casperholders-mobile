@@ -1,4 +1,5 @@
 import Big from 'big.js';
+import 'core-js';
 import 'node-libs-react-native/globals';
 import { LogBox } from 'react-native';
 import toFormat from 'toformat';
