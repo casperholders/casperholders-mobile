@@ -2,18 +2,20 @@ import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationsHistory from '@/components/operations/OperationsHistory';
 import OperationsResults from '@/components/operations/OperationsResults';
 import useDispatchDisconnect from '@/hooks/actions/useDispatchDisconnect';
+import useUniqueKey from '@/hooks/useUniqueKey';
 import { StyleSheet, View } from 'react-native';
 import { Button, Divider } from 'react-native-paper';
 
 export default function AccountScreen() {
+  const [uniqueKey, updateUniqueKey] = useUniqueKey();
   const dispatchDisconnect = useDispatchDisconnect();
 
   return (
-    <ScreenWrapper>
+    <ScreenWrapper onRefresh={updateUniqueKey}>
       <View style={styles.operationsWrapper}>
         <OperationsResults />
         <Divider style={{ marginVertical: 12 }} />
-        <OperationsHistory />
+        <OperationsHistory key={uniqueKey} />
       </View>
       <Button
         mode="contained"
