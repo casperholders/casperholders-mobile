@@ -58,7 +58,9 @@ export default function OperationsCard({ type, hash, status, amount, cost, messa
         style={styles.deployProgress}
         indeterminate
       />}
-      {!loading && message && <Caption style={styles.deployDetails}>{message}</Caption>}
+      {!loading && (message || undefined) && <Caption style={styles.deployDetails}>
+        {message}
+      </Caption>}
     </CardWithIcons>
   );
 }
