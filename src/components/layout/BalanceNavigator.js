@@ -5,13 +5,14 @@ import React from 'react';
 
 const Stack = createNativeStackNavigator();
 
-export default function BalanceNavigator(props) {
+export default function BalanceNavigator() {
   return (
     <NavigatorWrapper>
       <Stack.Navigator initialRouteName="Balance">
-        <Stack.Screen name="Balance">
-          {() => <BalanceScreen {...props} />}
-        </Stack.Screen>
+        <Stack.Screen
+          name="Balance"
+          component={BalanceScreen}
+        />
       </Stack.Navigator>
     </NavigatorWrapper>
   );
