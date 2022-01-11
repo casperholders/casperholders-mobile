@@ -22,7 +22,7 @@ export default function OperationsHistory() {
     if (page === 0 && history) {
       history.operations.forEach(({ hash }) => {
         const lowerHash = hash.toLowerCase();
-        if (lowerHash in deployResultsHashs) {
+        if (deployResultsHashs.includes(lowerHash)) {
           dispatchUnsetDeployResult({ deployResult: { hash: lowerHash } });
         }
       });

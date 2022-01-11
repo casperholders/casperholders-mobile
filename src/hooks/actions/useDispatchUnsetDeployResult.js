@@ -6,6 +6,6 @@ export default function useDispatchUnsetDeployResult() {
   const dispatch = useDispatch();
 
   return ({ deployResult }) => dispatch(unsetDeployResult({
-    deployResult: deployResultToObject({ deployResult }),
+    deployResult: deployResultToObject(deployResult),
   }));
 }

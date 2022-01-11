@@ -12,11 +12,19 @@ export default function MainNavigator() {
     ? (deployResultsCount > 9) ? '9+' : deployResultsCount
     : undefined;
 
+  const getBadgeForRoute = ({ route }) => {
+    if (route.key === 'account' && deployResultsBadge) {
+      return deployResultsBadge;
+    }
+
+    return undefined;
+  };
+
   const [tabIndex, setTabIndex] = useState(0);
   const [routes] = useState([
     { key: 'balance', title: 'Balance', icon: 'wallet' },
     { key: 'operations', title: 'Operations', icon: 'transfer' },
-    { key: 'account', title: 'Account', icon: 'account-circle', badge: deployResultsBadge },
+    { key: 'account', title: 'Account', icon: 'account-circle' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -27,6 +35,7 @@ export default function MainNavigator() {
 
   return (
     <BottomNavigation
+      getBadge={getBadgeForRoute}
       navigationState={{ index: tabIndex, routes }}
       onIndexChange={setTabIndex}
       renderScene={renderScene}
