@@ -2,7 +2,6 @@ import StakeBalanceCard from '@/components/balance/StakeBalanceCard';
 import Alert from '@/components/common/Alert';
 import CardWithIcons from '@/components/common/CardWithIcons';
 import Icon from '@/components/common/Icon';
-import Loader from '@/components/common/Loader';
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
@@ -13,8 +12,9 @@ import useUniqueKey from '@/hooks/useUniqueKey';
 import Big from 'big.js';
 import { orderBy } from 'lodash';
 import { useMemo, useState } from 'react';
+import ContentLoader, { Rect } from 'react-content-loader/native';
 import { Image, StyleSheet } from 'react-native';
-import { Caption, Paragraph, Subheading, Title } from 'react-native-paper';
+import { Caption, Subheading, Title } from 'react-native-paper';
 
 export default function BalanceScreen() {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
@@ -63,7 +63,18 @@ export default function BalanceScreen() {
     return Big(balance || 0).plus(stakeData?.totalStaked || 0);
   }, [balance, stakeData]);
 
-  return loading ? <Loader /> : (
+  const detailsStake = useMemo(() => {
+    if (stakeData?.stakes?.length > 0) {
+      return <Icon
+        name={stakeDetails ? 'chevron-up' : 'chevron-down'}
+        size={24}
+        right
+      />;
+    }
+    return <></>;
+  }, [stakeData]);
+
+  return (
     <ScreenWrapper onRefresh={updateUniqueKey}>
       {error && <Alert
         type="error"
@@ -78,7 +89,25 @@ export default function BalanceScreen() {
             />}
           >
             <Title>
-              {formatCasperAmount(totalFunds)}
+              {loading ? (<ContentLoader
+                  speed={1}
+                  width={100}
+                  height={25}
+                  viewBox="0 0 150 25"
+                  backgroundColor="#00126b"
+                  foregroundColor="#000e55"
+                >
+                  <Rect
+                    x="0"
+                    y="7"
+                    rx="3"
+                    ry="3"
+                    width="150"
+                    height="25"
+                  />
+                </ContentLoader>) :
+                (formatCasperAmount(totalFunds))
+              }
             </Title>
             <Caption>
               Total CSPR funds
@@ -87,61 +116,83 @@ export default function BalanceScreen() {
         </GridCol>
         <GridCol>
           <Subheading style={{ textAlign: 'center' }}>
-            Operations
+            Details
           </Subheading>
         </GridCol>
-        {stakeData?.totalStaked ? (
-          <>
-            <GridCol>
-              <CardWithIcons
-                left={<Icon
-                  name="lock-open"
-                  size={24}
-                  left
-                />}
-              >
-                <Subheading>
-                  {formatCasperAmount(balance)}
-                </Subheading>
-                <Caption>
-                  Unstaked CSPR funds
-                </Caption>
-              </CardWithIcons>
-            </GridCol>
-            <GridCol>
-              <CardWithIcons
-                onPress={() => setStakeDetails(!stakeDetails)}
-                left={<Icon
-                  name="safe"
-                  size={24}
-                  left
-                />}
-                right={<Icon
-                  name={stakeDetails ? 'chevron-up' : 'chevron-down'}
-                  size={24}
-                  right
-                />}
-              >
-                <Subheading>
-                  {formatCasperAmount(stakeData.totalStaked)}
-                </Subheading>
-                <Caption>
-                  Total staked CSPR funds
-                </Caption>
-              </CardWithIcons>
-            </GridCol>
-            {stakeDetails && <GridCol>
-              {stakeData.stakes.map((stake, index) =>
-                <StakeBalanceCard key={index} {...stake} />)}
-            </GridCol>}
-          </>
-        ) : (
-          <GridCol>
-            <Paragraph>
-              You currently do not have any staking funds.
-            </Paragraph>
-          </GridCol>
-        )}
+        <GridCol>
+          <CardWithIcons
+            left={<Icon
+              name="lock-open"
+              size={24}
+              left
+            />}
+          >
+            <Subheading>
+              {balanceLoading ? (<ContentLoader
+                  speed={1}
+                  width={100}
+                  height={25}
+                  viewBox="0 0 150 25"
+                  backgroundColor="#00126b"
+                  foregroundColor="#000e55"
+                >
+                  <Rect
+                    x="0"
+                    y="7"
+                    rx="3"
+                    ry="3"
+                    width="150"
+                    height="25"
+                  />
+                </ContentLoader>) :
+                (formatCasperAmount(balance))
+              }
+            </Subheading>
+            <Caption>
+              Unstaked CSPR funds
+            </Caption>
+          </CardWithIcons>
+        </GridCol>
+        <GridCol>
+          <CardWithIcons
+            onPress={() => setStakeDetails(!stakeDetails)}
+            left={<Icon
+              name="safe"
+              size={24}
+              left
+            />}
+            right={detailsStake}
+          >
+            <Subheading>
+              {stakeLoading ? (<ContentLoader
+                  speed={1}
+                  width={100}
+                  height={25}
+                  viewBox="0 0 150 25"
+                  backgroundColor="#00126b"
+                  foregroundColor="#000e55"
+                >
+                  <Rect
+                    x="0"
+                    y="7"
+                    rx="3"
+                    ry="3"
+                    width="150"
+                    height="25"
+                  />
+                </ContentLoader>) :
+                (formatCasperAmount(stakeData?.totalStaked ? stakeData?.totalStaked : '0'))
+              }
+            </Subheading>
+            <Caption>
+              Total staked CSPR funds
+            </Caption>
+          </CardWithIcons>
+        </GridCol>
+        {stakeDetails && <GridCol>
+          {stakeData.stakes.map((stake, index) =>
+            <StakeBalanceCard key={index} {...stake} />)}
+        </GridCol>}
       </GridRow>
     </ScreenWrapper>
   );

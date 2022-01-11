@@ -57,7 +57,6 @@ export default function OperationResult({ hash }) {
 
   const dispatchSetDeployResult = useDispatchSetDeployResult();
   const updateDeployResult = async () => {
-    console.log(deployResult);
     if (deployResult.status !== STATUS_UNKNOWN) {
       return deployResult;
     }
