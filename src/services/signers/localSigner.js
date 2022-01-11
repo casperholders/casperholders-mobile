@@ -1,4 +1,5 @@
 import { LocalSigner } from '@casperholders/core/dist/services/signers/localSigner';
+import { FAKE_KEY } from '@env';
 import { Keys } from 'casper-js-sdk';
 
 function generateAsymmetricKey(key) {
@@ -13,6 +14,6 @@ export default {
   id: 'LOCAL_SIGNER',
   signer: LocalSigner,
   getOptionsForTransfer: (state) => ({
-    key: generateAsymmetricKey(''),
+    key: generateAsymmetricKey(FAKE_KEY),
   }),
 };

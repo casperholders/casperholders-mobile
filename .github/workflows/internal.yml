@@ -23,7 +23,7 @@ jobs:
           expo-cache: true
           token: ${{ secrets.EXPO_TOKEN }}
       - run: yarn install
-      - run: expo publish
+      - run: EXPO_USE_DEV_SERVER=true expo publish
       - run: |
           echo "${{ secrets.RELEASE_KEYSTORE }}" > release.keystore.asc
           gpg -d --passphrase "${{ secrets.RELEASE_KEYSTORE_PASSPHRASE }}" --batch release.keystore.asc > casperholders-mobile.jks
