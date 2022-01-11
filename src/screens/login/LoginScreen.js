@@ -1,10 +1,11 @@
 import DotsGridBackground from '@/components/common/DotsGridBackground';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
-import testLocalSigner, { TEST_ASYMMETRIC_KEY } from '@/services/signers/testLocalSigner';
+import localSigner from '@/services/signers/localSigner';
+import { TEST_LOCAL_SIGNER_KEY } from '@env';
 import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Button, Text, Title } from 'react-native-paper';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const dispatchConnect = useDispatchConnect();
 
   const handleConnect = (payload) => {
@@ -18,7 +19,7 @@ export default function LoginScreen() {
         behavior="padding"
       >
         <Image
-          source={require('../../assets/logo.png')}
+          source={require('../../../assets/logo.png')}
           style={styles.logo}
         />
         <Title style={styles.header}>Casper Holders</Title>
@@ -26,7 +27,7 @@ export default function LoginScreen() {
         <Button
           icon={() => (
             <Image
-              source={require('../../assets/torus.png')}
+              source={require('../../../assets/torus.png')}
               style={{ width: 32, height: 32 }}
             />
           )}
@@ -40,7 +41,7 @@ export default function LoginScreen() {
         <Button
           icon={() => (
             <Image
-              source={require('../../assets/ledger_logo.png')}
+              source={require('../../../assets/ledger_logo.png')}
               style={{ width: 32, height: 32 }}
             />
           )}
@@ -56,17 +57,17 @@ export default function LoginScreen() {
           style={styles.button}
           labelStyle={styles.buttonLabel}
           mode="contained"
-          disabled="true"
+          onPress={() => navigation.navigate('Login locally')}
         >
-          Connect locally (Coming soon)
+          Connect locally
         </Button>
-        {TEST_ASYMMETRIC_KEY && <Button
+        {TEST_LOCAL_SIGNER_KEY && <Button
           style={styles.button}
           labelStyle={styles.buttonLabel}
           mode="contained"
           onPress={() => handleConnect({
-            signerId: testLocalSigner.id,
-            key: TEST_ASYMMETRIC_KEY.publicKey.toHex(),
+            signerId: localSigner.id,
+            key: TEST_LOCAL_SIGNER_KEY,
           })}
         >
           Connect with test key
