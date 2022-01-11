@@ -151,7 +151,7 @@ export default function OperationResult({ hash }) {
         style={styles.deployProgress}
         indeterminate
       />}
-      {message && <Caption>{message}</Caption>}
+      {message !== '' && <Caption>{message}</Caption>}
     </CardWithIcons>
   );
 }
