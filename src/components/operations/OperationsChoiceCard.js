@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Caption, Card, Title, useTheme } from 'react-native-paper';
 
-export default function OperationCard({ name, description, icon, disabled, onPress }) {
+export default function OperationsChoiceCard({ name, description, icon, disabled, onPress }) {
   const theme = useTheme();
   const color = disabled ? theme.colors.disabled : theme.colors.text;
   const styles = StyleSheet.create({

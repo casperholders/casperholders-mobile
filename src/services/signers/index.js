@@ -1,4 +1,4 @@
-import localSigner from '@/services/signers/localSigner';
+import localSigner from '@/services/signers/testLocalSigner';
 
 export default {
   [localSigner.id]: localSigner,

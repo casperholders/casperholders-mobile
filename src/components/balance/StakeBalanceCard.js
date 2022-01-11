@@ -1,18 +1,14 @@
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import truncateInMiddle from '@/helpers/truncateInMiddle';
 import { StyleSheet } from 'react-native';
-import { Button, Caption, Card, Paragraph } from 'react-native-paper';
+import { Button, Caption, Card, Paragraph, useTheme } from 'react-native-paper';
 
 export default function ({ validator, staked, formattedPercentOfTotal, delegationRate }) {
+  const theme = useTheme();
   const description = `${formattedPercentOfTotal}% of your staked funds ꞏ Validator ${truncateInMiddle(validator)}`;
-  const styles = StyleSheet.create({
-    actions: {
-      alignItems: 'flex-end',
-      justifyContent: 'flex-end',
-    },
-  });
+
   return (
-    <Card style={{ marginLeft: 12, marginBottom: 12 }}>
+    <Card style={styles.card}>
       <Card.Content>
         <Paragraph>
           {formatCasperAmount(staked)}
@@ -20,14 +16,36 @@ export default function ({ validator, staked, formattedPercentOfTotal, delegatio
         <Caption>
           {description}
         </Caption>
-        <Card.Actions style={styles.actions}>
-          <Button
-            mode="contained"
-            style={{ marginRight: 8 }}
-          >Stake</Button>
-          <Button mode="contained">Unstake</Button>
-        </Card.Actions>
       </Card.Content>
+      <Card.Actions style={styles.actions}>
+        <Button
+          style={styles.actionsStake}
+          color={theme.colors.text}
+          onPress={() => jumpTo('operations', { screen: 'Transfer' })}
+        >
+          Stake
+        </Button>
+        <Button
+          color={theme.colors.text}
+          onPress={() => undefined}
+        >
+          Unstake
+        </Button>
+      </Card.Actions>
     </Card>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    marginLeft: 12,
+    marginBottom: 12,
+  },
+  actions: {
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  actionsStake: {
+    marginRight: 8,
+  },
+});

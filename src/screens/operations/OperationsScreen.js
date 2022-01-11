@@ -1,7 +1,7 @@
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
-import OperationCard from '@/components/operations/OperationCard';
+import OperationsChoiceCard from '@/components/operations/OperationsChoiceCard';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Paragraph } from 'react-native-paper';
@@ -41,7 +41,7 @@ export default function OperationsScreen({ navigation }) {
             key={index}
             width={1 / 2}
           >
-            <OperationCard
+            <OperationsChoiceCard
               name={name}
               description={description}
               icon={icon}

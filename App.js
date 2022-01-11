@@ -14,6 +14,7 @@ const CombinedDarkTheme = merge(NavigationDarkTheme, PaperDarkTheme, {
   roundness: 8,
   colors: {
     primary: '#00126b',
+    textLoader: '#0d0e35',
     background: '#00012a',
     surface: '#00012a',
     card: '#00012a',

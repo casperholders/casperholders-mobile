@@ -15,7 +15,7 @@ export default function OperationsNavigator(props) {
           component={OperationsScreen}
         />
         <Stack.Screen name="Transfer">
-          {(subProps) => <TransferScreen {...props} {...subProps} />}
+          {() => <TransferScreen {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigatorWrapper>

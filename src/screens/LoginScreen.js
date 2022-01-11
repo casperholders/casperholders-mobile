@@ -1,18 +1,13 @@
 import DotsGridBackground from '@/components/common/DotsGridBackground';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
+import testLocalSigner, { TEST_ASYMMETRIC_KEY } from '@/services/signers/testLocalSigner';
 import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Button, Text, Title } from 'react-native-paper';
 
 export default function LoginScreen() {
   const dispatchConnect = useDispatchConnect();
 
-  const handleConnect = () => {
-    // FIXME This will be removed in favor of a real connection step.
-    const payload = {
-      signerId: 'LOCAL_SIGNER',
-      key: '01270a577d2d106c4d29402775f3dffcb9f04aad542579dd4d1cfad20572ebcb7c',
-    };
-
+  const handleConnect = (payload) => {
     dispatchConnect(payload);
   };
 
@@ -38,7 +33,7 @@ export default function LoginScreen() {
           style={styles.button}
           labelStyle={styles.buttonLabel}
           mode="contained"
-          onPress={handleConnect}
+          disabled="true"
         >
           Connect with Torus
         </Button>
@@ -52,7 +47,7 @@ export default function LoginScreen() {
           style={styles.button}
           labelStyle={styles.buttonLabel}
           mode="contained"
-          onPress={handleConnect}
+          disabled="true"
         >
           Connect with Ledger
         </Button>
@@ -65,6 +60,17 @@ export default function LoginScreen() {
         >
           Connect locally (Coming soon)
         </Button>
+        {TEST_ASYMMETRIC_KEY && <Button
+          style={styles.button}
+          labelStyle={styles.buttonLabel}
+          mode="contained"
+          onPress={() => handleConnect({
+            signerId: testLocalSigner.id,
+            key: TEST_ASYMMETRIC_KEY.publicKey.toHex(),
+          })}
+        >
+          Connect with test key
+        </Button>}
       </KeyboardAvoidingView>
     </DotsGridBackground>
   );

@@ -1,20 +1,20 @@
+import BalanceLoaderOrAmount from '@/components/balance/BalanceLoaderOrAmount';
 import StakeBalanceCard from '@/components/balance/StakeBalanceCard';
 import Alert from '@/components/common/Alert';
 import CardWithIcons from '@/components/common/CardWithIcons';
 import Icon from '@/components/common/Icon';
+import SectionHeading from '@/components/common/SectionHeading';
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
-import formatCasperAmount from '@/helpers/formatCasperAmount';
 import useBalance from '@/hooks/useBalance';
 import useStakeBalance from '@/hooks/useStakeBalance';
 import useUniqueKey from '@/hooks/useUniqueKey';
 import Big from 'big.js';
 import { orderBy } from 'lodash';
 import { useMemo, useState } from 'react';
-import ContentLoader, { Rect } from 'react-content-loader/native';
 import { Image, StyleSheet } from 'react-native';
-import { Caption, Subheading, Title } from 'react-native-paper';
+import { Caption } from 'react-native-paper';
 
 export default function BalanceScreen() {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
@@ -63,16 +63,13 @@ export default function BalanceScreen() {
     return Big(balance || 0).plus(stakeData?.totalStaked || 0);
   }, [balance, stakeData]);
 
-  const detailsStake = useMemo(() => {
-    if (stakeData?.stakes?.length > 0) {
-      return <Icon
-        name={stakeDetails ? 'chevron-up' : 'chevron-down'}
-        size={24}
-        right
-      />;
-    }
-    return <></>;
-  }, [stakeData]);
+  const detailsStake = useMemo(() => (
+    stakeData?.stakes?.length > 0 && <Icon
+      name={stakeDetails ? 'chevron-up' : 'chevron-down'}
+      size={24}
+      right
+    />
+  ), [stakeData]);
 
   return (
     <ScreenWrapper onRefresh={updateUniqueKey}>
@@ -88,37 +85,17 @@ export default function BalanceScreen() {
               style={styles.balanceCasperLogo}
             />}
           >
-            <Title>
-              {loading ? (<ContentLoader
-                  speed={1}
-                  width={100}
-                  height={25}
-                  viewBox="0 0 150 25"
-                  backgroundColor="#00126b"
-                  foregroundColor="#000e55"
-                >
-                  <Rect
-                    x="0"
-                    y="7"
-                    rx="3"
-                    ry="3"
-                    width="150"
-                    height="25"
-                  />
-                </ContentLoader>) :
-                (formatCasperAmount(totalFunds))
-              }
-            </Title>
+            <BalanceLoaderOrAmount
+              loading={loading}
+              amount={totalFunds}
+              style={{ fontWeight: 'bold' }}
+            />
             <Caption>
               Total CSPR funds
             </Caption>
           </CardWithIcons>
         </GridCol>
-        <GridCol>
-          <Subheading style={{ textAlign: 'center' }}>
-            Details
-          </Subheading>
-        </GridCol>
+        <SectionHeading title="Details" />
         <GridCol>
           <CardWithIcons
             left={<Icon
@@ -127,27 +104,10 @@ export default function BalanceScreen() {
               left
             />}
           >
-            <Subheading>
-              {balanceLoading ? (<ContentLoader
-                  speed={1}
-                  width={100}
-                  height={25}
-                  viewBox="0 0 150 25"
-                  backgroundColor="#00126b"
-                  foregroundColor="#000e55"
-                >
-                  <Rect
-                    x="0"
-                    y="7"
-                    rx="3"
-                    ry="3"
-                    width="150"
-                    height="25"
-                  />
-                </ContentLoader>) :
-                (formatCasperAmount(balance))
-              }
-            </Subheading>
+            <BalanceLoaderOrAmount
+              loading={balanceLoading}
+              amount={balance}
+            />
             <Caption>
               Unstaked CSPR funds
             </Caption>
@@ -163,27 +123,10 @@ export default function BalanceScreen() {
             />}
             right={detailsStake}
           >
-            <Subheading>
-              {stakeLoading ? (<ContentLoader
-                  speed={1}
-                  width={100}
-                  height={25}
-                  viewBox="0 0 150 25"
-                  backgroundColor="#00126b"
-                  foregroundColor="#000e55"
-                >
-                  <Rect
-                    x="0"
-                    y="7"
-                    rx="3"
-                    ry="3"
-                    width="150"
-                    height="25"
-                  />
-                </ContentLoader>) :
-                (formatCasperAmount(stakeData?.totalStaked ? stakeData?.totalStaked : '0'))
-              }
-            </Subheading>
+            <BalanceLoaderOrAmount
+              loading={stakeLoading}
+              amount={stakeData?.totalStaked || '0'}
+            />
             <Caption>
               Total staked CSPR funds
             </Caption>

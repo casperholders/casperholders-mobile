@@ -6,7 +6,6 @@ import AmountInput from '@/components/inputs/AmountInput';
 import TransferIdInput from '@/components/inputs/TransferIdInput';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationSummary from '@/components/operations/OperationSummary';
-import { NETWORK } from '@/env';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import getMatchedExchange from '@/helpers/getMatchedExchange';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
@@ -18,6 +17,7 @@ import useAsyncHandler from '@/hooks/useAsyncHandler';
 import useBalance from '@/hooks/useBalance';
 import deployManager from '@/services/deployManager';
 import { TransferDeployParameters } from '@casperholders/core';
+import { APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Button, Paragraph } from 'react-native-paper';
@@ -73,7 +73,7 @@ export default function TransferScreen({ jumpTo }) {
     try {
       const deployResult = await deployManager.prepareSignAndSendDeploy(
         new TransferDeployParameters(
-          activeKey, NETWORK, form.values.amount, form.values.address, form.values.transferId,
+          activeKey, APP_NETWORK, form.values.amount, form.values.address, form.values.transferId,
         ),
         signer,
         transferOptions,

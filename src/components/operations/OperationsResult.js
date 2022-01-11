@@ -1,24 +1,15 @@
-import CardWithIcons from '@/components/common/CardWithIcons';
-import Icon from '@/components/common/Icon';
-import { CASPER_LIVE_URL, RPC } from '@/env';
-import formatCasperAmount from '@/helpers/formatCasperAmount';
+import OperationsCard from '@/components/operations/OperationsCard';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
 import useDeployResult from '@/hooks/selectors/operations/useDeployResult';
 import deployManager from '@/services/deployManager';
-import {
-  STATUS_KO,
-  STATUS_OK,
-  STATUS_UNKNOWN,
-} from '@casperholders/core/dist/services/results/deployResult';
+import { STATUS_KO, STATUS_UNKNOWN } from '@casperholders/core/dist/services/results/deployResult';
+import { APP_RPC_URL } from '@env';
 import { useEffect, useState } from 'react';
-import { Linking, StyleSheet, View } from 'react-native';
 import RNEventSource from 'react-native-event-source';
-import { Caption, Paragraph, ProgressBar, Title, useTheme } from 'react-native-paper';
 
 const WATCHER_MAX_WAIT_IN_SECONDS = 60;
 
-export default function OperationResult({ hash }) {
-  const theme = useTheme();
+export default function OperationsResult({ hash }) {
   const deployResult = useDeployResult(hash);
   const [timedOut, setTimedOut] = useState(false);
   const [deployWatcher, setDeployWatcher] = useState(undefined);
@@ -31,7 +22,7 @@ export default function OperationResult({ hash }) {
   };
 
   useEffect(() => {
-    setDeployWatcher(new RNEventSource(`${RPC}/events/?start_from=0`));
+    setDeployWatcher(new RNEventSource(`${APP_RPC_URL}/events/?start_from=0`));
 
     const timeout = setTimeout(() => {
       setTimedOut(true);
@@ -63,12 +54,12 @@ export default function OperationResult({ hash }) {
 
     try {
       const updatedDeployResult = await deployManager.getDeployResult({
+        name: deployResult.name,
         hash: deployResult.hash,
         cost: deployResult.cost,
         status: deployResult.status,
         message: deployResult.message,
         amount: deployResult.amount,
-        name: deployResult.name,
       });
       if (updatedDeployResult.status !== STATUS_UNKNOWN) {
         dispatchSetDeployResult({ deployResult: updatedDeployResult });
@@ -100,73 +91,12 @@ export default function OperationResult({ hash }) {
     })();
   }, [timedOut]);
 
-  const RESULT_STATUSES_ICONS = {
-    [STATUS_UNKNOWN]: 'help-circle',
-    [STATUS_OK]: 'check-circle',
-    [STATUS_KO]: 'alert-circle',
-  };
-  const RESULT_STATUSES_COLORS = {
-    [STATUS_UNKNOWN]: 'white',
-    [STATUS_OK]: theme.colors.success,
-    [STATUS_KO]: theme.colors.error,
-  };
-
-  const icon = RESULT_STATUSES_ICONS[deployResult.status];
-  const color = RESULT_STATUSES_COLORS[deployResult.status];
-  const url = `${CASPER_LIVE_URL}/deploy/${deployResult.hash}`;
-  const details = `Amount: ${formatCasperAmount(deployResult.amount)} ꞏ Cost: ${formatCasperAmount(deployResult.cost)}`;
-  const loading = deployResult.status === STATUS_UNKNOWN;
-  const message = loading ? undefined : deployResult.message;
-
-  return (
-    <CardWithIcons
-      left={<Icon
-        name={icon}
-        color={color}
-        size={24}
-        left
-      />}
-    >
-      <Title>
-        {deployResult.name}
-      </Title>
-      <View style={styles.deployHashWrapper}>
-        <Paragraph
-          numberOfLines={1}
-          style={styles.deployHashText}
-          onPress={() => Linking.openURL(url)}
-        >
-          {deployResult.hash}
-        </Paragraph>
-        <Icon
-          name="open-in-new"
-          style={styles.deployHashIcon}
-        />
-      </View>
-      <Caption>
-        {details}
-      </Caption>
-      {loading && <ProgressBar
-        style={styles.deployProgress}
-        indeterminate
-      />}
-      {message !== '' && <Caption>{message}</Caption>}
-    </CardWithIcons>
-  );
+  return <OperationsCard
+    type={deployResult.name}
+    hash={deployResult.hash}
+    status={deployResult.status}
+    amount={deployResult.amount}
+    cost={deployResult.cost}
+    message={deployResult.message}
+  />;
 }
-
-const styles = StyleSheet.create({
-  deployHashWrapper: {
-    flexDirection: 'row',
-  },
-  deployHashText: {
-    textDecorationLine: 'underline',
-  },
-  deployHashIcon: {
-    alignSelf: 'flex-start',
-  },
-  deployProgress: {
-    marginTop: 4,
-    borderRadius: 4,
-  },
-});
