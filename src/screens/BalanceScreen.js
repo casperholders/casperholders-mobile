@@ -10,6 +10,7 @@ import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import useBalance from '@/hooks/useBalance';
 import useStakeBalance from '@/hooks/useStakeBalance';
 import useUniqueKey from '@/hooks/useUniqueKey';
+import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/noStakeBalanceError';
 import Big from 'big.js';
 import { orderBy } from 'lodash';
 import { useMemo, useState } from 'react';
@@ -22,7 +23,7 @@ export default function BalanceScreen() {
   const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
 
   const loading = balanceLoading || stakeLoading;
-  const error = balanceError || stakeError;
+  const error = balanceError || !(stakeError instanceof NoStakeBalanceError) ? stakeError : false;
 
   const [stakeDetails, setStakeDetails] = useState(false);
   const stakeData = useMemo(() => {
