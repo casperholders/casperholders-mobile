@@ -7,7 +7,7 @@ import { APP_RPC_URL } from '@env';
 import { useEffect, useState } from 'react';
 import RNEventSource from 'react-native-event-source';
 
-const WATCHER_MAX_WAIT_IN_SECONDS = 60;
+const WATCHER_MAX_WAIT_IN_SECONDS = 180;
 
 export default function OperationsResult({ hash }) {
   const deployResult = useDeployResult(hash);
