@@ -78,7 +78,8 @@ export default function TransferScreen({ jumpTo }) {
         signer,
         transferOptions,
       );
-
+      deployResult.amount = form.values.amount;
+      deployResult.cost = transferFee;
       dispatchSetDeployResult({ deployResult });
 
       jumpTo('account');
