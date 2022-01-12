@@ -1,4 +1,5 @@
 import Alert from '@/components/common/Alert';
+import ButtonGroup from '@/components/common/ButtonGroup';
 import CardLoader from '@/components/common/CardLoader';
 import SectionHeading from '@/components/common/SectionHeading';
 import GridCol from '@/components/grid/GridCol';
@@ -10,13 +11,27 @@ import useHistory from '@/hooks/useHistory';
 import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
 import { STATUS_KO, STATUS_OK } from '@casperholders/core/dist/services/results/deployResult';
 import { useEffect, useState } from 'react';
-import { Button } from 'react-native-paper';
+import { Button, useTheme } from 'react-native-paper';
+
+const QUICK_FILTERS = [
+  { text: 'Transfer', query: 'type=eq.transfer' },
+  { text: 'Stake', query: 'type=eq.delegate' },
+  { text: 'Unstake', query: 'type=eq.undelegate' },
+];
+
+QUICK_FILTERS.push({
+  text: 'Other', query: `type=not.in.(${QUICK_FILTERS.map(
+    ({ query }) => `"${query.replace('type=eq.', '')}"`,
+  ).join(',')})`,
+});
 
 export default function OperationsHistory() {
+  const theme = useTheme();
   const dispatchUnsetDeployResult = useDispatchUnsetDeployResult();
   const deployResultsHashs = useDeployResultsHashs();
+  const [filter, setFilter] = useState();
   const [page, setPage] = useState(0);
-  const [historyLoading, history, historyError] = useHistory(page);
+  const [historyLoading, history, historyError] = useHistory(page, filter?.query);
 
   useEffect(() => {
     if (page === 0 && history) {
@@ -33,6 +48,16 @@ export default function OperationsHistory() {
     amount ? CurrencyUtils.convertMotesToCasper(amount) : undefined
   );
 
+  const handleToggleFilter = (newFilter) => {
+    if (!historyLoading) {
+      if (filter !== newFilter) {
+        setPage(0);
+      }
+
+      setFilter(filter === newFilter ? undefined : newFilter);
+    }
+  };
+
   const handleChangePage = (toPage) => {
     if (!historyLoading) {
       setPage(toPage);
@@ -43,10 +68,32 @@ export default function OperationsHistory() {
     <GridRow>
       <SectionHeading
         title="Past operations"
-        description={!historyLoading && !historyError && (
-          history.operations.length ? `${history.total} past operations.` : 'No past operations available.'
+        description={(
+          historyLoading
+            ? 'Loading operations'
+            : (
+              !historyError && (
+                history.operations.length
+                  ? `${history.total} past operations.`
+                  : 'No past operations available.'
+              )
+            )
         )}
       />
+      <GridCol>
+        <ButtonGroup>
+          {QUICK_FILTERS.map((quickFilter, index) => (
+            <Button
+              key={index}
+              mode={filter === quickFilter && 'contained'}
+              color={filter === quickFilter ? theme.colors.primary : theme.colors.text}
+              onPress={() => handleToggleFilter(quickFilter)}
+            >
+              {quickFilter.text}
+            </Button>
+          ))}
+        </ButtonGroup>
+      </GridCol>
       {historyLoading && (
         <>
           <GridCol>
