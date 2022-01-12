@@ -53,8 +53,6 @@ export default function OperationsResult({ hash }) {
 
       return updatedDeployResult;
     } catch (error) {
-      console.error(error);
-
       return undefined;
     }
   };
@@ -64,7 +62,7 @@ export default function OperationsResult({ hash }) {
       if (secondsBeforeTimeout === 0 && deployResult.status === STATUS_UNKNOWN) {
         stopDeployListening();
         const updatedDeployResult = await updateDeployResult();
-        if (updatedDeployResult?.status === STATUS_UNKNOWN) {
+        if (!updatedDeployResult || updatedDeployResult.status === STATUS_UNKNOWN) {
           dispatchSetDeployResult({
             deployResult: {
               ...(updatedDeployResult || deployResult),
