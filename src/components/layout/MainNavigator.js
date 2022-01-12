@@ -3,12 +3,15 @@ import BalanceNavigator from '@/components/layout/BalanceNavigator';
 import HistoryNavigator from '@/components/layout/HistoryNavigator';
 import OperationsNavigator from '@/components/layout/OperationsNavigator';
 import useDeployResultsCount from '@/hooks/selectors/operations/useDeployResultsCount';
+import useDeploysResultNotification from '@/hooks/useDeploysResultNotification';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { useTheme } from 'react-native-paper';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function MainNavigator() {
+export default function MainNavigator({ navigation }) {
+  useDeploysResultNotification({ navigation });
+
   const theme = useTheme();
   const deployResultsCount = useDeployResultsCount();
   const deployResultsBadge = deployResultsCount

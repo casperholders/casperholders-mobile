@@ -12,7 +12,7 @@ export default function SettingsScreen() {
         mode="contained"
         icon="logout"
         style={styles.logoutBtn}
-        onPress={() => dispatchDisconnect()}
+        onPress={dispatchDisconnect}
       >
         Logout
       </Button>
