@@ -8,6 +8,7 @@ import OperationSummary from '@/components/operations/OperationSummary';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
 import useForm from '@/hooks/inputs/useForm';
+import useRouteFillForm from '@/hooks/inputs/useRouteFillForm';
 import useOperationsOptions from '@/hooks/selectors/auth/useOperationsOptions';
 import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
 import useSigner from '@/hooks/selectors/auth/useSigner';
@@ -30,10 +31,8 @@ export default function DelegateScreen({ navigation, route }) {
   const minAmount = 1;
   const stakingFee = 2.5;
 
-  const form = useForm({
-    address: '',
-    amount: '0',
-  });
+  const form = useForm({ address: '', amount: '0' });
+  useRouteFillForm(route, form, ['address']);
 
   useEffect(() => {
     form.setValues({ address: route?.params?.address ? route?.params?.address : '' });

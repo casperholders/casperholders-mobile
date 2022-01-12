@@ -1,50 +1,36 @@
 import OperationsCard from '@/components/operations/OperationsCard';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
 import useDeployResult from '@/hooks/selectors/operations/useDeployResult';
+import useEventSource from '@/hooks/useEventSource';
+import useInterval from '@/hooks/useInterval';
 import deployManager from '@/services/deployManager';
 import { STATUS_KO, STATUS_UNKNOWN } from '@casperholders/core/dist/services/results/deployResult';
 import { APP_RPC_URL } from '@env';
 import { useEffect, useState } from 'react';
-import RNEventSource from 'react-native-event-source';
 
 const WATCHER_MAX_WAIT_IN_SECONDS = 180;
 
 export default function OperationsResult({ hash }) {
   const deployResult = useDeployResult(hash);
-  const [timedOut, setTimedOut] = useState(false);
-  const [deployWatcher, setDeployWatcher] = useState(undefined);
-  const stopDeployWatching = () => {
-    if (deployWatcher) {
-      deployWatcher.removeAllListeners();
-      deployWatcher.close();
-      setDeployWatcher(undefined);
+  const stopDeployListening = useEventSource(
+    `${APP_RPC_URL}/events/?start_from=0`,
+    async (event) => {
+      const data = JSON.parse(event.data);
+      if ('DeployProcessed' in data && data.DeployProcessed.deploy_hash.toLowerCase() === hash) {
+        stopDeployListening();
+        await updateDeployResult();
+      }
+    },
+  );
+
+  const [secondsBeforeTimeout, setSecondsBeforeTimeout] = useState(WATCHER_MAX_WAIT_IN_SECONDS);
+  const clearInterval = useInterval(() => {
+    if ((secondsBeforeTimeout - 1) === 0) {
+      clearInterval();
     }
-  };
 
-  useEffect(() => {
-    setDeployWatcher(new RNEventSource(`${APP_RPC_URL}/events/?start_from=0`));
-
-    const timeout = setTimeout(() => {
-      setTimedOut(true);
-    }, WATCHER_MAX_WAIT_IN_SECONDS * 1000);
-
-    return () => {
-      clearTimeout(timeout);
-      stopDeployWatching();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (deployWatcher) {
-      deployWatcher.addEventListener('message', async (event) => {
-        const data = JSON.parse(event.data);
-        if ('DeployProcessed' in data && data.DeployProcessed.deploy_hash.toLowerCase() === hash) {
-          stopDeployWatching();
-          await updateDeployResult();
-        }
-      });
-    }
-  }, [deployWatcher]);
+    setSecondsBeforeTimeout(secondsBeforeTimeout - 1);
+  }, 1000);
 
   const dispatchSetDeployResult = useDispatchSetDeployResult();
   const updateDeployResult = async () => {
@@ -75,8 +61,8 @@ export default function OperationsResult({ hash }) {
 
   useEffect(() => {
     (async () => {
-      if (timedOut && deployResult.status === STATUS_UNKNOWN) {
-        stopDeployWatching();
+      if (secondsBeforeTimeout === 0 && deployResult.status === STATUS_UNKNOWN) {
+        stopDeployListening();
         const updatedDeployResult = await updateDeployResult();
         if (updatedDeployResult?.status === STATUS_UNKNOWN) {
           dispatchSetDeployResult({
@@ -89,7 +75,7 @@ export default function OperationsResult({ hash }) {
         }
       }
     })();
-  }, [timedOut]);
+  }, [secondsBeforeTimeout]);
 
   return <OperationsCard
     type={deployResult.name}
@@ -98,5 +84,10 @@ export default function OperationsResult({ hash }) {
     amount={deployResult.amount}
     cost={deployResult.cost}
     message={deployResult.message}
+    additionalInfo={(
+      deployResult.status === STATUS_UNKNOWN && secondsBeforeTimeout !== 0
+        ? `Waiting event: ${secondsBeforeTimeout}sec before forced fetch`
+        : undefined
+    )}
   />;
 }

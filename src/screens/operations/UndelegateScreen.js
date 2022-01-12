@@ -10,15 +10,14 @@ import formatCasperAmount from '@/helpers/formatCasperAmount';
 import getMatchedExchange from '@/helpers/getMatchedExchange';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
 import useForm from '@/hooks/inputs/useForm';
+import useRouteFillForm from '@/hooks/inputs/useRouteFillForm';
 import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
 import useSigner from '@/hooks/selectors/auth/useSigner';
 import useTransferOptions from '@/hooks/selectors/auth/useTransferOptions';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
 import useBalance from '@/hooks/useBalance';
 import deployManager from '@/services/deployManager';
-import {
-  TransferDeployParameters
-} from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
+import { TransferDeployParameters } from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
 import { APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
@@ -32,15 +31,8 @@ export default function UndelegateScreen({ navigation, route }) {
   const minAmount = 1;
   const transferFee = 0.00001;
 
-  const form = useForm({
-    address: '',
-    amount: '0',
-  });
-
-  useEffect(() => {
-    form.setValues({address: route?.params?.address ? route?.params?.address : '' });
-  }, [route?.params?.address]);
-
+  const form = useForm({ address: '', amount: '0' });
+  useRouteFillForm(route, form, ['address']);
 
   const matchedExchange = getMatchedExchange(form.values.address);
 

@@ -74,6 +74,10 @@ export default function BalanceScreen({ navigation }) {
     />
   ), [stakeData]);
 
+  const handleDetailsStakeToggle = detailsStake ? () => {
+    setStakeDetails(!stakeDetails);
+  } : undefined;
+
   return (
     <ScreenWrapper onRefresh={updateUniqueKey}>
       {error && <Alert
@@ -118,7 +122,7 @@ export default function BalanceScreen({ navigation }) {
         </GridCol>
         <GridCol>
           <CardWithIcons
-            onPress={() => setStakeDetails(!stakeDetails)}
+            onPress={handleDetailsStakeToggle}
             left={<Icon
               name="safe"
               size={24}

@@ -22,11 +22,19 @@ declare module '@env' {
    * @type {string}
    */
   export const APP_DATA_API_URL: string;
+
   /**
    * The Auction Manager hash to use.
    * @type {string}
    */
   export const APP_AUCTION_MANAGER_HASH: string;
+
+  /**
+   * Disable the event sources watching to avoid bugs due to Flipper debug proxies.
+   * @type {string}
+   */
+  export const APP_DISABLE_EVENT_SOURCES: string;
+
   /**
    * The fake private key for local testing using local signer.
    * @type {string}
