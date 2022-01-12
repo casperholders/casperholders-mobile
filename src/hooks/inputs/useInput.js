@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-export default function useInput(form, defaultValue, rules, onChange) {
-  const value = useRef(defaultValue);
+export default function useInput(form, currentValue, rules, onChange) {
+  const value = useRef(currentValue);
   const [error, setError] = useState(undefined);
 
   const validate = () => {
@@ -30,10 +30,18 @@ export default function useInput(form, defaultValue, rules, onChange) {
   }, []);
 
   const setValue = (newValue) => {
+    if (value.current === newValue) {
+      return;
+    }
+
     value.current = newValue;
     validate();
     onChange(value.current);
   };
+
+  useEffect(() => {
+    setValue(currentValue);
+  }, [currentValue]);
 
   return [value, setValue, error];
 }
