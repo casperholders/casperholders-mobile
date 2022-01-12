@@ -17,7 +17,7 @@ import { useMemo, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Caption } from 'react-native-paper';
 
-export default function BalanceScreen() {
+export default function BalanceScreen({ navigation }) {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
   const [balanceLoading, balance, balanceError] = useBalance([uniqueKey]);
   const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
@@ -134,7 +134,7 @@ export default function BalanceScreen() {
           </CardWithIcons>
         </GridCol>
         {stakeDetails && <GridCol>
-          {stakeData?.stakes?.map((stake, index) => <StakeBalanceCard key={index} {...stake} />)}
+          {stakeData?.stakes?.map((stake, index) => <StakeBalanceCard key={index} navigation={navigation} {...stake} />)}
         </GridCol>}
       </GridRow>
     </ScreenWrapper>

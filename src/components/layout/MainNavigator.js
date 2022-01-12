@@ -2,8 +2,13 @@ import AccountNavigator from '@/components/layout/AccountNavigator';
 import BalanceNavigator from '@/components/layout/BalanceNavigator';
 import OperationsNavigator from '@/components/layout/OperationsNavigator';
 import useDeployResultsCount from '@/hooks/selectors/operations/useDeployResultsCount';
-import { useState } from 'react';
-import { BottomNavigation, useTheme } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useTheme } from 'react-native-paper';
+import NavigatorWrapper from './NavigatorWrapper';
+
+
+const Tab = createMaterialBottomTabNavigator();
 
 export default function MainNavigator() {
   const theme = useTheme();
@@ -12,36 +17,55 @@ export default function MainNavigator() {
     ? (deployResultsCount > 9) ? '9+' : deployResultsCount
     : undefined;
 
-  const getBadgeForRoute = ({ route }) => {
-    if (route.key === 'account' && deployResultsBadge) {
-      return deployResultsBadge;
-    }
-
-    return undefined;
-  };
-
-  const [tabIndex, setTabIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'balance', title: 'Balance', icon: 'wallet' },
-    { key: 'operations', title: 'Operations', icon: 'transfer' },
-    { key: 'account', title: 'Account', icon: 'account-circle' },
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    balance: BalanceNavigator,
-    operations: OperationsNavigator,
-    account: AccountNavigator,
-  });
-
   return (
-    <BottomNavigation
-      getBadge={getBadgeForRoute}
-      navigationState={{ index: tabIndex, routes }}
-      onIndexChange={setTabIndex}
-      renderScene={renderScene}
-      barStyle={{ backgroundColor: theme.colors.primary }}
-      sceneAnimationEnabled={true}
-      shifting={true}
-    />
+    <NavigatorWrapper>
+      <Tab.Navigator
+        barStyle={{ backgroundColor: theme.colors.primary }}
+      >
+        <Tab.Screen
+          name="BalanceTab"
+          component={BalanceNavigator}
+          options={{
+            tabBarLabel: 'Balance',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons
+                name="wallet"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="OperationsTab"
+          component={OperationsNavigator}
+          options={{
+            tabBarLabel: 'Operations',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons
+                name="transfer"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="AccountTab"
+          component={AccountNavigator}
+          options={{
+            tabBarLabel: 'Account',
+            tabBarBadge: deployResultsBadge,
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons
+                name="account-circle"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigatorWrapper>
   );
 }

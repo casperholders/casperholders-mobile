@@ -24,7 +24,7 @@ import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Button, Paragraph } from 'react-native-paper';
 
-export default function TransferScreen({ jumpTo }) {
+export default function TransferScreen({ navigation, route }) {
   const activeKey = usePublicKey();
   const signer = useSigner();
   const transferOptions = useTransferOptions();
@@ -34,9 +34,14 @@ export default function TransferScreen({ jumpTo }) {
 
   const form = useForm({
     address: '',
-    transferId: '0',
+    transferId: '1',
     amount: '0',
   });
+
+  useEffect(() => {
+    form.setValues({address: route?.params?.address ? route?.params?.address : '' });
+  }, [route?.params?.address]);
+
 
   const matchedExchange = getMatchedExchange(form.values.address);
 
@@ -84,7 +89,7 @@ export default function TransferScreen({ jumpTo }) {
       deployResult.cost = transferFee;
       dispatchSetDeployResult({ deployResult });
 
-      jumpTo('account');
+      navigation.jumpTo('AccountTab');
     } catch (error) {
       console.error(error);
       // TODO manage error
