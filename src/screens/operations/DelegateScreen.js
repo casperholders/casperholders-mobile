@@ -8,6 +8,7 @@ import OperationSummary from '@/components/operations/OperationSummary';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
 import useForm from '@/hooks/inputs/useForm';
+import useOperationsOptions from '@/hooks/selectors/auth/useOperationsOptions';
 import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
 import useSigner from '@/hooks/selectors/auth/useSigner';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
@@ -20,7 +21,6 @@ import Big from 'big.js';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Paragraph, Text } from 'react-native-paper';
-import useOperationsOptions from '../../hooks/selectors/auth/useOperationsOptions';
 
 export default function DelegateScreen({ navigation, route }) {
   const activeKey = usePublicKey();
@@ -113,7 +113,7 @@ export default function DelegateScreen({ navigation, route }) {
   }, []);
   const handleClosePress = useCallback((value) => {
     console.log(value);
-    form.setValues({ address: value })
+    form.setValues({ address: value });
     sheetRef.current?.close();
   }, []);
   const styles = StyleSheet.create({
@@ -156,7 +156,11 @@ export default function DelegateScreen({ navigation, route }) {
         value={form.values.address}
         onChangeValue={(address) => form.setValues({ address })}
       />
-      <Button mode="contained" style={{elevation: 0}} onPress={() => handleSnapPress(0)}>Select a validator</Button>
+      <Button
+        mode="contained"
+        style={{ elevation: 0 }}
+        onPress={() => handleSnapPress(0)}
+      >Select a validator</Button>
       <AmountInput
         label="Amount"
         hint={`Amount to stake (minimum of ${minAmount} CSPR)`}
@@ -209,7 +213,7 @@ export default function DelegateScreen({ navigation, route }) {
           backgroundColor: '#0d0e35',
         }}
         handleIndicatorStyle={{
-          backgroundColor: 'white'
+          backgroundColor: 'white',
         }}
       >
         <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>

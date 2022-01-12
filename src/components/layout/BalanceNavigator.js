@@ -1,16 +1,13 @@
+import NavigatorWrapper from '@/components/layout/NavigatorWrapper';
 import BalanceScreen from '@/screens/BalanceScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 export default function BalanceNavigator(props) {
   return (
-    <View
-      style={{ flex: 1 }}
-      collapsable={false}
-    >
+    <NavigatorWrapper>
       <Stack.Navigator initialRouteName="Balance">
         <Stack.Screen
           name="Balance"
@@ -18,6 +15,6 @@ export default function BalanceNavigator(props) {
           {() => <BalanceScreen {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
-    </View>
+    </NavigatorWrapper>
   );
 }

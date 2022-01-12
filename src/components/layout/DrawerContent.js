@@ -1,7 +1,7 @@
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { Image, StyleSheet, View } from 'react-native';
 import { Divider, Drawer, Headline } from 'react-native-paper';
-import useDispatchDisconnect from '../../hooks/actions/useDispatchDisconnect';
+import useDispatchDisconnect from '@/hooks/actions/useDispatchDisconnect';
 
 export default function DrawerContent({ navigation, ...props }) {
   const dispatchDisconnect = useDispatchDisconnect();

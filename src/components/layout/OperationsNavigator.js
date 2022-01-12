@@ -1,19 +1,16 @@
+import NavigatorWrapper from '@/components/layout/NavigatorWrapper';
+import DelegateScreen from '@/screens/operations/DelegateScreen';
 import OperationsScreen from '@/screens/operations/OperationsScreen';
 import TransferScreen from '@/screens/operations/TransferScreen';
+import UndelegateScreen from '@/screens/operations/UndelegateScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { View } from 'react-native';
-import DelegateScreen from '../../screens/operations/DelegateScreen';
-import UndelegateScreen from '../../screens/operations/UndelegateScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function OperationsNavigator(props) {
   return (
-    <View
-      style={{ flex: 1 }}
-      collapsable={false}
-    >
+    <NavigatorWrapper>
       <Stack.Navigator initialRouteName="Operations">
         <Stack.Screen
           name="Operations"
@@ -29,6 +26,6 @@ export default function OperationsNavigator(props) {
           {() => <UndelegateScreen {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
-    </View>
+    </NavigatorWrapper>
   );
 }

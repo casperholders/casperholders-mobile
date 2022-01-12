@@ -23,7 +23,9 @@ export default function BalanceScreen({ navigation }) {
   const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
 
   const loading = balanceLoading || stakeLoading;
-  const error = balanceError || !(stakeError instanceof NoStakeBalanceError) ? stakeError : false;
+  const error = balanceError || (
+    stakeError instanceof NoStakeBalanceError ? undefined : stakeError
+  );
 
   const [stakeDetails, setStakeDetails] = useState(false);
   const stakeData = useMemo(() => {
@@ -134,7 +136,11 @@ export default function BalanceScreen({ navigation }) {
           </CardWithIcons>
         </GridCol>
         {stakeDetails && <GridCol>
-          {stakeData?.stakes?.map((stake, index) => <StakeBalanceCard key={index} navigation={navigation} {...stake} />)}
+          {stakeData.stakes.map((stake, index) => <StakeBalanceCard
+            key={index}
+            navigation={navigation}
+            {...stake}
+          />)}
         </GridCol>}
       </GridRow>
     </ScreenWrapper>
