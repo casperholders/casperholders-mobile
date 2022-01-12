@@ -133,7 +133,7 @@ export default function BalanceScreen() {
           </CardWithIcons>
         </GridCol>
         {stakeDetails && <GridCol>
-          {stakeData.stakes.map((stake, index) => <StakeBalanceCard key={index} {...stake} />)}
+          {stakeData?.stakes?.map((stake, index) => <StakeBalanceCard key={index} {...stake} />)}
         </GridCol>}
       </GridRow>
     </ScreenWrapper>
