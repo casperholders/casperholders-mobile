@@ -6,7 +6,7 @@ import useUniqueKey from '@/hooks/useUniqueKey';
 import { StyleSheet, View } from 'react-native';
 import { Button, Divider } from 'react-native-paper';
 
-export default function AccountScreen() {
+export default function HistoryScreen() {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
   const dispatchDisconnect = useDispatchDisconnect();
 

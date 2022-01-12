@@ -81,7 +81,7 @@ export default function UndelegateScreen({ navigation, route }) {
       deployResult.cost = transferFee;
       dispatchSetDeployResult({ deployResult });
 
-      navigation.jumpTo('AccountTab');
+      navigation.jumpTo('HistoryTab');
     } catch (error) {
       console.error(error);
       // TODO manage error

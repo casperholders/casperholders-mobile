@@ -82,7 +82,7 @@ export default function DelegateScreen({ navigation, route }) {
       deployResult.cost = stakingFee;
       dispatchSetDeployResult({ deployResult });
 
-      navigation.jumpTo('AccountTab');
+      navigation.jumpTo('HistoryTab');
     } catch (error) {
       console.error(error);
       // TODO manage error

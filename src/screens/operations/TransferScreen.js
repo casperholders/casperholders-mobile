@@ -46,7 +46,7 @@ export default function TransferScreen({ navigation, route }) {
 
       dispatchSetDeployResult({ deployResult });
 
-      navigation.jumpTo('AccountTab');
+      navigation.jumpTo('HistoryTab');
     },
   );
 

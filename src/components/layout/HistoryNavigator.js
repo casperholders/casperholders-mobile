@@ -1,17 +1,17 @@
 import NavigatorWrapper from '@/components/layout/NavigatorWrapper';
-import AccountScreen from '@/screens/AccountScreen';
+import HistoryScreen from '@/screens/HistoryScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
 const Stack = createNativeStackNavigator();
 
-export default function AccountNavigator() {
+export default function HistoryNavigator() {
   return (
     <NavigatorWrapper>
-      <Stack.Navigator initialRouteName="Account">
+      <Stack.Navigator initialRouteName="History">
         <Stack.Screen
-          name="Account"
-          component={AccountScreen}
+          name="History"
+          component={HistoryScreen}
         />
       </Stack.Navigator>
     </NavigatorWrapper>

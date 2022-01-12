@@ -1,6 +1,6 @@
 import Icon from '@/components/common/Icon';
-import AccountNavigator from '@/components/layout/AccountNavigator';
 import BalanceNavigator from '@/components/layout/BalanceNavigator';
+import HistoryNavigator from '@/components/layout/HistoryNavigator';
 import OperationsNavigator from '@/components/layout/OperationsNavigator';
 import useDeployResultsCount from '@/hooks/selectors/operations/useDeployResultsCount';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -48,14 +48,14 @@ export default function MainNavigator() {
         }}
       />
       <Tab.Screen
-        name="AccountTab"
-        component={AccountNavigator}
+        name="HistoryTab"
+        component={HistoryNavigator}
         options={{
-          tabBarLabel: 'Account',
+          tabBarLabel: 'History',
           tabBarBadge: deployResultsBadge,
           tabBarIcon: ({ color }) => (
             <Icon
-              name="account-circle"
+              name="history"
               color={color}
               size={26}
             />
