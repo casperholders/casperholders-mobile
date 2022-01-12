@@ -1,9 +1,9 @@
+import ButtonGroup from '@/components/common/ButtonGroup';
 import InputMessages from '@/components/inputs/InputMessages';
 import InputWrapper from '@/components/inputs/InputWrapper';
 import useInput from '@/hooks/inputs/useInput';
 import Big from 'big.js';
 import { useCallback } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 
 export default function AmountInput({ form, label, hint, min, fee, funds, value, onChangeValue }) {
@@ -93,28 +93,17 @@ export default function AmountInput({ form, label, hint, min, fee, funds, value,
         error={error}
         hint={hint}
       />
-      <View style={styles.quickButtons}>
+      <ButtonGroup>
         {amountQuickActions.map(({ text, handler }, index) => (
           <Button
             key={index}
             color="white"
-            style={styles.quickButton}
-            compact
             onPress={handler}
           >
             {text}
           </Button>
         ))}
-      </View>
+      </ButtonGroup>
     </InputWrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  quickButtons: {
-    flexDirection: 'row',
-  },
-  quickButton: {
-    flexGrow: 1,
-  },
-});
