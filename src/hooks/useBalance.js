@@ -1,9 +1,9 @@
-import useActiveKey from '@/hooks/selectors/auth/useActiveKey';
+import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
 import useAsyncData from '@/hooks/useAsyncData';
 import balanceService from '@/services/balanceService';
 
 export default function useBalance(deps = []) {
-  const activeKey = useActiveKey();
+  const activeKey = usePublicKey();
 
   return useAsyncData(async () => {
     return await balanceService.fetchBalance();

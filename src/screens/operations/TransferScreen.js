@@ -10,7 +10,7 @@ import formatCasperAmount from '@/helpers/formatCasperAmount';
 import getMatchedExchange from '@/helpers/getMatchedExchange';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
 import useForm from '@/hooks/inputs/useForm';
-import useActiveKey from '@/hooks/selectors/auth/useActiveKey';
+import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
 import useSigner from '@/hooks/selectors/auth/useSigner';
 import useTransferOptions from '@/hooks/selectors/auth/useTransferOptions';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react';
 import { Button, Paragraph } from 'react-native-paper';
 
 export default function TransferScreen({ jumpTo }) {
-  const activeKey = useActiveKey();
+  const activeKey = usePublicKey();
   const signer = useSigner();
   const transferOptions = useTransferOptions();
 
