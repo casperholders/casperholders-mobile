@@ -18,4 +18,10 @@ export default {
   getOptionsForTransfer: (state) => ({
     key: generateAsymmetricKeyAndCache(state.auth.activeKey),
   }),
+  getOptionsForOperations: (state) => ({
+    key: generateAsymmetricKeyAndCache(state.auth.activeKey),
+  }),
+  getOptionsForValidatorOperations: (state) => ({
+    key: generateAsymmetricKeyAndCache(state.auth.activeKey),
+  }),
 };

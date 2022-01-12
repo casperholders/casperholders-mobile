@@ -22,7 +22,11 @@ declare module '@env' {
    * @type {string}
    */
   export const APP_DATA_API_URL: string;
-
+  /**
+   * The Auction Manager hash to use.
+   * @type {string}
+   */
+  export const APP_AUCTION_MANAGER_HASH: string;
   /**
    * The fake private key for local testing using local signer.
    * @type {string}

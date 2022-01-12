@@ -3,6 +3,8 @@ import TransferScreen from '@/screens/operations/TransferScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { View } from 'react-native';
+import DelegateScreen from '../../screens/operations/DelegateScreen';
+import UndelegateScreen from '../../screens/operations/UndelegateScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +21,12 @@ export default function OperationsNavigator(props) {
         />
         <Stack.Screen name="Transfer">
           {() => <TransferScreen {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Stake">
+          {() => <DelegateScreen {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Unstake">
+          {() => <UndelegateScreen {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </View>
