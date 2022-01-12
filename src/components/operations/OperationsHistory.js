@@ -90,7 +90,7 @@ export default function OperationsHistory() {
               mode="contained"
               icon="chevron-right"
               contentStyle={{ flexDirection: 'row-reverse' }}
-              disabled={Math.trunc(history.total / 10) === page}
+              disabled={history?.total <= 10 || Math.trunc(history?.total / 10) === page}
               loading={historyLoading}
               onPress={() => handleChangePage(page + 1)}
             >

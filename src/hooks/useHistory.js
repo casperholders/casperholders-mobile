@@ -18,7 +18,7 @@ export default function useHistory(page) {
 
     return {
       operations: await response.json(),
-      total: Number(response.headers.get('content-range').replace(/^[0-9]*-[0-9]*\//, '')),
+      total: Number(response.headers.get('content-range').replace(/^.*\//, '')),
     };
   }, [activeKey, page]);
 }
