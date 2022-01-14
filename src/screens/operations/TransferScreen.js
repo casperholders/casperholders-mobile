@@ -15,7 +15,9 @@ import useSigner from '@/hooks/selectors/auth/useSigner';
 import useTransferOptions from '@/hooks/selectors/auth/useTransferOptions';
 import useBalance from '@/hooks/useBalance';
 import deployManager from '@/services/deployManager';
-import { TransferDeployParameters } from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
+import {
+  TransferDeployParameters,
+} from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
 import { APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';

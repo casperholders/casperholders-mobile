@@ -1,13 +1,22 @@
+import BottomSheetModalContainer from '@/components/common/BottomSheetModalContainer';
 import DotsGridBackground from '@/components/common/DotsGridBackground';
+import LedgerConnect from '@/components/LedgerConnect';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import localSigner from '@/services/signers/localSigner';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
+import { useCallback, useMemo, useRef } from 'react';
 import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Button, Text, Title } from 'react-native-paper';
 
 export default function LoginScreen({ navigation }) {
   const dispatchConnect = useDispatchConnect();
 
+  const bottomSheetModalRef = useRef(null);
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+  // variables
+  const snapPoints = useMemo(() => ['46%'], []);
   const handleConnect = (payload) => {
     dispatchConnect(payload);
   };
@@ -48,10 +57,16 @@ export default function LoginScreen({ navigation }) {
           style={styles.button}
           labelStyle={styles.buttonLabel}
           mode="contained"
-          disabled="true"
+          onPress={handlePresentModalPress}
         >
           Connect with Ledger
         </Button>
+        <BottomSheetModalContainer
+          bottomSheetModalRef={bottomSheetModalRef}
+          snapPoints={snapPoints}
+        >
+          <LedgerConnect />
+        </BottomSheetModalContainer>
         <Button
           icon="account"
           style={styles.button}

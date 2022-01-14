@@ -7,6 +7,9 @@
       "android",
       "ios"
     ],
+    "plugins": [
+      "@config-plugins/react-native-ble-plx"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "backgroundColor": "#00012a",
@@ -24,7 +27,7 @@
     ],
     "android": {
       "package": "com.casperholders.wallet",
-      "permissions" : []
+      "permissions": []
     },
     "ios": {
       "bundleIdentifier": "com.casperholders.wallet",

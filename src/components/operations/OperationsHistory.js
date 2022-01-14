@@ -104,10 +104,11 @@ export default function OperationsHistory() {
           </GridCol>
         </>
       )}
-      {!historyLoading && historyError && <Alert
-        type="error"
-        message={historyError.message}
-      />}
+      {!historyLoading && historyError &&
+        (<GridCol><Alert
+          type="error"
+          message={historyError.message}
+        /></GridCol>)}
       {!historyLoading && !historyError && (
         <>
           {history.operations.map((deployData) => (
