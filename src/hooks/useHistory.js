@@ -16,7 +16,6 @@ export default function useHistory(page, additionalQuery) {
       query.push(additionalQuery);
     }
 
-    console.log(`${APP_DATA_API_URL}/deploys?${query.join('&')}`)
     const response = await fetch(
       `${APP_DATA_API_URL}/deploys?${query.join('&')}`,
       {

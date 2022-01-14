@@ -4,7 +4,8 @@
     "name": "Casper Holders",
     "slug": "casperholders-mobile",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,6 +27,7 @@
       "permissions" : []
     },
     "ios": {
+      "bundleIdentifier": "com.casperholders.wallet",
       "supportsTablet": true
     }
   }

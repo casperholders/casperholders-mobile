@@ -1,158 +1,122 @@
 import Alert from '@/components/common/Alert';
-import ConfirmDialog from '@/components/common/ConfirmDialog';
 import Loader from '@/components/common/Loader';
-import AddressInput from '@/components/inputs/AddressInput';
 import AmountInput from '@/components/inputs/AmountInput';
-import TransferIdInput from '@/components/inputs/TransferIdInput';
+import DeployForm from '@/components/inputs/DeployForm';
+import ValidatorInput from '@/components/inputs/ValidatorInput';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationSummary from '@/components/operations/OperationSummary';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
-import getMatchedExchange from '@/helpers/getMatchedExchange';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
-import useForm from '@/hooks/inputs/useForm';
-import useRouteFillForm from '@/hooks/inputs/useRouteFillForm';
+import useDeployForm from '@/hooks/inputs/useDeployForm';
+import useOperationsOptions from '@/hooks/selectors/auth/useOperationsOptions';
 import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
 import useSigner from '@/hooks/selectors/auth/useSigner';
-import useTransferOptions from '@/hooks/selectors/auth/useTransferOptions';
-import useAsyncHandler from '@/hooks/useAsyncHandler';
 import useBalance from '@/hooks/useBalance';
+import useBalanceValidator from '@/hooks/useBalanceValidator';
 import deployManager from '@/services/deployManager';
-import { TransferDeployParameters } from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
-import { APP_NETWORK } from '@env';
+import { APP_AUCTION_MANAGER_HASH, APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
-import { Button, Paragraph } from 'react-native-paper';
+import { Paragraph } from 'react-native-paper';
+import { Undelegate } from '@casperholders/core/dist/services/deploys/auction/actions/undelegate';
 
 export default function UndelegateScreen({ navigation, route }) {
+  const minAmount = 1;
+  const unstakeFee = 0.00001;
   const activeKey = usePublicKey();
   const signer = useSigner();
-  const transferOptions = useTransferOptions();
+  const operationsOptions = useOperationsOptions();
+  const dispatchSetDeployResult = useDispatchSetDeployResult();
+  const deployForm = useDeployForm(
+    route,
+    { address: '', amount: '0' },
+    ['address'],
+    async (values) => {
+      const deployResult = await deployManager.prepareSignAndSendDeploy(
+        new Undelegate(
+          values.amount, activeKey, values.address, APP_NETWORK, APP_AUCTION_MANAGER_HASH,
+        ),
+        signer,
+        operationsOptions,
+      );
 
-  const minAmount = 1;
-  const transferFee = 0.00001;
+      deployResult.amount = values.amount;
+      deployResult.cost = unstakeFee;
 
-  const form = useForm({ address: '', amount: '0' });
-  useRouteFillForm(route, form, ['address']);
+      dispatchSetDeployResult({ deployResult });
 
-  const matchedExchange = getMatchedExchange(form.values.address);
+      navigation.jumpTo('HistoryTab');
+    },
+  );
 
   const [balanceLoading, balance, balanceError] = useBalance();
   const [balanceAfter, setBalanceAfter] = useState(undefined);
+
+  const [balanceValidatorLoading, balanceValidator, balanceValidatorError] = useBalanceValidator([deployForm.form.values.address], deployForm.form.values.address);
   useEffect(() => {
     try {
       setBalanceAfter(
-        Big(balance).minus(form.values.amount).minus(transferFee),
+        Big(balance).plus(deployForm.form.values.amount).minus(unstakeFee),
       );
     } catch (_) {
       setBalanceAfter(undefined);
     }
-  }, [balance, transferFee, form.values.amount]);
+  }, [balance, unstakeFee, deployForm.form.values.amount]);
 
   const operationSummaryItems = [
-    { label: 'Undelegation fee', amount: transferFee },
-    { label: 'Staking balance', amount: balance },
+    { label: 'Unstaking fee', amount: unstakeFee },
+    { label: 'Staking balance', amount: balanceValidator },
     { label: 'Balance', amount: balance },
-    { label: 'Balance after unstake', amount: balanceAfter },
+    { label: 'Balance after unstaking', amount: balanceAfter },
   ];
-
-  const [dialogVisible, setDialogVisible] = useState(false);
-  const handleDialogClose = () => setDialogVisible(false);
-  const handleDialogOpen = () => {
-    if (!form.validate()) {
-      return;
-    }
-
-    setDialogVisible(true);
-  };
-
-  const dispatchSetDeployResult = useDispatchSetDeployResult();
-  const [loading, handleDialogConfirm] = useAsyncHandler(async () => {
-    handleDialogClose();
-
-    try {
-      const deployResult = await deployManager.prepareSignAndSendDeploy(
-        new TransferDeployParameters(
-          activeKey, APP_NETWORK, form.values.amount, form.values.address, form.values.transferId,
-        ),
-        signer,
-        transferOptions,
-      );
-      deployResult.amount = form.values.amount;
-      deployResult.cost = transferFee;
-      dispatchSetDeployResult({ deployResult });
-
-      navigation.jumpTo('HistoryTab');
-    } catch (error) {
-      console.error(error);
-      // TODO manage error
-    }
-  });
 
   return balanceLoading ? <Loader /> : (
     <ScreenWrapper>
-      {balanceError && <Alert
-        type="error"
-        message={balanceError.message}
-      />}
-      <AddressInput
-        label="Address"
-        form={form}
-        value={form.values.address}
-        onChangeValue={(address) => form.setValues({ address })}
-      />
-      {
-        matchedExchange &&
-        <Alert message={`Looks like you're transferring the funds to ${matchedExchange}. Please verify your transfer ID before sending the deploy.`} />
-      }
-      <TransferIdInput
-        label="Transfer ID"
-        hint="You can leave 0 if unknown"
-        form={form}
-        value={form.values.transferId}
-        onChangeValue={(transferId) => form.setValues({ transferId })}
-      />
-      <AmountInput
-        label="Amount"
-        hint={`Amount to transfer (minimum of ${minAmount} CSPR)`}
-        form={form}
-        min={minAmount}
-        fee={transferFee}
-        funds={balance || 0}
-        value={form.values.amount}
-        onChangeValue={(amount) => form.setValues({ amount })}
-      />
-      <OperationSummary
-        title="Transfer summary"
-        items={operationSummaryItems}
-      />
-      <Button
-        mode="contained"
+      <DeployForm
         icon="send"
-        style={{ marginTop: 'auto' }}
+        name="Unstake"
         disabled={balanceError}
-        loading={loading}
-        onPress={handleDialogOpen}
+        dialogChildren={<>
+          <Paragraph style={{ marginBottom: 12 }}>
+            You are about to unstake {formatCasperAmount(deployForm.form.values.amount)} from the
+            following address:
+          </Paragraph>
+          <Paragraph style={{ marginBottom: 12 }}>
+            {deployForm.form.values.address}
+          </Paragraph>
+          <Paragraph>
+            Please verify those information are correct before unstaking the funds!
+          </Paragraph>
+        </>}
+        {...deployForm}
       >
-        Transfer
-      </Button>
-      <ConfirmDialog
-        visible={dialogVisible}
-        title="Confirm transfer"
-        confirmLabel="Transfer"
-        onClose={handleDialogClose}
-        onConfirm={handleDialogConfirm}
-      >
-        <Paragraph style={{ marginBottom: 12 }}>
-          You are about to transfer {formatCasperAmount(form.values.amount)} to the following
-          address:
-        </Paragraph>
-        <Paragraph style={{ marginBottom: 12 }}>
-          {form.values.address}
-        </Paragraph>
-        <Paragraph>
-          Please verify those information are correct before transferring the funds!
-        </Paragraph>
-      </ConfirmDialog>
+        {balanceError && <Alert
+          type="error"
+          message={balanceError.message}
+        />}
+        <ValidatorInput
+          label="Validator"
+          form={deployForm.form}
+          value={deployForm.form.values.address}
+          onChangeValue={(address) => deployForm.form.setValues({ address })}
+          undelegate={true}
+        />
+
+        <AmountInput
+          label="Amount"
+          hint={`Amount to unstake (minimum of ${minAmount} CSPR)`}
+          form={deployForm.form}
+          min={minAmount}
+          fee={0}
+          funds={balanceValidator || 0}
+          value={deployForm.form.values.amount}
+          onChangeValue={(amount) => deployForm.form.setValues({ amount })}
+        />
+        <OperationSummary
+          title="Unstaking summary"
+          items={operationSummaryItems}
+        />
+      </DeployForm>
     </ScreenWrapper>
   );
 }
