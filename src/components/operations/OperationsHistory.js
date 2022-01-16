@@ -10,7 +10,7 @@ import useDeployResultsHashs from '@/hooks/selectors/operations/useDeployResults
 import useHistory from '@/hooks/useHistory';
 import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
 import { STATUS_KO, STATUS_OK } from '@casperholders/core/dist/services/results/deployResult';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, useTheme } from 'react-native-paper';
 
 const QUICK_FILTERS = [
@@ -44,6 +44,22 @@ export default function OperationsHistory() {
     }
   }, [history]);
 
+  const historyDescription = useMemo(() => {
+    if (historyLoading) {
+      return 'Loading operations';
+    }
+
+    if (historyError) {
+      return undefined;
+    }
+
+    if (history.operations.length === 0) {
+      return 'No past operations available.';
+    }
+
+    return `${history.total} past operations.`;
+  }, [historyLoading, historyError, history]);
+
   const convertMotesToCasper = (amount) => (
     amount ? CurrencyUtils.convertMotesToCasper(amount) : undefined
   );
@@ -68,17 +84,7 @@ export default function OperationsHistory() {
     <GridRow>
       <SectionHeading
         title="Past operations"
-        description={(
-          historyLoading
-            ? 'Loading operations'
-            : (
-              !historyError && (
-                history.operations.length
-                  ? `${history.total} past operations.`
-                  : 'No past operations available.'
-              )
-            )
-        )}
+        description={historyDescription}
       />
       <GridCol>
         <ButtonGroup>
@@ -105,10 +111,10 @@ export default function OperationsHistory() {
         </>
       )}
       {!historyLoading && historyError &&
-        (<GridCol><Alert
-          type="error"
-          message={historyError.message}
-        /></GridCol>)}
+      (<GridCol><Alert
+        type="error"
+        message={historyError.message}
+      /></GridCol>)}
       {!historyLoading && !historyError && (
         <>
           {history.operations.map((deployData) => (
