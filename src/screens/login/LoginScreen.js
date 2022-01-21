@@ -1,6 +1,6 @@
 import BottomSheetModalContainer from '@/components/common/BottomSheetModalContainer';
 import DotsGridBackground from '@/components/common/DotsGridBackground';
-import LedgerConnect from '@/components/LedgerConnect';
+import LedgerConnect from '@/components/login/ledger/LedgerConnect';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import localSigner from '@/services/signers/localSigner';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
