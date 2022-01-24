@@ -1,12 +1,11 @@
-import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
+import Alert from '@/components/common/Alert';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import CasperApp from '@zondax/ledger-casper';
 import { useCallback, useEffect, useState } from 'react';
-import { AsyncStorage } from 'react-native';
 import { Button } from 'react-native-paper';
 
 export default function LedgerDevices() {
-  const dispatchConnect = useDispatchConnect();
   const [scanning, setScanning] = useState(true);
   const [devices, setDevices] = useState([]);
 
@@ -41,7 +40,8 @@ export default function LedgerDevices() {
     try {
       const transport = await TransportBLE.open(device);
       const app = new CasperApp(transport);
-      const key = `02${(await app.getAddressAndPubKey('m/44\'/506\'/0\'/0/0')).publicKey.toString('hex')}`;
+      const ledgerKey = (await app.getAddressAndPubKey('m/44\'/506\'/0\'/0/0')).publicKey.toString('hex');
+      const key = `02${ledgerKey}`;
       try {
         let devices = [];
         const value = await AsyncStorage.getItem('@devices');
@@ -65,10 +65,18 @@ export default function LedgerDevices() {
   });
   return (
     <>
+      {scanning && <Alert
+        type="info"
+        message="Scanning ..."
+      />}
+      {!scanning && <Button
+        type="info"
+        onPress={() => setScanning(true)}
+      >Refresh</Button>
+      }
       {devices.map((child, index) => (
         <Button
           key={index}
-          style={{ backgroundColor: 'black' }}
           onPress={() => deviceInfo(child)}
         >
           {child.name}
