@@ -6,7 +6,7 @@ import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import OperationsCard from '@/components/operations/OperationsCard';
 import useDispatchUnsetDeployResult from '@/hooks/actions/useDispatchUnsetDeployResult';
-import useDeployResultsHashs from '@/hooks/selectors/operations/useDeployResultsHashs';
+import useDeployResultsHashs from '@/hooks/operations/useDeployResultsHashs';
 import useHistory from '@/hooks/useHistory';
 import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
 import { STATUS_KO, STATUS_OK } from '@casperholders/core/dist/services/results/deployResult';

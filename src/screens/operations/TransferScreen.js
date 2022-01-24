@@ -8,16 +8,11 @@ import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationSummary from '@/components/operations/OperationSummary';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import getMatchedExchange from '@/helpers/getMatchedExchange';
-import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
+import usePublicKey from '@/hooks/auth/usePublicKey';
 import useDeployForm from '@/hooks/inputs/useDeployForm';
-import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
-import useSigner from '@/hooks/selectors/auth/useSigner';
-import useTransferOptions from '@/hooks/selectors/auth/useTransferOptions';
 import useBalance from '@/hooks/useBalance';
 import deployManager from '@/services/deployManager';
-import {
-  TransferDeployParameters,
-} from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
+import { TransferDeployParameters } from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
 import { APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
@@ -27,28 +22,24 @@ export default function TransferScreen({ navigation, route }) {
   const minAmount = 2.5;
   const transferFee = 0.1;
   const activeKey = usePublicKey();
-  const signer = useSigner();
-  const transferOptions = useTransferOptions();
-  const dispatchSetDeployResult = useDispatchSetDeployResult();
   const deployForm = useDeployForm(
+    navigation,
     route,
     { address: '', transferId: '1', amount: '0' },
     ['address'],
-    async (values) => {
+    async (signer, deployOptions, values) => {
       const deployResult = await deployManager.prepareSignAndSendDeploy(
         new TransferDeployParameters(
           activeKey, APP_NETWORK, values.amount, values.address, values.transferId,
         ),
         signer,
-        transferOptions,
+        deployOptions,
       );
 
       deployResult.amount = values.amount;
       deployResult.cost = transferFee;
 
-      dispatchSetDeployResult({ deployResult });
-
-      navigation.jumpTo('HistoryTab');
+      return deployResult;
     },
   );
 

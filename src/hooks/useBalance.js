@@ -1,4 +1,4 @@
-import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
+import usePublicKey from '@/hooks/auth/usePublicKey';
 import useAsyncData from '@/hooks/useAsyncData';
 import balanceService from '@/services/balanceService';
 

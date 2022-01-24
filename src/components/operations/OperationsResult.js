@@ -1,6 +1,6 @@
 import OperationsCard from '@/components/operations/OperationsCard';
 import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
-import useDeployResult from '@/hooks/selectors/operations/useDeployResult';
+import useDeployResult from '@/hooks/operations/useDeployResult';
 import useEventSource from '@/hooks/useEventSource';
 import useInterval from '@/hooks/useInterval';
 import deployManager from '@/services/deployManager';

@@ -4,7 +4,7 @@ import GridRow from '@/components/grid/GridRow';
 import InputWrapper from '@/components/inputs/InputWrapper';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import useDispatchDisconnect from '@/hooks/actions/useDispatchDisconnect';
-import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
+import usePublicKey from '@/hooks/auth/usePublicKey';
 import * as Clipboard from 'expo-clipboard';
 import { StyleSheet } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';

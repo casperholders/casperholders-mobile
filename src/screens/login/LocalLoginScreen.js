@@ -2,7 +2,7 @@ import PrivateKeyInput from '@/components/inputs/PrivateKeyInput';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import useForm from '@/hooks/inputs/useForm';
-import localSigner from '@/services/signers/localSigner';
+import LocalAdapter from '@/services/newSigners/localAdapter';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
 
@@ -18,8 +18,8 @@ export default function LocalLoginScreen() {
       setLoading(true);
 
       dispatchConnect({
-        signerId: localSigner.id,
-        key: form.values.privateKey,
+        adapterId: LocalAdapter.ID,
+        options: { privateKey: form.values.privateKey },
       });
     }
   };

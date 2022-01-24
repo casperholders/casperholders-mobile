@@ -1,4 +1,4 @@
-import generateAsymmetricKey from '@/services/signers/generateAsymmetricKey';
+import generateAsymmetricKey from '@/services/newSigners/generateAsymmetricKey';
 import { LocalSigner } from '@casperholders/core/dist/services/signers/localSigner';
 
 const cachedKeys = {};

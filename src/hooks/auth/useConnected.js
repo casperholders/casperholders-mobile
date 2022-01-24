@@ -1,4 +1,4 @@
-import selectConnected from '@/hooks/selectors/auth/selectConnected';
+import { selectConnected } from '@/store/reducers/authReducer';
 import { useSelector } from 'react-redux';
 
 export default function useConnected() {

@@ -1,4 +1,4 @@
-import selectPublicKey from '@/hooks/selectors/auth/selectPublicKey';
+import { selectPublicKey } from '@/store/reducers/authReducer';
 import { useSelector } from 'react-redux';
 
 export default function usePublicKey() {

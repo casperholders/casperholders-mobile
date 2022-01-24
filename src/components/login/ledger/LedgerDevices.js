@@ -1,3 +1,4 @@
+import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
 import CasperApp from '@zondax/ledger-casper';
 import { useCallback, useEffect, useState } from 'react';
@@ -5,6 +6,7 @@ import { AsyncStorage } from 'react-native';
 import { Button } from 'react-native-paper';
 
 export default function LedgerDevices() {
+  const dispatchConnect = useDispatchConnect();
   const [scanning, setScanning] = useState(true);
   const [devices, setDevices] = useState([]);
 

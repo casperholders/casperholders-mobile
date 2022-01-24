@@ -6,46 +6,39 @@ import ValidatorInput from '@/components/inputs/ValidatorInput';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationSummary from '@/components/operations/OperationSummary';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
-import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
+import usePublicKey from '@/hooks/auth/usePublicKey';
 import useDeployForm from '@/hooks/inputs/useDeployForm';
-import useOperationsOptions from '@/hooks/selectors/auth/useOperationsOptions';
-import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
-import useSigner from '@/hooks/selectors/auth/useSigner';
 import useBalance from '@/hooks/useBalance';
 import useBalanceValidator from '@/hooks/useBalanceValidator';
 import deployManager from '@/services/deployManager';
+import { Undelegate } from '@casperholders/core/dist/services/deploys/auction/actions/undelegate';
 import { APP_AUCTION_MANAGER_HASH, APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
-import { Undelegate } from '@casperholders/core/dist/services/deploys/auction/actions/undelegate';
 
 export default function UndelegateScreen({ navigation, route }) {
   const minAmount = 1;
   const unstakeFee = 0.00001;
   const activeKey = usePublicKey();
-  const signer = useSigner();
-  const operationsOptions = useOperationsOptions();
-  const dispatchSetDeployResult = useDispatchSetDeployResult();
   const deployForm = useDeployForm(
+    navigation,
     route,
     { address: '', amount: '0' },
     ['address'],
-    async (values) => {
+    async (signer, deployOptions, values) => {
       const deployResult = await deployManager.prepareSignAndSendDeploy(
         new Undelegate(
           values.amount, activeKey, values.address, APP_NETWORK, APP_AUCTION_MANAGER_HASH,
         ),
         signer,
-        operationsOptions,
+        deployOptions,
       );
 
       deployResult.amount = values.amount;
       deployResult.cost = unstakeFee;
 
-      dispatchSetDeployResult({ deployResult });
-
-      navigation.jumpTo('HistoryTab');
+      return deployResult;
     },
   );
 

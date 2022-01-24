@@ -1,7 +1,7 @@
 import ensureNotificationsPermission from '@/helpers/ensureNotificationsPermission';
 import usePendingDeployResultsCount
-  from '@/hooks/selectors/operations/usePendingDeployResultsCount';
-import usePendingNotificationId from '@/hooks/selectors/operations/usePendingNotificationId';
+  from '@/hooks/operations/usePendingDeployResultsCount';
+import usePendingNotificationId from '@/hooks/operations/usePendingNotificationId';
 import { setPendingNotificationId } from '@/store/reducers/operationsReducer';
 import { TabActions } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications';

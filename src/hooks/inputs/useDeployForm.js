@@ -1,9 +1,17 @@
+import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
+import useAdapter from '@/hooks/auth/useAdapter';
+import useOptions from '@/hooks/auth/useOptions';
 import useForm from '@/hooks/inputs/useForm';
 import useRouteFillForm from '@/hooks/inputs/useRouteFillForm';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
 import { useState } from 'react';
 
-export default function useDeployForm(route, initialState, filledFromRoute, runDeploy) {
+export default function useDeployForm(navigation, route, initialState, filledFromRoute, runDeploy) {
+  const dispatchSetDeployResult = useDispatchSetDeployResult();
+
+  const adapter = useAdapter();
+  const options = useOptions();
+
   const form = useForm(initialState);
 
   useRouteFillForm(route, form, filledFromRoute);
@@ -23,12 +31,20 @@ export default function useDeployForm(route, initialState, filledFromRoute, runD
     handleDialogClose();
     setError(undefined);
 
+    const connection = await adapter.openConnection(options);
+
     try {
-      await runDeploy(form.values);
+      const deployResult = await runDeploy(adapter.coreSigner, connection.options, form.values);
+
+      dispatchSetDeployResult({ deployResult });
+
+      navigation.jumpTo('HistoryTab');
     } catch (error) {
       console.error(error);
 
       setError(error);
+    } finally {
+      connection.close();
     }
   });
 

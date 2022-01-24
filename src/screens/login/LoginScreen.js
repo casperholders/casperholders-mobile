@@ -2,7 +2,7 @@ import BottomSheetModalContainer from '@/components/common/BottomSheetModalConta
 import DotsGridBackground from '@/components/common/DotsGridBackground';
 import LedgerConnect from '@/components/login/ledger/LedgerConnect';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
-import localSigner from '@/services/signers/localSigner';
+import LocalAdapter from '@/services/newSigners/localAdapter';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
 import { useCallback, useMemo, useRef } from 'react';
 import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
@@ -81,8 +81,8 @@ export default function LoginScreen({ navigation }) {
           labelStyle={styles.buttonLabel}
           mode="contained"
           onPress={() => handleConnect({
-            signerId: localSigner.id,
-            key: TEST_LOCAL_SIGNER_KEY,
+            adapterId: LocalAdapter.ID,
+            options: { privateKey: TEST_LOCAL_SIGNER_KEY },
           })}
         >
           Connect with test key
