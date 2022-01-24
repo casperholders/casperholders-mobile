@@ -1,5 +1,5 @@
-import LoginNavigator from '@/components/layout/LoginNavigator';
 import MainNavigator from '@/components/layout/MainNavigator';
+import LoginScreen from '@/screens/LoginScreen';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
@@ -15,7 +15,7 @@ export default function Main() {
       ref={navigationRef}
       theme={theme}
     >
-      {!connected ? <LoginNavigator /> : <MainNavigator navigation={navigationRef} />}
+      {!connected ? <LoginScreen /> : <MainNavigator navigation={navigationRef} />}
     </NavigationContainer>
   );
 };

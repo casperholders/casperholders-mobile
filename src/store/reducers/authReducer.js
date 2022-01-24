@@ -26,14 +26,10 @@ export const { connect, disconnect } = authSlice.actions;
 
 export const selectConnected = (state) => state.auth.connected;
 
-export const selectAdapter = (state) => {
-  console.log(state);
-
-  return signerManager.adapter(state.auth.adapterId);
-};
+export const selectAdapter = (state) => signerManager.adapter(state.auth.adapterId);
 
 export const selectOptions = (state) => state.auth.options;
 
-export const selectPublicKey = (state) => selectAdapter(state).computePublicKey(selectPublicKey(state));
+export const selectPublicKey = (state) => selectAdapter(state).computePublicKey(selectOptions(state));
 
 export default authSlice.reducer;

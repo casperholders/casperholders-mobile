@@ -1,12 +1,11 @@
 import PrivateKeyInput from '@/components/inputs/PrivateKeyInput';
-import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import useForm from '@/hooks/inputs/useForm';
 import LocalAdapter from '@/services/newSigners/localAdapter';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
 
-export default function LocalLoginScreen() {
+export default function LocalConnect() {
   const dispatchConnect = useDispatchConnect();
   const [loading, setLoading] = useState(false);
   const form = useForm({
@@ -25,7 +24,7 @@ export default function LocalLoginScreen() {
   };
 
   return (
-    <ScreenWrapper>
+    <>
       <PrivateKeyInput
         label="Private key"
         form={form}
@@ -40,6 +39,6 @@ export default function LocalLoginScreen() {
       >
         Login
       </Button>
-    </ScreenWrapper>
+    </>
   );
 }

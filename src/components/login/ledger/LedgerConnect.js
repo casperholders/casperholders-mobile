@@ -1,18 +1,17 @@
 import Alert from '@/components/common/Alert';
-import GridCol from '@/components/grid/GridCol';
-import GridRow from '@/components/grid/GridRow';
 import LedgerDevices from '@/components/login/ledger/LedgerDevices';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
-import { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Title } from 'react-native-paper';
+import { useCallback, useEffect, useState } from 'react';
+import { Linking, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
 
-export default function LedgerConnect({}) {
+
+export default function LedgerConnect() {
   const [bluetooth, setBluetooth] = useState(false);
 
   useEffect(() => {
     const subscription = TransportBLE.observeState({
-      next: (e) => setBluetooth(e.available),
+      next: (event) => setBluetooth(event.available),
       complete: () => {
       },
       error: () => {
@@ -24,20 +23,22 @@ export default function LedgerConnect({}) {
     };
   }, []);
 
-  return (
-    <GridRow>
-      <GridCol style={styles.center}>
-        <Title>Connect to ledger</Title>
-      </GridCol>
-      <GridCol style={{ padding: 20 }}>
-        <Alert
-          type={bluetooth ? 'info' : 'error'}
-          message={bluetooth ? 'Bluetooth enabled' : 'Enable bluetooth'}
-        />
-        {bluetooth && <LedgerDevices />}
-      </GridCol>
-    </GridRow>
-  );
+  // TODO Open bluetooth settings.
+  const handleOpenBluetooth = useCallback(() => Linking.openSettings(), []);
+
+  return bluetooth ? <LedgerDevices /> : <>
+    <Alert
+      type="error"
+      message="You must enable bluetooth to connect with Ledger."
+    />
+    <Button
+      icon="bluetooth"
+      mode="contained"
+      onPress={handleOpenBluetooth}
+    >
+      Enable bluetooth
+    </Button>
+  </>;
 }
 
 const styles = StyleSheet.create({
