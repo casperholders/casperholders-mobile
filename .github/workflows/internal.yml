@@ -38,7 +38,7 @@ jobs:
           EXPO_PASSWORD: ${{ secrets.EXPO_TOKEN }}
           EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.EXPO_ANDROID_KEYSTORE_PASSWORD }}
           EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.EXPO_ANDROID_KEY_PASSWORD }}
-        run: yarn run aab
+        run: npm install --global expo-cli eas-cli && yarn run aab
       - uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}

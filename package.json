@@ -60,9 +60,7 @@
     "@babel/core": "^7.12.9",
     "babel-plugin-module-resolver": "^4.1.0",
     "cross-var": "^1.1.0",
-    "dotenv-cli": "^4.1.1",
-    "react-native-bundle-visualizer": "^3.1.1",
-    "turtle-cli": "^0.24.3"
+    "dotenv-cli": "^4.1.1"
   },
   "private": true
 }
