@@ -11,7 +11,9 @@ import { upperFirst } from 'lodash';
 import { Linking, StyleSheet, View } from 'react-native';
 import { Caption, ProgressBar, Text, useTheme } from 'react-native-paper';
 
-export default function OperationsCard({ type, hash, status, amount, cost, message }) {
+export default function OperationsCard(
+  { type, hash, status, amount, cost, message, additionalInfo },
+) {
   const theme = useTheme();
 
   const RESULT_STATUSES_ICONS = {
@@ -54,6 +56,9 @@ export default function OperationsCard({ type, hash, status, amount, cost, messa
       <Caption style={styles.deployDetails}>
         {details}
       </Caption>
+      {additionalInfo && <Caption style={styles.deployDetails}>
+        {additionalInfo}
+      </Caption>}
       {loading && <ProgressBar
         style={styles.deployProgress}
         indeterminate

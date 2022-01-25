@@ -14,7 +14,9 @@ module.exports = function (api) {
         },
       ],
       'react-native-reanimated/plugin',
-      'module:react-native-dotenv',
+      ['module:react-native-dotenv', {
+        allowUndefined: true,
+      }],
     ],
     env: {
       production: {

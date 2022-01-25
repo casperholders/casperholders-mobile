@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const operationsSlice = createSlice({
   name: 'operations',
   initialState: {
+    pendingNotificationId: undefined,
     deployResultsByHash: {},
   },
   reducers: {
@@ -15,9 +16,16 @@ const operationsSlice = createSlice({
         delete state.deployResultsByHash[lowerHash];
       }
     },
+    setPendingNotificationId: (state, action) => {
+      state.pendingNotificationId = action.payload.notificationId;
+    },
   },
 });
 
-export const { setDeployResult, unsetDeployResult } = operationsSlice.actions;
+export const {
+  setDeployResult,
+  unsetDeployResult,
+  setPendingNotificationId,
+} = operationsSlice.actions;
 
 export default operationsSlice.reducer;

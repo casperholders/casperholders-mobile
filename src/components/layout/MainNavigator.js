@@ -1,47 +1,70 @@
-import AccountNavigator from '@/components/layout/AccountNavigator';
+import Icon from '@/components/common/Icon';
 import BalanceNavigator from '@/components/layout/BalanceNavigator';
+import HistoryNavigator from '@/components/layout/HistoryNavigator';
 import OperationsNavigator from '@/components/layout/OperationsNavigator';
-import useDeployResultsCount from '@/hooks/selectors/operations/useDeployResultsCount';
-import { useState } from 'react';
-import { BottomNavigation, useTheme } from 'react-native-paper';
+import useDeployResultsCount from '@/hooks/operations/useDeployResultsCount';
+import useDeploysResultNotification from '@/hooks/useDeploysResultNotification';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useTheme } from 'react-native-paper';
 
-export default function MainNavigator() {
+const Tab = createMaterialBottomTabNavigator();
+
+export default function MainNavigator({ navigation }) {
+  useDeploysResultNotification({ navigation });
+
   const theme = useTheme();
   const deployResultsCount = useDeployResultsCount();
   const deployResultsBadge = deployResultsCount
-    ? (deployResultsCount > 9) ? '9+' : deployResultsCount
+    ? (deployResultsCount > 9 ? '9+' : deployResultsCount)
     : undefined;
 
-  const getBadgeForRoute = ({ route }) => {
-    if (route.key === 'account' && deployResultsBadge) {
-      return deployResultsBadge;
-    }
-
-    return undefined;
-  };
-
-  const [tabIndex, setTabIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'balance', title: 'Balance', icon: 'wallet' },
-    { key: 'operations', title: 'Operations', icon: 'transfer' },
-    { key: 'account', title: 'Account', icon: 'account-circle' },
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    balance: BalanceNavigator,
-    operations: OperationsNavigator,
-    account: AccountNavigator,
-  });
-
   return (
-    <BottomNavigation
-      getBadge={getBadgeForRoute}
-      navigationState={{ index: tabIndex, routes }}
-      onIndexChange={setTabIndex}
-      renderScene={renderScene}
+    <Tab.Navigator
       barStyle={{ backgroundColor: theme.colors.primary }}
-      sceneAnimationEnabled={true}
-      shifting={true}
-    />
+    >
+      <Tab.Screen
+        name="BalanceTab"
+        component={BalanceNavigator}
+        options={{
+          tabBarLabel: 'Balance',
+          tabBarIcon: ({ color }) => (
+            <Icon
+              name="wallet"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="OperationsTab"
+        component={OperationsNavigator}
+        options={{
+          tabBarLabel: 'Operations',
+          tabBarIcon: ({ color }) => (
+            <Icon
+              name="transfer"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="HistoryTab"
+        component={HistoryNavigator}
+        options={{
+          tabBarLabel: 'History',
+          tabBarBadge: deployResultsBadge,
+          tabBarIcon: ({ color }) => (
+            <Icon
+              name="history"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }

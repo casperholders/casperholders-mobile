@@ -8,6 +8,7 @@ export default function useForm(initialState = {}) {
     values,
     setValue: (key, newValue) => setValues({ ...values, [key]: newValue }),
     setValues: (newValues) => setValues({ ...values, ...newValues }),
+    resetValues: () => setValues(initialState),
     register: (v) => validations.current.push(v),
     unregister: (v) => validations.current.splice(validations.current.indexOf(v)),
     validate: () => {

@@ -7,9 +7,11 @@ export default function Alert({ type, message }) {
   const ALERT_TYPES_ICONS = {
     info: 'information',
     error: 'alert',
+    success: 'check',
   };
   const ALERT_TYPES_COLORS = {
     error: theme.colors.error,
+    success: theme.colors.success,
   };
 
   const alertType = type || 'info';

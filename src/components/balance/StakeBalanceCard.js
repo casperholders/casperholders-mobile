@@ -3,7 +3,9 @@ import truncateInMiddle from '@/helpers/truncateInMiddle';
 import { StyleSheet } from 'react-native';
 import { Button, Caption, Card, Paragraph, useTheme } from 'react-native-paper';
 
-export default function ({ validator, staked, formattedPercentOfTotal, delegationRate }) {
+export default function (
+  { navigation, validator, staked, formattedPercentOfTotal, delegationRate },
+) {
   const theme = useTheme();
   const description = `${formattedPercentOfTotal}% of your staked funds ꞏ Validator ${truncateInMiddle(validator)}`;
 
@@ -21,13 +23,21 @@ export default function ({ validator, staked, formattedPercentOfTotal, delegatio
         <Button
           style={styles.actionsStake}
           color={theme.colors.text}
-          onPress={() => jumpTo('operations', { screen: 'Transfer' })}
+          onPress={() => navigation.jumpTo('OperationsTab', {
+            screen: 'Stake',
+            address: validator,
+            initial: false,
+          })}
         >
           Stake
         </Button>
         <Button
           color={theme.colors.text}
-          onPress={() => undefined}
+          onPress={() => navigation.jumpTo('OperationsTab', {
+            screen: 'Unstake',
+            address: validator,
+            initial: false,
+          })}
         >
           Unstake
         </Button>

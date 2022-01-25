@@ -18,15 +18,13 @@ export default function OperationsScreen({ navigation }) {
       route: 'Unstake',
       icon: 'lock-open',
       name: 'Unstake',
-      description: 'Coming soon',
-      disabled: true,
+      description: 'Unstake your tokens from the network.',
     },
     {
       route: 'Stake',
       icon: 'safe',
       name: 'Stake',
-      description: 'Coming soon',
-      disabled: true,
+      description: 'Stake your tokens to secure the network.',
     },
   ];
 

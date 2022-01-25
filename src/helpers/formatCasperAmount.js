@@ -4,7 +4,7 @@ export default function formatCasperAmount(amount) {
   let formattedAmount;
   if (amount !== undefined) {
     try {
-      formattedAmount = Big(amount).toFormat(2);
+      formattedAmount = Big(amount).toFormat(5);
     } catch (_) {
       formattedAmount = '-';
     }

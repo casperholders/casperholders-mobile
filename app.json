@@ -4,7 +4,11 @@
     "name": "Casper Holders",
     "slug": "casperholders-mobile",
     "platforms": [
-      "android"
+      "android",
+      "ios"
+    ],
+    "plugins": [
+      "@config-plugins/react-native-ble-plx"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,9 +27,10 @@
     ],
     "android": {
       "package": "com.casperholders.wallet",
-      "permissions" : []
+      "permissions": []
     },
     "ios": {
+      "bundleIdentifier": "com.casperholders.wallet",
       "supportsTablet": true
     }
   }

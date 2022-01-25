@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, useTheme } from 'react-native-paper';
 
 export default function ConfirmDialog(
-  { visible, title, confirmLabel, children, onClose, onConfirm },
+  { visible, title, confirmLabel, confirmIcon, children, onClose, onConfirm },
 ) {
   const theme = useTheme();
 
@@ -27,6 +27,7 @@ export default function ConfirmDialog(
           </Button>
           <Button
             mode="contained"
+            icon={confirmIcon}
             onPress={onConfirm}
           >
             {confirmLabel}

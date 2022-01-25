@@ -17,13 +17,15 @@ import { useMemo, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Caption } from 'react-native-paper';
 
-export default function BalanceScreen() {
+export default function BalanceScreen({ navigation }) {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
   const [balanceLoading, balance, balanceError] = useBalance([uniqueKey]);
   const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
 
   const loading = balanceLoading || stakeLoading;
-  const error = balanceError || !(stakeError instanceof NoStakeBalanceError) ? stakeError : false;
+  const error = balanceError || (
+    stakeError instanceof NoStakeBalanceError ? undefined : stakeError
+  );
 
   const [stakeDetails, setStakeDetails] = useState(false);
   const stakeData = useMemo(() => {
@@ -72,6 +74,10 @@ export default function BalanceScreen() {
     />
   ), [stakeData]);
 
+  const handleDetailsStakeToggle = detailsStake ? () => {
+    setStakeDetails(!stakeDetails);
+  } : undefined;
+
   return (
     <ScreenWrapper onRefresh={updateUniqueKey}>
       {error && <Alert
@@ -116,7 +122,7 @@ export default function BalanceScreen() {
         </GridCol>
         <GridCol>
           <CardWithIcons
-            onPress={() => setStakeDetails(!stakeDetails)}
+            onPress={handleDetailsStakeToggle}
             left={<Icon
               name="safe"
               size={24}
@@ -134,7 +140,11 @@ export default function BalanceScreen() {
           </CardWithIcons>
         </GridCol>
         {stakeDetails && <GridCol>
-          {stakeData?.stakes?.map((stake, index) => <StakeBalanceCard key={index} {...stake} />)}
+          {stakeData.stakes.map((stake, index) => <StakeBalanceCard
+            key={index}
+            navigation={navigation}
+            {...stake}
+          />)}
         </GridCol>}
       </GridRow>
     </ScreenWrapper>

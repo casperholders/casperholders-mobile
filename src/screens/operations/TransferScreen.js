@@ -1,56 +1,60 @@
 import Alert from '@/components/common/Alert';
-import ConfirmDialog from '@/components/common/ConfirmDialog';
 import Loader from '@/components/common/Loader';
 import AddressInput from '@/components/inputs/AddressInput';
 import AmountInput from '@/components/inputs/AmountInput';
+import DeployForm from '@/components/inputs/DeployForm';
 import TransferIdInput from '@/components/inputs/TransferIdInput';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationSummary from '@/components/operations/OperationSummary';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import getMatchedExchange from '@/helpers/getMatchedExchange';
-import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResult';
-import useForm from '@/hooks/inputs/useForm';
-import usePublicKey from '@/hooks/selectors/auth/usePublicKey';
-import useSigner from '@/hooks/selectors/auth/useSigner';
-import useTransferOptions from '@/hooks/selectors/auth/useTransferOptions';
-import useAsyncHandler from '@/hooks/useAsyncHandler';
+import usePublicKey from '@/hooks/auth/usePublicKey';
+import useDeployForm from '@/hooks/inputs/useDeployForm';
 import useBalance from '@/hooks/useBalance';
 import deployManager from '@/services/deployManager';
-import {
-  TransferDeployParameters
-} from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
+import { TransferDeployParameters } from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
 import { APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
-import { Button, Paragraph } from 'react-native-paper';
+import { Paragraph } from 'react-native-paper';
 
-export default function TransferScreen({ jumpTo }) {
-  const activeKey = usePublicKey();
-  const signer = useSigner();
-  const transferOptions = useTransferOptions();
-
+export default function TransferScreen({ navigation, route }) {
   const minAmount = 2.5;
   const transferFee = 0.1;
+  const activeKey = usePublicKey();
+  const deployForm = useDeployForm(
+    navigation,
+    route,
+    { address: '', transferId: '1', amount: '0' },
+    ['address'],
+    async (signer, deployOptions, values) => {
+      const deployResult = await deployManager.prepareSignAndSendDeploy(
+        new TransferDeployParameters(
+          activeKey, APP_NETWORK, values.amount, values.address, values.transferId,
+        ),
+        signer,
+        deployOptions,
+      );
 
-  const form = useForm({
-    address: '',
-    transferId: '0',
-    amount: '0',
-  });
+      deployResult.amount = values.amount;
+      deployResult.cost = transferFee;
 
-  const matchedExchange = getMatchedExchange(form.values.address);
+      return deployResult;
+    },
+  );
 
+  const matchedExchange = getMatchedExchange(deployForm.form.values.address);
   const [balanceLoading, balance, balanceError] = useBalance();
   const [balanceAfter, setBalanceAfter] = useState(undefined);
   useEffect(() => {
     try {
       setBalanceAfter(
-        Big(balance).minus(form.values.amount).minus(transferFee),
+        Big(balance).minus(deployForm.form.values.amount).minus(transferFee),
       );
     } catch (_) {
       setBalanceAfter(undefined);
     }
-  }, [balance, transferFee, form.values.amount]);
+  }, [balance, transferFee, deployForm.form.values.amount]);
 
   const operationSummaryItems = [
     { label: 'Transfer fee', amount: transferFee },
@@ -58,104 +62,62 @@ export default function TransferScreen({ jumpTo }) {
     { label: 'Balance after transfer', amount: balanceAfter },
   ];
 
-  const [dialogVisible, setDialogVisible] = useState(false);
-  const handleDialogClose = () => setDialogVisible(false);
-  const handleDialogOpen = () => {
-    if (!form.validate()) {
-      return;
-    }
-
-    setDialogVisible(true);
-  };
-
-  const dispatchSetDeployResult = useDispatchSetDeployResult();
-  const [loading, handleDialogConfirm] = useAsyncHandler(async () => {
-    handleDialogClose();
-
-    try {
-      const deployResult = await deployManager.prepareSignAndSendDeploy(
-        new TransferDeployParameters(
-          activeKey, APP_NETWORK, form.values.amount, form.values.address, form.values.transferId,
-        ),
-        signer,
-        transferOptions,
-      );
-      deployResult.amount = form.values.amount;
-      deployResult.cost = transferFee;
-      dispatchSetDeployResult({ deployResult });
-
-      jumpTo('account');
-    } catch (error) {
-      console.error(error);
-      // TODO manage error
-    }
-  });
-
   return balanceLoading ? <Loader /> : (
     <ScreenWrapper>
-      {balanceError && <Alert
-        type="error"
-        message={balanceError.message}
-      />}
-      <AddressInput
-        label="Address"
-        form={form}
-        value={form.values.address}
-        onChangeValue={(address) => form.setValues({ address })}
-      />
-      {
-        matchedExchange &&
-        <Alert message={`Looks like you're transferring the funds to ${matchedExchange}. Please verify your transfer ID before sending the deploy.`} />
-      }
-      <TransferIdInput
-        label="Transfer ID"
-        hint="You can leave 0 if unknown"
-        form={form}
-        value={form.values.transferId}
-        onChangeValue={(transferId) => form.setValues({ transferId })}
-      />
-      <AmountInput
-        label="Amount"
-        hint={`Amount to transfer (minimum of ${minAmount} CSPR)`}
-        form={form}
-        min={minAmount}
-        fee={transferFee}
-        funds={balance || 0}
-        value={form.values.amount}
-        onChangeValue={(amount) => form.setValues({ amount })}
-      />
-      <OperationSummary
-        title="Transfer summary"
-        items={operationSummaryItems}
-      />
-      <Button
-        mode="contained"
+      <DeployForm
         icon="send"
-        style={{ marginTop: 'auto' }}
+        name="Transfer"
         disabled={balanceError}
-        loading={loading}
-        onPress={handleDialogOpen}
+        dialogChildren={<>
+          <Paragraph style={{ marginBottom: 12 }}>
+            You are about to transfer {formatCasperAmount(deployForm.form.values.amount)} to the
+            following address:
+          </Paragraph>
+          <Paragraph style={{ marginBottom: 12 }}>
+            {deployForm.form.values.address}
+          </Paragraph>
+          <Paragraph>
+            Please verify those information are correct before transferring the funds!
+          </Paragraph>
+        </>}
+        {...deployForm}
       >
-        Transfer
-      </Button>
-      <ConfirmDialog
-        visible={dialogVisible}
-        title="Confirm transfer"
-        confirmLabel="Transfer"
-        onClose={handleDialogClose}
-        onConfirm={handleDialogConfirm}
-      >
-        <Paragraph style={{ marginBottom: 12 }}>
-          You are about to transfer {formatCasperAmount(form.values.amount)} to the following
-          address:
-        </Paragraph>
-        <Paragraph style={{ marginBottom: 12 }}>
-          {form.values.address}
-        </Paragraph>
-        <Paragraph>
-          Please verify those information are correct before transferring the funds!
-        </Paragraph>
-      </ConfirmDialog>
+        {balanceError && <Alert
+          type="error"
+          message={balanceError.message}
+        />}
+        <AddressInput
+          label="Address"
+          form={deployForm.form}
+          value={deployForm.form.values.address}
+          onChangeValue={(address) => deployForm.form.setValues({ address })}
+        />
+        {
+          matchedExchange &&
+          <Alert message={`Looks like you're transferring the funds to ${matchedExchange}. Please verify your transfer ID before sending the deploy.`} />
+        }
+        <TransferIdInput
+          label="Transfer ID"
+          hint="You can leave 1 if unknown"
+          form={deployForm.form}
+          value={deployForm.form.values.transferId}
+          onChangeValue={(transferId) => deployForm.form.setValues({ transferId })}
+        />
+        <AmountInput
+          label="Amount"
+          hint={`Amount to transfer (minimum of ${minAmount} CSPR)`}
+          form={deployForm.form}
+          min={minAmount}
+          fee={transferFee}
+          funds={balance || 0}
+          value={deployForm.form.values.amount}
+          onChangeValue={(amount) => deployForm.form.setValues({ amount })}
+        />
+        <OperationSummary
+          title="Transfer summary"
+          items={operationSummaryItems}
+        />
+      </DeployForm>
     </ScreenWrapper>
   );
 }

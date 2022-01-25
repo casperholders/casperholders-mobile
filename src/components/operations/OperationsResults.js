@@ -2,7 +2,7 @@ import SectionHeading from '@/components/common/SectionHeading';
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import OperationsResult from '@/components/operations/OperationsResult';
-import useDeployResultsHashs from '@/hooks/selectors/operations/useDeployResultsHashs';
+import useDeployResultsHashs from '@/hooks/operations/useDeployResultsHashs';
 
 export default function OperationsResults() {
   const deployResultsHashs = useDeployResultsHashs();
