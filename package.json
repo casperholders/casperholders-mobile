@@ -7,10 +7,7 @@
     "ios": "expo run:ios",
     "eject": "expo eject",
     "publish": "dotenv -e .env.local -- cross-var expo publish",
-    "apk": "dotenv -e .env.local -- cross-var turtle build:android --keystore-path %JKS% --keystore-alias %KALIAS% -t apk -o dist/casperholders.apk",
-    "aab": "dotenv -e .env.local -- cross-var turtle build:android --keystore-path %JKS% --keystore-alias %KALIAS% -o dist/casperholders.aab",
-    "apk-github": "cross-var turtle build:android --keystore-path %JKS% --keystore-alias %KALIAS% -t apk -o dist/casperholders.apk",
-    "aab-github": "cross-var turtle build:android --keystore-path %JKS% --keystore-alias %KALIAS% -o dist/casperholders.aab"
+    "aab": "eas build --platform android --local --output=dist/casperholders.aab"
   },
   "dependencies": {
     "@casperholders/core": "1.14.2",

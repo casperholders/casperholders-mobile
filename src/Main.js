@@ -1,9 +1,9 @@
 import MainNavigator from '@/components/layout/MainNavigator';
+import useConnected from '@/hooks/auth/useConnected';
 import LoginScreen from '@/screens/LoginScreen';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
-import useConnected from './hooks/auth/useConnected';
 
 export default function Main() {
   const theme = useTheme();
