@@ -1,21 +1,19 @@
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
-import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
-import LedgerAdapter from '@/services/newSigners/ledgerAdapter';
+import LedgerKeys from '@/components/login/ledger/LedgerKeys';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
-import CasperApp from '@zondax/ledger-casper';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card, Text, useTheme } from 'react-native-paper';
+
 
 const SCAN_TIMEOUT_IN_SECONDS = 10;
 
 export default function LedgerDevices() {
   const theme = useTheme();
-  const dispatchConnect = useDispatchConnect();
-  const [loading, setLoading] = useState(false);
   const [scanning, setScanning] = useState(true);
   const [devices, setDevices] = useState([]);
+  const [selectedDevice, setSelectedDevice] = useState();
 
   useEffect(() => {
     if (scanning) {
@@ -45,67 +43,62 @@ export default function LedgerDevices() {
     }
   }, [scanning]);
 
-  const handleDeviceSelect = useCallback(async (device) => {
-    if (!loading) {
-      setLoading(true);
+  const handleDeviceSelect = useCallback((device) => {
+    setSelectedDevice({ id: device.id, name: device.name });
+  }, [selectedDevice]);
 
-      const transport = await TransportBLE.open(device);
-      const app = new CasperApp(transport);
-      const ledgerKey = (await app.getAddressAndPubKey('m/44\'/506\'/0\'/0/0')).publicKey.toString('hex');
-      const firstKey = `02${ledgerKey}`;
-
-      dispatchConnect({
-        adapterId: LedgerAdapter.ID,
-        options: {
-          // TODO Fill the first keys.
-          keysByKeyPaths: [
-            firstKey,
-          ],
-          activeKeyPath: 0,
-          deviceId: device.id,
-          deviceName: device.name,
-        },
-      });
-    }
-  }, []);
+  const handleCancel = useCallback(() => {
+    setSelectedDevice(undefined);
+  }, [selectedDevice]);
 
   return (
     <GridRow>
-      {!scanning && <GridCol>
-        <Text style={styles.textCenter}>
-          {devices.length ? `${devices.length} devices available.` : 'No device detected.'}
-        </Text>
-      </GridCol>}
-      {devices.map((device) => <GridCol key={device.id}>
-        <Card style={{ backgroundColor: theme.colors.background }}>
-          <Card.Content>
-            <Text>
-              {device.name}
-            </Text>
-          </Card.Content>
-          <Card.Actions style={{ justifyContent: 'flex-end' }}>
-            <Button
-              contentStyle={{ flexDirection: 'row-reverse' }}
-              icon="chevron-right"
-              color="white"
-              onPress={() => handleDeviceSelect(device)}
-            >
-              Connect
-            </Button>
-          </Card.Actions>
-        </Card>
-      </GridCol>)}
-      <GridCol>
-        <Button
-          loading={scanning}
-          icon="refresh"
-          type="info"
-          mode="contained"
-          onPress={() => setScanning(true)}
-        >
-          {scanning ? 'Scanning...' : 'Refresh'}
-        </Button>
-      </GridCol>
+      {
+        selectedDevice === undefined ?
+          <>
+            {!scanning && <GridCol>
+              <Text style={styles.textCenter}>
+                {devices.length ? `${devices.length} devices available.` : 'No device detected.'}
+              </Text>
+            </GridCol>}
+            {devices.map((device) => <GridCol key={device.id}>
+              <Card style={{ backgroundColor: theme.colors.background }}>
+                <Card.Content>
+                  <Text>
+                    {device.name}
+                  </Text>
+                </Card.Content>
+                <Card.Actions style={{ justifyContent: 'flex-end' }}>
+                  <Button
+                    contentStyle={{ flexDirection: 'row-reverse' }}
+                    icon="chevron-right"
+                    color="white"
+                    onPress={() => handleDeviceSelect(device)}
+                  >
+                    Connect
+                  </Button>
+                </Card.Actions>
+              </Card>
+            </GridCol>)}
+            <GridCol>
+              <Button
+                loading={scanning}
+                icon="refresh"
+                type="info"
+                mode="contained"
+                onPress={() => setScanning(true)}
+              >
+                {scanning ? 'Scanning...' : 'Refresh'}
+              </Button>
+            </GridCol>
+          </> :
+          <>
+            <LedgerKeys
+              selectedDevice={selectedDevice}
+              handleCancel={handleCancel}
+            />
+          </>
+      }
     </GridRow>
   );
 }

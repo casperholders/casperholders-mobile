@@ -1,17 +1,32 @@
-import BottomSheetModalContainer from '@/components/common/BottomSheetModalContainer';
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import LoginButton from '@/components/login/LoginButton';
-import { useCallback, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Title } from 'react-native-paper';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { useCallback, useMemo, useRef } from 'react';
+import { StyleSheet } from 'react-native';
+import { Portal, Title } from 'react-native-paper';
 
 export default function ({ icon, title, children }) {
   const bottomSheetRef = useRef(null);
   const handleOpenBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.present();
+    bottomSheetRef.current?.snapToIndex(0);
   }, []);
-
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingTop: 200,
+    },
+    contentContainer: {
+      backgroundColor: '#0d0e35',
+      padding: 20,
+    },
+    itemContainer: {
+      padding: 6,
+      margin: 6,
+      backgroundColor: '#00126b',
+    },
+  });
+  const snapPoints = useMemo(() => ['46%', '75%', '90%'], []);
   return (
     <>
       <LoginButton
@@ -19,23 +34,33 @@ export default function ({ icon, title, children }) {
         title={title}
         onPress={handleOpenBottomSheet}
       />
-      <BottomSheetModalContainer
-        bottomSheetModalRef={bottomSheetRef}
-        snapPoints={['46%']}
-      >
-        <View style={styles.bottomSheetWrapper}>
-          <GridRow>
-            <GridCol>
-              <Title style={styles.bottomSheetTitle}>
-                {title}
-              </Title>
-            </GridCol>
-            <GridCol>
-              {children}
-            </GridCol>
-          </GridRow>
-        </View>
-      </BottomSheetModalContainer>
+      <Portal>
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={-1}
+          snapPoints={snapPoints}
+          enablePanDownToClose={true}
+          backgroundStyle={{
+            backgroundColor: '#0d0e35',
+          }}
+          handleIndicatorStyle={{
+            backgroundColor: 'white',
+          }}
+        >
+          <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
+            <GridRow>
+              <GridCol>
+                <Title style={styles.bottomSheetTitle}>
+                  {title}
+                </Title>
+              </GridCol>
+              <GridCol>
+                {children}
+              </GridCol>
+            </GridRow>
+          </BottomSheetScrollView>
+        </BottomSheet>
+      </Portal>
     </>
   );
 }
