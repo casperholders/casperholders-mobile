@@ -1,7 +1,7 @@
 import PrivateKeyInput from '@/components/inputs/PrivateKeyInput';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import useForm from '@/hooks/inputs/useForm';
-import LocalAdapter from '@/services/newSigners/localAdapter';
+import LocalAdapter from '@/services/signers/localAdapter';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
 

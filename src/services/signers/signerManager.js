@@ -1,5 +1,5 @@
-import LedgerAdapter from '@/services/newSigners/ledgerAdapter';
-import LocalAdapter from '@/services/newSigners/localAdapter';
+import LedgerAdapter from '@/services/signers/ledgerAdapter';
+import LocalAdapter from '@/services/signers/localAdapter';
 
 class SignerManager {
   /**

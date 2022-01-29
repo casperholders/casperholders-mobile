@@ -1,6 +1,6 @@
-import AbstractAdapter from '@/services/newSigners/abstractAdapter';
-import DeployConnection from '@/services/newSigners/deployConnection';
-import generateAsymmetricKey from '@/services/newSigners/generateAsymmetricKey';
+import AbstractAdapter from '@/services/signers/abstractAdapter';
+import DeployConnection from '@/services/signers/deployConnection';
+import generateAsymmetricKey from '@/services/signers/generateAsymmetricKey';
 import { LocalSigner } from '@casperholders/core/dist/services/signers/localSigner';
 
 export default class LocalAdapter extends AbstractAdapter {

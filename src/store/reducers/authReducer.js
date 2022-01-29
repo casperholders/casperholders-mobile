@@ -1,4 +1,4 @@
-import signerManager from '@/services/newSigners/signerManager';
+import signerManager from '@/services/signers/signerManager';
 import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice = createSlice({

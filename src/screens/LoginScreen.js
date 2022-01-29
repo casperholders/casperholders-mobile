@@ -4,7 +4,7 @@ import LocalConnect from '@/components/login/local/LocalConnect';
 import LoginBottomSheet from '@/components/login/LoginBottomSheet';
 import LoginButton from '@/components/login/LoginButton';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
-import LocalAdapter from '@/services/newSigners/localAdapter';
+import LocalAdapter from '@/services/signers/localAdapter';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
 import { useCallback, useMemo, useRef } from 'react';
 import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
