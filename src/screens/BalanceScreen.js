@@ -7,7 +7,9 @@ import SectionHeading from '@/components/common/SectionHeading';
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
+import useAdapter from '@/hooks/auth/useAdapter';
 import useBalance from '@/hooks/useBalance';
+import useNetwork from '@/hooks/useNetwork';
 import useStakeBalance from '@/hooks/useStakeBalance';
 import useUniqueKey from '@/hooks/useUniqueKey';
 import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
@@ -16,13 +18,13 @@ import Big from 'big.js';
 import { orderBy } from 'lodash';
 import { useMemo, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Caption } from 'react-native-paper';
+import { Caption, Subheading } from 'react-native-paper';
 
 export default function BalanceScreen({ navigation }) {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
-  const [balanceLoading, balance, balanceError] = useBalance([uniqueKey]);
-  const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
-
+  const network = useNetwork();
+  const [balanceLoading, balance, balanceError] = useBalance([uniqueKey, network]);
+  const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey, network]);
   const adapter = useAdapter();
   const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
   const loading = balanceLoading || stakeLoading;
@@ -88,6 +90,17 @@ export default function BalanceScreen({ navigation }) {
         message={error.message}
       />}
       <GridRow>
+        <GridCol>
+          <CardWithIcons
+            left={<Icon
+              name={'network'}
+              size={24}
+              style={styles.network}
+            />}
+          >
+            <Subheading style={{ fontWeight: 'bold' }}>Network : {network.name}</Subheading>
+          </CardWithIcons>
+        </GridCol>
         <GridCol>
           <CardWithIcons
             left={<Image
@@ -165,5 +178,10 @@ const styles = StyleSheet.create({
     marginRight: 8,
     width: 42,
     height: 42,
+  },
+  network: {
+    marginRight: 8,
+    width: 24,
+    height: 24,
   },
 });

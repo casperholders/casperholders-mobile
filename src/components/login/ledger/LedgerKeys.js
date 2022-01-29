@@ -2,6 +2,7 @@ import CardLoader from '@/components/common/CardLoader';
 import GridCol from '@/components/grid/GridCol';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
+import useNetwork from '@/hooks/useNetwork';
 import balanceService from '@/services/balanceService';
 import LedgerAdapter from '@/services/signers/ledgerAdapter';
 import TransportHID from '@ledgerhq/react-native-hid';
@@ -16,7 +17,7 @@ export default function LedgerKeys({ selectedDevice, handleCancel }) {
   const [loading, setLoading] = useState(false);
   const [addresses, setAddresses] = useState([]);
   const [balances, setBalances] = useState([]);
-
+  const network = useNetwork();
 
   useEffect(async () => {
     if (addresses.length === 0) {
@@ -39,14 +40,14 @@ export default function LedgerKeys({ selectedDevice, handleCancel }) {
     for (let i = nextKeyPath; i < nextKeyPath + 4; i++) {
       const ledgerKey = (await app.getAddressAndPubKey(`m/44'/506'/0'/0/${i}`)).publicKey.toString('hex');
       const address = `02${ledgerKey}`;
-      const balance = await balanceService.fetchBalanceOfPublicKey(address);
+      const balance = await balanceService(network.rpcUrl).fetchBalanceOfPublicKey(address);
       newAddresses.push(address);
       newBalances.push(balance);
     }
     setAddresses([...addresses, ...newAddresses]);
     setBalances([...balances, ...newBalances]);
     setLoading(false);
-  }, [addresses, balances, selectedDevice]);
+  }, [addresses, balances, network, selectedDevice]);
 
   const handleAddressSelect = useCallback((activeKeyPath) => {
     let device = selectedDevice;

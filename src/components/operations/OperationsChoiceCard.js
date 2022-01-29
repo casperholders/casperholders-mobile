@@ -1,5 +1,4 @@
 import Icon from '@/components/common/Icon';
-import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Caption, Card, Title, useTheme } from 'react-native-paper';
 

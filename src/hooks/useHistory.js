@@ -1,9 +1,10 @@
 import usePublicKey from '@/hooks/auth/usePublicKey';
 import useAsyncData from '@/hooks/useAsyncData';
-import { APP_DATA_API_URL } from '@env';
+import useNetwork from '@/hooks/useNetwork';
 
 export default function useHistory(page, additionalQuery) {
   const activeKey = usePublicKey();
+  const network = useNetwork();
   return useAsyncData(async () => {
     const query = [
       `from=ilike.${activeKey}`,
@@ -17,7 +18,7 @@ export default function useHistory(page, additionalQuery) {
     }
 
     const response = await fetch(
-      `${APP_DATA_API_URL}/deploys?${query.join('&')}`,
+      `${network.dataApiUrl}/deploys?${query.join('&')}`,
       {
         method: 'GET',
         headers: new Headers({
@@ -31,5 +32,5 @@ export default function useHistory(page, additionalQuery) {
       operations: await response.json(),
       total: Number(response.headers.get('content-range').replace(/^.*\//, '')),
     };
-  }, [activeKey, page, additionalQuery]);
+  }, [activeKey, network, page, additionalQuery]);
 }

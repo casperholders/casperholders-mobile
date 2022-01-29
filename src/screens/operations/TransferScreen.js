@@ -11,9 +11,11 @@ import getMatchedExchange from '@/helpers/getMatchedExchange';
 import usePublicKey from '@/hooks/auth/usePublicKey';
 import useDeployForm from '@/hooks/inputs/useDeployForm';
 import useBalance from '@/hooks/useBalance';
+import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
-import { TransferDeployParameters } from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
-import { APP_NETWORK } from '@env';
+import {
+  TransferDeployParameters,
+} from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
@@ -22,15 +24,16 @@ export default function TransferScreen({ navigation, route }) {
   const minAmount = 2.5;
   const transferFee = 0.1;
   const activeKey = usePublicKey();
+  const network = useNetwork();
   const deployForm = useDeployForm(
     navigation,
     route,
     { address: '', transferId: '1', amount: '0' },
     ['address'],
     async (signer, deployOptions, values) => {
-      const deployResult = await deployManager.prepareSignAndSendDeploy(
+      const deployResult = await deployManager(network.rpcUrl).prepareSignAndSendDeploy(
         new TransferDeployParameters(
-          activeKey, APP_NETWORK, values.amount, values.address, values.transferId,
+          activeKey, network.network, values.amount, values.address, values.transferId,
         ),
         signer,
         deployOptions,

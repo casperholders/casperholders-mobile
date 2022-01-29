@@ -4,7 +4,6 @@ import store from '@/store';
 import { DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications';
 import { merge } from 'lodash';
-import React from 'react';
 import { StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DarkTheme as PaperDarkTheme, Provider as PaperProvider } from 'react-native-paper';

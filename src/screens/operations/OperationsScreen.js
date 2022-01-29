@@ -1,12 +1,17 @@
+import Alert from '@/components/common/Alert';
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import OperationsChoiceCard from '@/components/operations/OperationsChoiceCard';
-import React from 'react';
+import useAdapter from '@/hooks/auth/useAdapter';
+import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { StyleSheet } from 'react-native';
 import { Paragraph } from 'react-native-paper';
 
 export default function OperationsScreen({ navigation }) {
+  const adapter = useAdapter();
+  const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
+
   const operations = [
     {
       route: 'Transfer',
@@ -33,6 +38,12 @@ export default function OperationsScreen({ navigation }) {
       <Paragraph style={styles.operationsDescription}>
         Choose an operation to execute from the list bellow.
       </Paragraph>
+      {readOnly &&
+        <Alert
+          type="info"
+          message="You are in Read Only mode. You can't make any operations."
+        />
+      }
       <GridRow>
         {operations.map(({ route, name, description, icon, disabled }, index) => (
           <GridCol
@@ -43,7 +54,7 @@ export default function OperationsScreen({ navigation }) {
               name={name}
               description={description}
               icon={icon}
-              disabled={disabled}
+              disabled={disabled || readOnly}
               onPress={() => navigation.navigate(route)}
             />
           </GridCol>

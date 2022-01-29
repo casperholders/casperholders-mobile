@@ -1,7 +1,6 @@
 import NavigatorWrapper from '@/components/layout/NavigatorWrapper';
 import HistoryScreen from '@/screens/HistoryScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 
 const Stack = createNativeStackNavigator();
 

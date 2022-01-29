@@ -3,17 +3,17 @@ import useDispatchSetDeployResult from '@/hooks/actions/useDispatchSetDeployResu
 import useDeployResult from '@/hooks/operations/useDeployResult';
 import useEventSource from '@/hooks/useEventSource';
 import useInterval from '@/hooks/useInterval';
+import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
 import { STATUS_KO, STATUS_UNKNOWN } from '@casperholders/core/dist/services/results/deployResult';
-import { APP_RPC_URL } from '@env';
 import { useEffect, useState } from 'react';
 
 const WATCHER_MAX_WAIT_IN_SECONDS = 180;
 
 export default function OperationsResult({ hash }) {
   const deployResult = useDeployResult(hash);
+  const network = useNetwork();
   const stopDeployListening = useEventSource(
-    `${APP_RPC_URL}/events/?start_from=0`,
     async (event) => {
       const data = JSON.parse(event.data);
       if ('DeployProcessed' in data && data.DeployProcessed.deploy_hash.toLowerCase() === hash) {
@@ -39,7 +39,7 @@ export default function OperationsResult({ hash }) {
     }
 
     try {
-      const updatedDeployResult = await deployManager.getDeployResult({
+      const updatedDeployResult = await deployManager(network.rpcUrl).getDeployResult({
         name: deployResult.name,
         hash: deployResult.hash,
         cost: deployResult.cost,

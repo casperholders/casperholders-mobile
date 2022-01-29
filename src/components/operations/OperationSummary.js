@@ -1,5 +1,5 @@
 import OperationSummaryRow from '@/components/operations/OperationSummaryRow';
-import React from 'react';
+import { Fragment } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Divider, Subheading } from 'react-native-paper';
 
@@ -10,13 +10,13 @@ export default function OperationSummary({ title, items }) {
         {title}
       </Subheading>
       {items.map(({ label, amount }, index) => (
-        <React.Fragment key={index}>
+        <Fragment key={index}>
           <Divider />
           <OperationSummaryRow
             label={label}
             amount={amount}
           />
-        </React.Fragment>
+        </Fragment>
       ))}
     </View>
   );

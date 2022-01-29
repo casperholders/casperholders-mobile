@@ -9,9 +9,9 @@ import formatCasperAmount from '@/helpers/formatCasperAmount';
 import usePublicKey from '@/hooks/auth/usePublicKey';
 import useDeployForm from '@/hooks/inputs/useDeployForm';
 import useBalance from '@/hooks/useBalance';
+import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
 import { Delegate } from '@casperholders/core/dist/services/deploys/auction/actions/delegate';
-import { APP_AUCTION_MANAGER_HASH, APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
@@ -20,15 +20,16 @@ export default function DelegateScreen({ navigation, route }) {
   const minAmount = 1;
   const stakeFee = 2.5;
   const activeKey = usePublicKey();
+  const network = useNetwork();
   const deployForm = useDeployForm(
     navigation,
     route,
     { address: '', amount: '0' },
     ['address'],
     async (signer, deployOptions, values) => {
-      const deployResult = await deployManager.prepareSignAndSendDeploy(
+      const deployResult = await deployManager(network.rpcUrl).prepareSignAndSendDeploy(
         new Delegate(
-          values.amount, activeKey, values.address, APP_NETWORK, APP_AUCTION_MANAGER_HASH,
+          values.amount, activeKey, values.address, network.network, network.auctionManagerHash,
         ),
         signer,
         deployOptions,

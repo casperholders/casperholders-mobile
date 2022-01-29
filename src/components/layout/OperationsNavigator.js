@@ -4,7 +4,6 @@ import OperationsScreen from '@/screens/operations/OperationsScreen';
 import TransferScreen from '@/screens/operations/TransferScreen';
 import UndelegateScreen from '@/screens/operations/UndelegateScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 
 const Stack = createNativeStackNavigator();
 

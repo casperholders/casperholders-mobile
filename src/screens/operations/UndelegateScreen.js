@@ -10,9 +10,9 @@ import usePublicKey from '@/hooks/auth/usePublicKey';
 import useDeployForm from '@/hooks/inputs/useDeployForm';
 import useBalance from '@/hooks/useBalance';
 import useBalanceValidator from '@/hooks/useBalanceValidator';
+import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
 import { Undelegate } from '@casperholders/core/dist/services/deploys/auction/actions/undelegate';
-import { APP_AUCTION_MANAGER_HASH, APP_NETWORK } from '@env';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
@@ -21,15 +21,16 @@ export default function UndelegateScreen({ navigation, route }) {
   const minAmount = 1;
   const unstakeFee = 0.00001;
   const activeKey = usePublicKey();
+  const network = useNetwork();
   const deployForm = useDeployForm(
     navigation,
     route,
     { address: '', amount: '0' },
     ['address'],
     async (signer, deployOptions, values) => {
-      const deployResult = await deployManager.prepareSignAndSendDeploy(
+      const deployResult = await deployManager(network.rpcUrl).prepareSignAndSendDeploy(
         new Undelegate(
-          values.amount, activeKey, values.address, APP_NETWORK, APP_AUCTION_MANAGER_HASH,
+          values.amount, activeKey, values.address, network.network, network.auctionManagerHash,
         ),
         signer,
         deployOptions,

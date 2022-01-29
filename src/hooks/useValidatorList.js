@@ -1,22 +1,22 @@
 import usePublicKey from '@/hooks/auth/usePublicKey';
 import useAsyncData from '@/hooks/useAsyncData';
+import useNetwork from '@/hooks/useNetwork';
 import balanceService from '@/services/balanceService';
 import clientCasper from '@/services/clientCasper';
 import { NoActiveKeyError } from '@casperholders/core/dist/services/errors/noActiveKeyError';
 import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/noStakeBalanceError';
 import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
-import { APP_API_URL } from '@env';
 import Big from 'big.js';
 
 export default function useValidatorList(undelegate) {
   const activeKey = usePublicKey();
-
+  const network = useNetwork();
   return useAsyncData(async () => {
     let userStake;
     let validators;
     if (undelegate) {
       try {
-        userStake = await balanceService.fetchAllStakeBalance();
+        userStake = await balanceService(network.rpcUrl).fetchAllStakeBalance();
       } catch (e) {
         validators = [
           { header: `Oops an error occurred : ${e}` },
@@ -36,7 +36,7 @@ export default function useValidatorList(undelegate) {
     }
     let validatorsData = [];
     try {
-      validatorsData = await (await fetch(`${APP_API_URL}/validators/accountinfos`)).json();
+      validatorsData = await (await fetch(`${network.apiUrl}/validators/accountinfos`)).json();
       if (undelegate && userStake) {
         validatorsData = validatorsData.filter(
           (validatorInfo) => userStake.some(
@@ -46,10 +46,10 @@ export default function useValidatorList(undelegate) {
       }
     } catch (e) {
       console.log(e);
-      const validatorsInfo = (await clientCasper.casperRPC.getValidatorsInfo())
+      const validatorsInfo = (await clientCasper(network.rpcUrl).casperRPC.getValidatorsInfo())
         .auction_state
         .bids;
-      const validators = (await clientCasper.casperRPC.getValidatorsInfo())
+      const validators = (await clientCasper(network.rpcUrl).casperRPC.getValidatorsInfo())
         .auction_state.era_validators;
       const currentEra = validators[0].validator_weights.map((v) => v.public_key);
       const nextEra = validators[1].validator_weights.map((v) => v.public_key);
@@ -105,5 +105,5 @@ export default function useValidatorList(undelegate) {
       ];
     }
     return validators;
-  }, [activeKey]);
+  }, [activeKey, network]);
 }

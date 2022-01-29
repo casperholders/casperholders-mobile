@@ -1,4 +1,3 @@
-import { APP_CASPERHOLDERS_URL } from '@env';
 import { Linking } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
@@ -12,7 +11,7 @@ export default function TorusConnect() {
       icon="link"
       mode="contained"
       style={{ marginTop: 30 }}
-      onPress={() => Linking.openURL(APP_CASPERHOLDERS_URL)}
+      onPress={() => Linking.openURL('https://casperholders.io')}
     >
       Open CasperHolders website
     </Button>

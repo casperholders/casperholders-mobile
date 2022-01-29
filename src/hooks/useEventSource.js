@@ -1,8 +1,10 @@
-import { APP_DISABLE_EVENT_SOURCES, APP_RPC_URL } from '@env';
+import useNetwork from '@/hooks/useNetwork';
+import { APP_DISABLE_EVENT_SOURCES } from '@env';
 import { useEffect, useState } from 'react';
 import RNEventSource from 'react-native-event-source';
 
-export default function useEventSource(eventSourceUrl, listener) {
+export default function useEventSource(listener) {
+  const network = useNetwork();
   const [eventSource, setEventSource] = useState(undefined);
   const stopListening = () => {
     if (eventSource) {
@@ -14,11 +16,11 @@ export default function useEventSource(eventSourceUrl, listener) {
 
   useEffect(() => {
     if (!APP_DISABLE_EVENT_SOURCES) {
-      setEventSource(new RNEventSource(`${APP_RPC_URL}/events/?start_from=0`));
+      setEventSource(new RNEventSource(`${network.rpcUrl}/events/?start_from=0`));
 
       return stopListening;
     }
-  }, []);
+  }, [network]);
 
   useEffect(() => {
     if (eventSource) {

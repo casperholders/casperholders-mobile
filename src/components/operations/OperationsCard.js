@@ -1,13 +1,14 @@
 import CardWithIcons from '@/components/common/CardWithIcons';
 import Icon from '@/components/common/Icon';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
+import useNetwork from '@/hooks/useNetwork';
 import {
   STATUS_KO,
   STATUS_OK,
   STATUS_UNKNOWN,
 } from '@casperholders/core/dist/services/results/deployResult';
-import { APP_CASPER_LIVE_URL } from '@env';
 import { upperFirst } from 'lodash';
+import { useMemo } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { Caption, ProgressBar, Text, useTheme } from 'react-native-paper';
 
@@ -15,7 +16,7 @@ export default function OperationsCard(
   { type, hash, status, amount, cost, message, additionalInfo },
 ) {
   const theme = useTheme();
-
+  const network = useNetwork();
   const RESULT_STATUSES_ICONS = {
     [STATUS_UNKNOWN]: 'help-circle',
     [STATUS_OK]: 'check-circle',
@@ -29,7 +30,7 @@ export default function OperationsCard(
 
   const icon = RESULT_STATUSES_ICONS[status];
   const color = RESULT_STATUSES_COLORS[status];
-  const url = `${APP_CASPER_LIVE_URL}/deploy/${hash}`;
+  const url = useMemo(() => `${network.csprLiveUrl}/deploy/${hash}`, [network]);
   const details = `Amount: ${formatCasperAmount(amount)} ꞏ Cost: ${formatCasperAmount(cost)}`;
   const loading = status === STATUS_UNKNOWN;
 
