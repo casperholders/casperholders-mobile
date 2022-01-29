@@ -3,6 +3,7 @@ import LedgerConnect from '@/components/login/ledger/LedgerConnect';
 import LocalConnect from '@/components/login/local/LocalConnect';
 import LoginBottomSheet from '@/components/login/LoginBottomSheet';
 import LoginButton from '@/components/login/LoginButton';
+import TorusConnect from '@/components/login/torus/TorusConnect';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import LocalAdapter from '@/services/signers/localAdapter';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
@@ -35,7 +36,7 @@ export default function LoginScreen({ navigation }) {
         />
         <Title style={styles.header}>Casper Holders</Title>
         <Text style={styles.text}>The first Casper Network mobile wallet !</Text>
-        <LoginButton
+        <LoginBottomSheet
           icon={() => (
             <Image
               source={require('../../assets/torus.png')}
@@ -43,8 +44,9 @@ export default function LoginScreen({ navigation }) {
             />
           )}
           title="Connect with Torus"
-          disabled={true}
-        />
+        >
+          <TorusConnect />
+        </LoginBottomSheet>
         <LoginBottomSheet
           icon={() => (
             <Image

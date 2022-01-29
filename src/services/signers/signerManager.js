@@ -1,5 +1,6 @@
 import LedgerAdapter from '@/services/signers/ledgerAdapter';
 import LocalAdapter from '@/services/signers/localAdapter';
+import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 
 class SignerManager {
   /**
@@ -25,8 +26,10 @@ class SignerManager {
 
 const ledgerAdapter = new LedgerAdapter();
 const localAdapter = new LocalAdapter();
+const readOnlyAdapter = new ReadOnlyAdapter();
 
 export default new SignerManager(new Map([
   [LedgerAdapter.ID, ledgerAdapter],
   [LocalAdapter.ID, localAdapter],
+  [ReadOnlyAdapter.ID, readOnlyAdapter],
 ]));

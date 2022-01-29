@@ -1,11 +1,15 @@
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import truncateInMiddle from '@/helpers/truncateInMiddle';
+import useAdapter from '@/hooks/auth/useAdapter';
+import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { StyleSheet } from 'react-native';
 import { Button, Caption, Card, Paragraph, useTheme } from 'react-native-paper';
 
 export default function (
   { navigation, validator, staked, formattedPercentOfTotal, delegationRate },
 ) {
+  const adapter = useAdapter();
+  const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
   const theme = useTheme();
   const description = `${formattedPercentOfTotal}% of your staked funds ꞏ Validator ${truncateInMiddle(validator)}`;
 
@@ -28,6 +32,7 @@ export default function (
             address: validator,
             initial: false,
           })}
+          disabled={readOnly}
         >
           Stake
         </Button>
@@ -38,6 +43,7 @@ export default function (
             address: validator,
             initial: false,
           })}
+          disabled={readOnly}
         >
           Unstake
         </Button>

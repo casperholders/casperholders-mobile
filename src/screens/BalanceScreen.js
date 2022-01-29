@@ -10,6 +10,7 @@ import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import useBalance from '@/hooks/useBalance';
 import useStakeBalance from '@/hooks/useStakeBalance';
 import useUniqueKey from '@/hooks/useUniqueKey';
+import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/noStakeBalanceError';
 import Big from 'big.js';
 import { orderBy } from 'lodash';
@@ -22,6 +23,8 @@ export default function BalanceScreen({ navigation }) {
   const [balanceLoading, balance, balanceError] = useBalance([uniqueKey]);
   const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
 
+  const adapter = useAdapter();
+  const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
   const loading = balanceLoading || stakeLoading;
   const error = balanceError || (
     stakeError instanceof NoStakeBalanceError ? undefined : stakeError
@@ -140,6 +143,12 @@ export default function BalanceScreen({ navigation }) {
           </CardWithIcons>
         </GridCol>
         {stakeDetails && <GridCol>
+          {readOnly &&
+            <Alert
+              type="info"
+              message="You are in Read Only mode. You can't make any operations."
+            />
+          }
           {stakeData.stakes.map((stake, index) => <StakeBalanceCard
             key={index}
             navigation={navigation}

@@ -1,7 +1,8 @@
+import Alert from '@/components/common/Alert';
 import PrivateKeyInput from '@/components/inputs/PrivateKeyInput';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import useForm from '@/hooks/inputs/useForm';
-import LocalAdapter from '@/services/signers/localAdapter';
+import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
 
@@ -9,7 +10,7 @@ export default function LocalConnect() {
   const dispatchConnect = useDispatchConnect();
   const [loading, setLoading] = useState(false);
   const form = useForm({
-    privateKey: '',
+    publicKey: '',
   });
 
   const handleConnect = () => {
@@ -17,19 +18,23 @@ export default function LocalConnect() {
       setLoading(true);
 
       dispatchConnect({
-        adapterId: LocalAdapter.ID,
-        options: { privateKey: form.values.privateKey },
+        adapterId: ReadOnlyAdapter.ID,
+        options: { publicKey: form.values.publicKey },
       });
     }
   };
 
   return (
     <>
+      <Alert
+        type="info"
+        message="You will connect in Read Only mode. You won't be able to make any operations."
+      />
       <PrivateKeyInput
-        label="Private key"
+        label="Public key"
         form={form}
-        value={form.values.privateKey}
-        onChangeValue={(privateKey) => form.setValues({ privateKey })}
+        value={form.values.publicKey}
+        onChangeValue={(publicKey) => form.setValues({ publicKey })}
       />
       <Button
         mode="contained"
