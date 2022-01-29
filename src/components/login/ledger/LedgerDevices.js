@@ -1,6 +1,7 @@
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import LedgerKeys from '@/components/login/ledger/LedgerKeys';
+import TransportHID from '@ledgerhq/react-native-hid';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
@@ -13,6 +14,7 @@ export default function LedgerDevices() {
   const theme = useTheme();
   const [scanning, setScanning] = useState(true);
   const [devices, setDevices] = useState([]);
+  const [usbDevices, setUsbDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState();
 
   useEffect(() => {
@@ -31,20 +33,40 @@ export default function LedgerDevices() {
         },
       });
 
+      const usb = TransportHID.listen({
+        next: async (event) => {
+          if (event.type === 'add') {
+            const device = event;
+            if (!devices.some((d) => d.descriptor.deviceId === device.descriptor.deviceId)) {
+              setUsbDevices([...devices, device]);
+            }
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+
       const timeout = setTimeout(() => {
         subscription.unsubscribe();
+        usb.unsubscribe();
         setScanning(false);
       }, SCAN_TIMEOUT_IN_SECONDS * 1000);
 
       return () => {
         clearTimeout(timeout);
         subscription.unsubscribe();
+        usb.unsubscribe();
       };
     }
   }, [scanning]);
 
-  const handleDeviceSelect = useCallback((device) => {
-    setSelectedDevice({ id: device.id, name: device.name });
+  const handleDeviceSelect = useCallback((device, usb = false) => {
+    if (usb) {
+      setSelectedDevice(device);
+    } else {
+      setSelectedDevice({ id: device.id, name: device.name });
+    }
   }, [selectedDevice]);
 
   const handleCancel = useCallback(() => {
@@ -74,6 +96,25 @@ export default function LedgerDevices() {
                     icon="chevron-right"
                     color="white"
                     onPress={() => handleDeviceSelect(device)}
+                  >
+                    Connect
+                  </Button>
+                </Card.Actions>
+              </Card>
+            </GridCol>)}
+            {usbDevices.map((device) => <GridCol key={device.descriptor.id}>
+              <Card style={{ backgroundColor: theme.colors.background }}>
+                <Card.Content>
+                  <Text>
+                    {device.deviceModel.productName} - USB
+                  </Text>
+                </Card.Content>
+                <Card.Actions style={{ justifyContent: 'flex-end' }}>
+                  <Button
+                    contentStyle={{ flexDirection: 'row-reverse' }}
+                    icon="chevron-right"
+                    color="white"
+                    onPress={() => handleDeviceSelect(device.descriptor, true)}
                   >
                     Connect
                   </Button>
