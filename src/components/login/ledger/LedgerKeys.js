@@ -26,7 +26,12 @@ export default function LedgerKeys({ selectedDevice, handleCancel }) {
 
   const loadMoreKeys = useCallback(async () => {
     setLoading(true);
-    const transport = await TransportBLE.open(selectedDevice.id);
+    let transport;
+    if (selectedDevice.deviceId) {
+      transport = await TransportHID.open(selectedDevice);
+    } else {
+      transport = await TransportBLE.open(selectedDevice.id);
+    }
     const app = new CasperApp(transport);
     const nextKeyPath = addresses.length;
     const newAddresses = [];
@@ -44,12 +49,19 @@ export default function LedgerKeys({ selectedDevice, handleCancel }) {
   }, [addresses, balances, selectedDevice]);
 
   const handleAddressSelect = useCallback((activeKeyPath) => {
+    let device = selectedDevice;
+    let mode = LedgerAdapter.USB;
+    if (!device.deviceId && device.id) {
+      device = device.id;
+      mode = LedgerAdapter.BLE;
+    }
     dispatchConnect({
       adapterId: LedgerAdapter.ID,
       options: {
         keysByKeyPaths: addresses,
         activeKeyPath,
-        deviceId: selectedDevice.id,
+        mode,
+        device,
         deviceName: selectedDevice.name,
       },
     });

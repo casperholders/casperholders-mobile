@@ -37,8 +37,8 @@ export default function LedgerDevices() {
         next: async (event) => {
           if (event.type === 'add') {
             const device = event;
-            if (!devices.some((d) => d.descriptor.deviceId === device.descriptor.deviceId)) {
-              setUsbDevices([...devices, device]);
+            if (!usbDevices.some((d) => d.descriptor.deviceId === device.descriptor.deviceId)) {
+              setUsbDevices([...usbDevices, device]);
             }
           }
         },
@@ -80,7 +80,7 @@ export default function LedgerDevices() {
           <>
             {!scanning && <GridCol>
               <Text style={styles.textCenter}>
-                {devices.length ? `${devices.length} devices available.` : 'No device detected.'}
+                {devices.length + usbDevices.length > 0 ? `${devices.length + usbDevices.length} devices available.` : 'No device detected.'}
               </Text>
             </GridCol>}
             {devices.map((device) => <GridCol key={device.id}>
@@ -102,7 +102,7 @@ export default function LedgerDevices() {
                 </Card.Actions>
               </Card>
             </GridCol>)}
-            {usbDevices.map((device) => <GridCol key={device.descriptor.id}>
+            {usbDevices.map((device, index) => <GridCol key={index}>
               <Card style={{ backgroundColor: theme.colors.background }}>
                 <Card.Content>
                   <Text>
