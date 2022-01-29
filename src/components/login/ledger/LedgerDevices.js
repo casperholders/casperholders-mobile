@@ -19,6 +19,7 @@ export default function LedgerDevices() {
 
   useEffect(() => {
     if (scanning) {
+      setUsbDevices([]);
       const subscription = TransportBLE.listen({
         next: (event) => {
           if (event.type === 'add') {
