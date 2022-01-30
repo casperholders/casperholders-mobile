@@ -12,6 +12,7 @@ import useBalance from '@/hooks/useBalance';
 import useNetwork from '@/hooks/useNetwork';
 import useStakeBalance from '@/hooks/useStakeBalance';
 import useUniqueKey from '@/hooks/useUniqueKey';
+import useValidatorInfos from '@/hooks/useValidatorInfos';
 import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/noStakeBalanceError';
 import Big from 'big.js';
@@ -25,6 +26,7 @@ export default function BalanceScreen({ navigation }) {
   const network = useNetwork();
   const [balanceLoading, balance, balanceError] = useBalance([uniqueKey, network]);
   const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey, network]);
+  const [validatorsInfoLoading, validatorsInfo, validatorsInfoError] = useValidatorInfos([]);
   const adapter = useAdapter();
   const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
   const loading = balanceLoading || stakeLoading;
@@ -42,10 +44,19 @@ export default function BalanceScreen({ navigation }) {
     let totalFees = Big(0);
     let totalStaked = Big(0);
     validators.forEach(({ validator, stakedTokens }) => {
+      const validatorInfo = validatorsInfo.filter((v) => v.publicKey === validator);
+      let image = undefined;
+      let delegationRate = 0;
+      if (validatorInfo.length > 0) {
+        validator = validatorInfo[0].name;
+        image = validatorInfo[0].png;
+        delegationRate = validatorInfo[0].delegation_rate;
+      }
       stakes.push({
         validator,
         staked: stakedTokens,
-        delegationRate: validator.delegation_rate || 0,
+        image,
+        delegationRate,
       });
 
       totalStaked = totalStaked.plus(stakedTokens);

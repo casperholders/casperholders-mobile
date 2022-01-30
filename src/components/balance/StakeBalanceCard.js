@@ -1,27 +1,40 @@
+import ValidatorIcon from '@/components/common/ValidatorIcon';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import truncateInMiddle from '@/helpers/truncateInMiddle';
 import useAdapter from '@/hooks/auth/useAdapter';
 import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button, Caption, Card, Paragraph, useTheme } from 'react-native-paper';
 
 export default function (
-  { navigation, validator, staked, formattedPercentOfTotal, delegationRate },
+  { navigation, validator, staked, image, formattedPercentOfTotal, delegationRate },
 ) {
   const adapter = useAdapter();
   const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
   const theme = useTheme();
-  const description = `${formattedPercentOfTotal}% of your staked funds ꞏ Validator ${truncateInMiddle(validator)}`;
+  const description = `${formattedPercentOfTotal}% of your staked funds - ${delegationRate}% fee`;
 
   return (
     <Card style={styles.card}>
-      <Card.Content>
-        <Paragraph>
-          {formatCasperAmount(staked)}
-        </Paragraph>
-        <Caption>
-          {description}
-        </Caption>
+      <Card.Content style={{ flexDirection: 'row' }}>
+        {
+          image !== undefined && <ValidatorIcon
+            url={image}
+            size={35}
+            left
+          />
+        }
+        <View style={{ flex: 1 }}>
+          <Paragraph>
+            Validator {truncateInMiddle(validator)}
+          </Paragraph>
+          <Paragraph>
+            {formatCasperAmount(staked)}
+          </Paragraph>
+          <Caption>
+            {description}
+          </Caption>
+        </View>
       </Card.Content>
       <Card.Actions style={styles.actions}>
         <Button
