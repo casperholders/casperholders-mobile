@@ -10,7 +10,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+android/
 # macOS
 .DS_Store
 
@@ -78,3 +78,4 @@ web-build/
 dist/
 
 # @end expo-cli
+ios/

@@ -8,7 +8,8 @@
       "ios"
     ],
     "plugins": [
-      "@config-plugins/react-native-ble-plx"
+      "@config-plugins/react-native-ble-plx",
+      "./gradle-config"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,7 +28,8 @@
     ],
     "android": {
       "package": "com.casperholders.wallet",
-      "permissions": []
+      "permissions": [],
+      "versionCode": 2
     },
     "ios": {
       "bundleIdentifier": "com.casperholders.wallet",
