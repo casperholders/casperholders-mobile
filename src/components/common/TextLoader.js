@@ -13,6 +13,7 @@ export default function TextLoader({ width, height }) {
 
   return (
     <ContentLoader
+      uniqueKey={`text-loader-${width}-${height}`}
       style={{ width: '100%' }}
       speed={1}
       width={width}

@@ -13,6 +13,7 @@ export default function CardLoader({ height }) {
 
   return (
     <ContentLoader
+      uniqueKey={`card-loader-${height}`}
       speed={1}
       style={styles.cardLoader}
       height={height}
