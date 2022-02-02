@@ -63,7 +63,7 @@ export default function LoginScreen({ navigation }) {
         >
           <LocalConnect />
         </LoginBottomSheet>
-        {TEST_LOCAL_SIGNER_KEY && <LoginButton
+        {TEST_LOCAL_SIGNER_KEY !== undefined && <LoginButton
           title="Connect with test key"
           onPress={() => handleConnect({
             adapterId: LocalAdapter.ID,

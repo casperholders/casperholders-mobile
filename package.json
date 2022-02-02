@@ -4,11 +4,39 @@
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
+    "test": "jest",
     "ios": "expo run:ios",
     "eject": "expo eject",
     "publish": "dotenv -e .env.local -- cross-var expo publish",
     "apk": "eas build -p android --local --profile preview --output=dist/casperholders.apk",
     "aab": "eas build --platform android --local --output=dist/casperholders.aab"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "setupFiles": [
+      "./setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js",
+      "!**/android/**",
+      "!**/ios/**"
+    ]
   },
   "dependencies": {
     "@casperholders/core": "1.14.2",
@@ -37,6 +65,8 @@
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
     "expo-web-browser": "~10.1.0",
+    "jest": "^26.6.3",
+    "jest-expo": "^44.0.1",
     "jsc-android": "^250230.2.1",
     "lodash": "^4.17.21",
     "node-libs-react-native": "^1.2.1",
@@ -62,9 +92,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/jest-native": "^4.0.4",
+    "@testing-library/react-native": "^9.0.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "cross-var": "^1.1.0",
-    "dotenv-cli": "^4.1.1"
+    "dotenv-cli": "^4.1.1",
+    "react-test-renderer": "17.0.1"
   },
   "private": true
 }
