@@ -3,6 +3,8 @@ import 'node-libs-react-native/globals';
 import { LogBox } from 'react-native';
 import toFormat from 'toformat';
 
+global.Buffer = require('buffer').Buffer;
+
 toFormat(Big);
 
 LogBox.ignoreLogs([

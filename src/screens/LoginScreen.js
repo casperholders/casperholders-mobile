@@ -34,7 +34,7 @@ export default function LoginScreen({ navigation }) {
           style={styles.logo}
         />
         <Title style={styles.header}>Casper Holders</Title>
-        <Text style={styles.text}>The first Casper Network mobile wallet !</Text>
+        <Text style={styles.text}>The first Casper Network mobile wallet!</Text>
         <LoginBottomSheet
           icon={() => (
             <Image
