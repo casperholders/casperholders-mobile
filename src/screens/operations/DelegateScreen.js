@@ -16,6 +16,13 @@ import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
 
+/**
+ * Delegate screen
+ * @param navigation
+ * @param route
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function DelegateScreen({ navigation, route }) {
   const minAmount = 1;
   const stakeFee = 2.5;

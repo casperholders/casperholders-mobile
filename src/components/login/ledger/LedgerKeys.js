@@ -11,6 +11,13 @@ import CasperApp from '@zondax/ledger-casper';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Caption, Card, Paragraph, Title, useTheme } from 'react-native-paper';
 
+/**
+ * Ledger keys
+ * @param selectedDevice
+ * @param handleCancel
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function LedgerKeys({ selectedDevice, handleCancel }) {
   const theme = useTheme();
   const dispatchConnect = useDispatchConnect();

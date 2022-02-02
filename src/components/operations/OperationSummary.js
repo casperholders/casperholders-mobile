@@ -3,6 +3,13 @@ import { Fragment } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Divider, Subheading } from 'react-native-paper';
 
+/**
+ * Operation summary dialog
+ * @param title
+ * @param items
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationSummary({ title, items }) {
   return (
     <View style={styles.summary}>

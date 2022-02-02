@@ -5,6 +5,11 @@ import useUniqueKey from '@/hooks/useUniqueKey';
 import { View } from 'react-native';
 import { Divider } from 'react-native-paper';
 
+/**
+ * HistoryScreen with recent & past operations
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function HistoryScreen() {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
 

@@ -3,6 +3,22 @@ import ConfirmDialog from '@/components/common/ConfirmDialog';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
+/**
+ * Deploy form
+ * @param icon
+ * @param name
+ * @param disabled
+ * @param loading
+ * @param error
+ * @param children
+ * @param dialogChildren
+ * @param dialogVisible
+ * @param handleDialogOpen
+ * @param handleDialogClose
+ * @param handleDialogConfirm
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function DeployForm(
   {
     icon,

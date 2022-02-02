@@ -5,6 +5,9 @@ import TransportHID from '@ledgerhq/react-native-hid';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
 import CasperApp from '@zondax/ledger-casper';
 
+/**
+ * Ledger Adapter
+ */
 export default class LedgerAdapter extends AbstractAdapter {
   static get ID() {
     return 'LEDGER_SIGNER';

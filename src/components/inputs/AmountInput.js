@@ -6,6 +6,19 @@ import Big from 'big.js';
 import { useCallback } from 'react';
 import { Button, TextInput } from 'react-native-paper';
 
+/**
+ * Amount input
+ * @param form
+ * @param label
+ * @param hint
+ * @param min
+ * @param fee
+ * @param funds
+ * @param value
+ * @param onChangeValue
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function AmountInput({ form, label, hint, min, fee, funds, value, onChangeValue }) {
   const getBigMin = useCallback(() => Big(min === undefined ? 0 : min), [min]);
   const getBigMax = useCallback(() => {

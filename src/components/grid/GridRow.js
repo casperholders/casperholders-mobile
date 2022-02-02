@@ -1,5 +1,11 @@
 import { StyleSheet, View } from 'react-native';
 
+/**
+ * Grid row component
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function GridRow({ children }) {
   return (
     <View style={styles.row}>

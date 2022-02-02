@@ -2,6 +2,14 @@ import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet
 import { StyleSheet, View } from 'react-native';
 import { Portal } from 'react-native-paper';
 
+/**
+ * Bottom sheet modal container component
+ * @param bottomSheetModalRef
+ * @param snapPoints
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function BottomSheetModalContainer({
                                                     bottomSheetModalRef,
                                                     snapPoints,

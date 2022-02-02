@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
 
+/**
+ * Abstract async data resolver
+ * @param resolver
+ * @param deps
+ * @returns {[boolean,unknown,unknown]}
+ */
 export default function useAsyncData(resolver, deps = []) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);

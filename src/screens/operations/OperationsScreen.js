@@ -8,6 +8,12 @@ import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { StyleSheet } from 'react-native';
 import { Paragraph } from 'react-native-paper';
 
+/**
+ * Operation screen, display all types of operations
+ * @param navigation
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationsScreen({ navigation }) {
   const adapter = useAdapter();
   const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;

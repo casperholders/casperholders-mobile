@@ -2,6 +2,9 @@ import LedgerAdapter from '@/services/signers/ledgerAdapter';
 import LocalAdapter from '@/services/signers/localAdapter';
 import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 
+/**
+ * SignerManager to manage the different signer types in the application
+ */
 class SignerManager {
   /**
    * SignerManager constructor.

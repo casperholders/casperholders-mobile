@@ -1,5 +1,11 @@
 import { ImageBackground, StyleSheet } from 'react-native';
 
+/**
+ * Dot grid background
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function DotsGridBackground({ children }) {
   return (
     <ImageBackground

@@ -4,6 +4,11 @@ import GridRow from '@/components/grid/GridRow';
 import OperationsResult from '@/components/operations/OperationsResult';
 import useDeployResultsHashs from '@/hooks/operations/useDeployResultsHashs';
 
+/**
+ * Display all operations results
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationsResults() {
   const deployResultsHashs = useDeployResultsHashs();
 

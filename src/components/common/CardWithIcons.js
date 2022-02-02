@@ -1,6 +1,15 @@
 import { StyleSheet, View } from 'react-native';
 import { Card } from 'react-native-paper';
 
+/**
+ * Card with icons component
+ * @param left
+ * @param right
+ * @param children
+ * @param other
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function CardWithIcons({ left, right, children, ...other }) {
   return (
     <Card {...other}>

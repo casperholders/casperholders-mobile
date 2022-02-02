@@ -1,6 +1,9 @@
 import MainnetAdapter from '@/services/networks/mainnetAdapter';
 import TestnetAdapter from '@/services/networks/testnetAdapter';
 
+/**
+ * Network manager to manage the networks inside the app
+ */
 class NetworkManager {
   /**
    * NetworkManager constructor.

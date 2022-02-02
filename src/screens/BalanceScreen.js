@@ -21,6 +21,12 @@ import { useMemo, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Caption, Subheading } from 'react-native-paper';
 
+/**
+ * Balance screen with liquid and total & staked balance by validators
+ * @param navigation
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function BalanceScreen({ navigation }) {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
   const network = useNetwork();

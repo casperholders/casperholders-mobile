@@ -1,3 +1,6 @@
+/**
+ * Abstract Signer adapter to manager multiple signer types
+ */
 export default class AbstractAdapter {
   /**
    * Get the signer unique ID.

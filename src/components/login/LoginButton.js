@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
+/**
+ * Login button
+ * @param title
+ * @param other
+ * @returns {JSX.Element}
+ */
 export default function ({ title, ...other }) {
   return (
     <Button

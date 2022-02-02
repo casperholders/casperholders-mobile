@@ -3,6 +3,11 @@ import { APP_DISABLE_EVENT_SOURCES } from '@env';
 import { useEffect, useState } from 'react';
 import RNEventSource from 'react-native-event-source';
 
+/**
+ * Abstract event source
+ * @param listener
+ * @returns {stopListening}
+ */
 export default function useEventSource(listener) {
   const network = useNetwork();
   const [eventSource, setEventSource] = useState(undefined);

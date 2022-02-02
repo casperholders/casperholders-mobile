@@ -1,3 +1,6 @@
+/**
+ * DeployConnection used to wrap options and manage the differences between signer types for connections
+ */
 export default class DeployConnection {
   /**
    * SignerConnection constructor.

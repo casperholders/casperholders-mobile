@@ -10,6 +10,11 @@ import { Button, Card, Text, useTheme } from 'react-native-paper';
 
 const SCAN_TIMEOUT_IN_SECONDS = 10;
 
+/**
+ * Ledger devices
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function LedgerDevices() {
   const theme = useTheme();
   const [scanning, setScanning] = useState(true);

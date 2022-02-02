@@ -2,6 +2,12 @@ import ContentLoader, { Rect } from 'react-content-loader/native';
 import { StyleSheet } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
+/**
+ * Card loader component
+ * @param height
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function CardLoader({ height }) {
   const theme = useTheme();
 

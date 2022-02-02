@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * OperationsReducer manage the operations state inside the app
+ * @type {Slice<{pendingNotificationId: undefined, deployResultsByHash: {}}, {setPendingNotificationId: reducers.setPendingNotificationId, setDeployResult: reducers.setDeployResult, unsetDeployResult: reducers.unsetDeployResult}, string>}
+ */
 const operationsSlice = createSlice({
   name: 'operations',
   initialState: {

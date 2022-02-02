@@ -1,5 +1,8 @@
 import AbstractAdapter from '@/services/signers/abstractAdapter';
 
+/**
+ * ReadOnly adapter to be able to view an account in read only mode
+ */
 export default class ReadOnlyAdapter extends AbstractAdapter {
 
   static get ID() {

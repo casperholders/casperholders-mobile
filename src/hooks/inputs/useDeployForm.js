@@ -6,6 +6,15 @@ import useRouteFillForm from '@/hooks/inputs/useRouteFillForm';
 import useAsyncHandler from '@/hooks/useAsyncHandler';
 import { useState } from 'react';
 
+/**
+ * Deploy form handler
+ * @param navigation
+ * @param route
+ * @param initialState
+ * @param filledFromRoute
+ * @param runDeploy
+ * @returns {{form: ({resetValues: (function(): void), setValues: (function(*): void), values: {}, setValue: (function(*, *): void), unregister: (function(*): *[]), register: (function(*): number), validate: (function(): this is *[])}|*), dialogVisible: boolean, handleDialogOpen: handleDialogOpen, handleDialogConfirm: *, loading: *, error: unknown, handleDialogClose: (function(): void)}}
+ */
 export default function useDeployForm(navigation, route, initialState, filledFromRoute, runDeploy) {
   const dispatchSetDeployResult = useDispatchSetDeployResult();
 

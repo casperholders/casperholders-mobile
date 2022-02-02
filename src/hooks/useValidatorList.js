@@ -8,6 +8,11 @@ import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/no
 import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
 import Big from 'big.js';
 
+/**
+ * Generate a validator list, return only the validators whom the user is delegating to if the undelegate boolean is true
+ * @param undelegate boolean
+ * @returns {[boolean,unknown,unknown]|*}
+ */
 export default function useValidatorList(undelegate) {
   const activeKey = usePublicKey();
   const network = useNetwork();

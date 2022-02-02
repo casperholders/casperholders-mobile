@@ -6,6 +6,13 @@ import { useCallback, useMemo, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import { Portal, Title } from 'react-native-paper';
 
+/**
+ * Abstract login bottom sheet
+ * @param icon
+ * @param title
+ * @param children
+ * @returns {JSX.Element}
+ */
 export default function ({ icon, title, children }) {
   const bottomSheetRef = useRef(null);
   const handleOpenBottomSheet = useCallback(() => {

@@ -4,6 +4,13 @@ import formatCasperAmount from '@/helpers/formatCasperAmount';
 import { StyleSheet, View } from 'react-native';
 import { Caption, Divider, Text, useTheme } from 'react-native-paper';
 
+/**
+ * Display validator infos
+ * @param validator
+ * @param onPress
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ValidatorCard({ validator, onPress }) {
   const theme = useTheme();
   const styles = StyleSheet.create({

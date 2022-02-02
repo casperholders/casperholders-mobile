@@ -25,6 +25,11 @@ QUICK_FILTERS.push({
   ).join(',')})`,
 });
 
+/**
+ * Display user operations history
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationsHistory() {
   const theme = useTheme();
   const dispatchUnsetDeployResult = useDispatchUnsetDeployResult();
@@ -111,10 +116,10 @@ export default function OperationsHistory() {
         </>
       )}
       {!historyLoading && historyError &&
-      (<GridCol><Alert
-        type="error"
-        message={historyError.message}
-      /></GridCol>)}
+        (<GridCol><Alert
+          type="error"
+          message={historyError.message}
+        /></GridCol>)}
       {!historyLoading && !historyError && (
         <>
           {history.operations.map((deployData) => (

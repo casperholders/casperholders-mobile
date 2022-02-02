@@ -1,6 +1,11 @@
 import { StyleSheet, View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
+/**
+ * Loader component
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Loader() {
   return (
     <View style={styles.container}>

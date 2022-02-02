@@ -1,6 +1,9 @@
+/**
+ * AbstractNetworkAdapter to manage networks inside the application
+ */
 export default class AbstractNetworkAdapter {
   /**
-   * Get the signer unique ID.
+   * Get the network unique ID.
    * @type {string}
    */
   static get ID() {
@@ -8,7 +11,7 @@ export default class AbstractNetworkAdapter {
   }
 
   /**
-   * Get the signer human readable name.
+   * Get the network human readable name.
    * @type {string}
    */
   get name() {
@@ -16,7 +19,7 @@ export default class AbstractNetworkAdapter {
   }
 
   /**
-   * Get the signer human readable name.
+   * Get the network.
    * @type {string}
    */
   get network() {
@@ -24,7 +27,7 @@ export default class AbstractNetworkAdapter {
   }
 
   /**
-   * Get the signer human readable name.
+   * Get the cspr live url.
    * @type {string}
    */
   get csprLiveUrl() {
@@ -32,7 +35,7 @@ export default class AbstractNetworkAdapter {
   }
 
   /**
-   * Get the signer human readable name.
+   * Get the rpc url.
    * @type {string}
    */
   get rpcUrl() {
@@ -40,7 +43,7 @@ export default class AbstractNetworkAdapter {
   }
 
   /**
-   * Get the signer human readable name.
+   * Get the data Api Url.
    * @type {string}
    */
   get dataApiUrl() {
@@ -48,15 +51,15 @@ export default class AbstractNetworkAdapter {
   }
 
   /**
-   * Get the signer human readable name.
+   * Get the api url.
    * @type {string}
    */
   get apiUrl() {
     throw new Error('you must implement this method');
   }
-  
+
   /**
-   * Get the signer human readable name.
+   * Get the auction manager hash.
    * @type {string}
    */
   get auctionManagerHash() {

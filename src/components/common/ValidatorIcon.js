@@ -1,6 +1,16 @@
 import { StyleSheet, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
 
+/**
+ * Validator icon component
+ * @param url
+ * @param size
+ * @param left
+ * @param right
+ * @param style
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ValidatorIcon({ url, size, left, right, style }) {
   const styles = StyleSheet.create({
     iconWrapper: {

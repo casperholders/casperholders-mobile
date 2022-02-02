@@ -17,6 +17,11 @@ import { StyleSheet } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 
+/**
+ * Settings Screen display the public key & QRCode and manage the network state
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function SettingsScreen() {
   const dispatchDisconnect = useDispatchDisconnect();
   const dispatchChangeNetwork = useDispatchChangeNetwork();

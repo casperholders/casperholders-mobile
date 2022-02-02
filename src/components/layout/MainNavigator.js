@@ -9,6 +9,12 @@ import { useTheme } from 'react-native-paper';
 
 const Tab = createMaterialBottomTabNavigator();
 
+/**
+ * Main bottom tab navigator
+ * @param navigation
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function MainNavigator({ navigation }) {
   useDeploysResultNotification({ navigation });
 

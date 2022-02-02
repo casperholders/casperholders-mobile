@@ -6,6 +6,11 @@ import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
 
+/**
+ * Local connect bottom sheet content
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function LocalConnect() {
   const dispatchConnect = useDispatchConnect();
   const [loading, setLoading] = useState(false);

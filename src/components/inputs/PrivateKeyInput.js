@@ -4,6 +4,16 @@ import useInput from '@/hooks/inputs/useInput';
 import usePasteHandler from '@/hooks/inputs/usePasteHandler';
 import { TextInput } from 'react-native-paper';
 
+/**
+ * Private key input, for testing only !!
+ * @param form
+ * @param label
+ * @param hint
+ * @param value
+ * @param onChangeValue
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function PrivateKeyInput({ form, label, hint, value, onChangeValue }) {
   const [internalValue, setInternalValue, error] = useInput(form, value, [
     (a) => !!a || 'Private key is required',

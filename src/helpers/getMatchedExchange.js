@@ -5,6 +5,11 @@ const EXCHANGES = new Map([
   ['01b92e36567350dd7b339d709bfe341df6fda853e85315418f1bb3ddd414d9f5be', 'Huobi'],
 ]);
 
+/**
+ * Get exchange address
+ * @param address
+ * @returns {string}
+ */
 export default function getMatchedExchange(address) {
   return EXCHANGES.get(address);
 }

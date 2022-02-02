@@ -1,5 +1,11 @@
 import { StyleSheet, View } from 'react-native';
 
+/**
+ * Button group component
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ButtonGroup({ children }) {
   return (
     <View style={styles.buttonGroup}>

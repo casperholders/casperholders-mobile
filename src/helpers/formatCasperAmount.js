@@ -1,5 +1,10 @@
 import Big from 'big.js';
 
+/**
+ * Format Casper amount
+ * @param amount
+ * @returns {`${string} CSPR`}
+ */
 export default function formatCasperAmount(amount) {
   let formattedAmount;
   if (amount !== undefined) {

@@ -10,6 +10,12 @@ import { useEffect, useState } from 'react';
 
 const WATCHER_MAX_WAIT_IN_SECONDS = 180;
 
+/**
+ * Display operation result
+ * @param hash
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationsResult({ hash }) {
   const deployResult = useDeployResult(hash);
   const network = useNetwork();

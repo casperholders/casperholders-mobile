@@ -10,6 +10,17 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Portal, TextInput } from 'react-native-paper';
 
+/**
+ * Validator input
+ * @param form
+ * @param label
+ * @param hint
+ * @param value
+ * @param onChangeValue
+ * @param undelegate
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ValidatorInput({ form, label, hint, value, onChangeValue, undelegate }) {
   const [internalValue, setInternalValue, error] = useInput(form, value, [
     (a) => !!a || 'Address is required',

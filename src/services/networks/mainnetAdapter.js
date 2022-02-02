@@ -1,5 +1,8 @@
 import AbstractNetworkAdapter from '@/services/networks/abstractNetworkAdapter';
 
+/**
+ * Mainnet adapter
+ */
 export default class MainnetAdapter extends AbstractNetworkAdapter {
   static get ID() {
     return 'CASPER_MAINNET';

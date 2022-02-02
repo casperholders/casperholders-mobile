@@ -12,6 +12,18 @@ import { useMemo } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { Caption, ProgressBar, Text, useTheme } from 'react-native-paper';
 
+/**
+ * Display operation details
+ * @param type
+ * @param hash
+ * @param status
+ * @param amount
+ * @param cost
+ * @param message
+ * @param additionalInfo
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationsCard(
   { type, hash, status, amount, cost, message, additionalInfo },
 ) {

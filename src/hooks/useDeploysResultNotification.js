@@ -1,6 +1,5 @@
 import ensureNotificationsPermission from '@/helpers/ensureNotificationsPermission';
-import usePendingDeployResultsCount
-  from '@/hooks/operations/usePendingDeployResultsCount';
+import usePendingDeployResultsCount from '@/hooks/operations/usePendingDeployResultsCount';
 import usePendingNotificationId from '@/hooks/operations/usePendingNotificationId';
 import { setPendingNotificationId } from '@/store/reducers/operationsReducer';
 import { TabActions } from '@react-navigation/native';
@@ -8,6 +7,10 @@ import * as Notifications from 'expo-notifications';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+/**
+ * Create a deploy result notification
+ * @param navigation
+ */
 export default function useDeploysResultNotification({ navigation }) {
   const dispatch = useDispatch();
   const pendingDeployResultsCount = usePendingDeployResultsCount();

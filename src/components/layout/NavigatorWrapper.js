@@ -1,5 +1,11 @@
 import { StyleSheet, View } from 'react-native';
 
+/**
+ * Navigation wrapper
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function NavigatorWrapper({ children }) {
   // Wrapping the navigation into a view to avoid screen bugs.
   // See https://github.com/callstack/react-native-paper/issues/2999

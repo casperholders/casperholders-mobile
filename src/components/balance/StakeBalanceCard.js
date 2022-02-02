@@ -6,6 +6,16 @@ import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
 import { StyleSheet, View } from 'react-native';
 import { Button, Caption, Card, Paragraph, useTheme } from 'react-native-paper';
 
+/**
+ * Stake balance card component
+ * @param navigation
+ * @param validator
+ * @param staked
+ * @param image
+ * @param formattedPercentOfTotal
+ * @param delegationRate
+ * @returns {JSX.Element}
+ */
 export default function (
   { navigation, validator, staked, image, formattedPercentOfTotal, delegationRate },
 ) {

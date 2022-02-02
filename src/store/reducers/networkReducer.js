@@ -2,6 +2,10 @@ import MainnetAdapter from '@/services/networks/mainnetAdapter';
 import NetworkManager from '@/services/networks/networkManager';
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * NetworkReducer manage the network state inside the app
+ * @type {Slice<{networkId: string}, {setNetwork: reducers.setNetwork}, string>}
+ */
 const networkSlice = createSlice({
   name: 'network',
   initialState: {

@@ -1,5 +1,10 @@
 import { useRef, useState } from 'react';
 
+/**
+ * Form handler
+ * @param initialState
+ * @returns {{resetValues: (function(): void), setValues: (function(*): void), values: {}, setValue: (function(*, *): void), unregister: (function(*): *[]), register: (function(*): number), validate: (function(): this is *[])}}
+ */
 export default function useForm(initialState = {}) {
   const [values, setValues] = useState(initialState);
   const validations = useRef([]);

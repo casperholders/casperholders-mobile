@@ -7,6 +7,11 @@ import { PermissionsAndroid, StyleSheet } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
 import { Button } from 'react-native-paper';
 
+/**
+ * Ledger connect bottom sheet content
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function LedgerConnect() {
   const [bluetooth, setBluetooth] = useState(false);
 

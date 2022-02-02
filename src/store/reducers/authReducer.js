@@ -1,6 +1,10 @@
 import signerManager from '@/services/signers/signerManager';
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * AuthReducer manage the Auth state of the app
+ * @type {Slice<{connected: boolean, options: undefined, adapterId: undefined}, {disconnect: reducers.disconnect, connect: reducers.connect}, string>}
+ */
 const authSlice = createSlice({
   name: 'auth',
   initialState: {

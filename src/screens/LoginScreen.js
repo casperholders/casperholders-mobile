@@ -7,19 +7,18 @@ import TorusConnect from '@/components/login/torus/TorusConnect';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import LocalAdapter from '@/services/signers/localAdapter';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
-import { useCallback, useMemo, useRef } from 'react';
 import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Text, Title } from 'react-native-paper';
 
+/**
+ * Login screen with Ledger USB & BLE + ReadOnly.
+ * @param navigation
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function LoginScreen({ navigation }) {
   const dispatchConnect = useDispatchConnect();
 
-  const bottomSheetModalRef = useRef(null);
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-  // variables
-  const snapPoints = useMemo(() => ['46%'], []);
   const handleConnect = (payload) => {
     dispatchConnect(payload);
   };

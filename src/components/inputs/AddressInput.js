@@ -5,6 +5,16 @@ import usePasteHandler from '@/hooks/inputs/usePasteHandler';
 import { CLPublicKey } from 'casper-js-sdk';
 import { TextInput } from 'react-native-paper';
 
+/**
+ * Address input
+ * @param form
+ * @param label
+ * @param hint
+ * @param value
+ * @param onChangeValue
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function AddressInput({ form, label, hint, value, onChangeValue }) {
   const [internalValue, setInternalValue, error] = useInput(form, value, [
     (a) => !!a || 'Address is required',

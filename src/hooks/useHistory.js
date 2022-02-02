@@ -2,6 +2,12 @@ import usePublicKey from '@/hooks/auth/usePublicKey';
 import useAsyncData from '@/hooks/useAsyncData';
 import useNetwork from '@/hooks/useNetwork';
 
+/**
+ * Retrieve user operations history from casper holders api
+ * @param page
+ * @param additionalQuery
+ * @returns {[boolean,unknown,unknown]|*}
+ */
 export default function useHistory(page, additionalQuery) {
   const activeKey = usePublicKey();
   const network = useNetwork();

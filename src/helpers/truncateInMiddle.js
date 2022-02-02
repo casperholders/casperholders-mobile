@@ -1,3 +1,10 @@
+/**
+ * Truncate string to display it more easily
+ * @param str
+ * @param size
+ * @param separator
+ * @returns {string|*}
+ */
 export default function truncateInMiddle(str, size = 15, separator = '...') {
   if (str.length <= size) {
     return str;

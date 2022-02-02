@@ -2,6 +2,13 @@ import CardWithIcons from '@/components/common/CardWithIcons';
 import Icon from '@/components/common/Icon';
 import { Paragraph, useTheme } from 'react-native-paper';
 
+/**
+ * Alert component
+ * @param type
+ * @param message
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Alert({ type, message }) {
   const theme = useTheme();
   const ALERT_TYPES_ICONS = {

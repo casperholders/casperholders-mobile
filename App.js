@@ -34,6 +34,11 @@ const CombinedDarkTheme = merge(NavigationDarkTheme, PaperDarkTheme, {
   },
 });
 
+/**
+ * Root view of the app with the providers needed to wrap the main view
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

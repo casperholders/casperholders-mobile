@@ -20,6 +20,13 @@ import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
 
+/**
+ * Transfer screen
+ * @param navigation
+ * @param route
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function TransferScreen({ navigation, route }) {
   const minAmount = 2.5;
   const transferFee = 0.1;

@@ -1,5 +1,8 @@
 import AbstractNetworkAdapter from '@/services/networks/abstractNetworkAdapter';
 
+/**
+ * Testnet adapter
+ */
 export default class TestnetAdapter extends AbstractNetworkAdapter {
   static get ID() {
     return 'CASPER_TESTNET';

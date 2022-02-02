@@ -1,5 +1,13 @@
 import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
 
+/**
+ * Abstract screen wrapper in a scrollview
+ * @param children
+ * @param onRefresh
+ * @param other
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ScreenWrapper({ children, onRefresh, ...other }) {
   const refreshControl = onRefresh ? <RefreshControl
     refreshing={false}

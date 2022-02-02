@@ -1,6 +1,18 @@
 import { StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, useTheme } from 'react-native-paper';
 
+/**
+ * Confirm dialog component
+ * @param visible
+ * @param title
+ * @param confirmLabel
+ * @param confirmIcon
+ * @param children
+ * @param onClose
+ * @param onConfirm
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ConfirmDialog(
   { visible, title, confirmLabel, confirmIcon, children, onClose, onConfirm },
 ) {

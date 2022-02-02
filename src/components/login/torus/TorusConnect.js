@@ -1,6 +1,11 @@
 import { Linking } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
+/**
+ * Torus Connect bottom sheet content
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function TorusConnect() {
   return <>
     <Text>

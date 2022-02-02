@@ -2,6 +2,16 @@ import Icon from '@/components/common/Icon';
 import { StyleSheet } from 'react-native';
 import { Caption, Card, Title, useTheme } from 'react-native-paper';
 
+/**
+ * Abstract Operation card choice
+ * @param name
+ * @param description
+ * @param icon
+ * @param disabled
+ * @param onPress
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationsChoiceCard({ name, description, icon, disabled, onPress }) {
   const theme = useTheme();
   const color = disabled ? theme.colors.disabled : theme.colors.text;

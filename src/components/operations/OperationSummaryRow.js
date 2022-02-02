@@ -2,6 +2,13 @@ import formatCasperAmount from '@/helpers/formatCasperAmount';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
+/**
+ * Details of an operation summary
+ * @param label
+ * @param amount
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationSummaryRow({ label, amount }) {
   return (
     <View style={styles.summaryRow}>

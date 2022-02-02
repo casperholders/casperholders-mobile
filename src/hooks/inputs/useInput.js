@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
+/**
+ * Input form handler
+ * @param form
+ * @param currentValue
+ * @param rules
+ * @param onChange
+ * @returns {[React.MutableRefObject<*>,setValue,unknown]}
+ */
 export default function useInput(form, currentValue, rules, onChange) {
   const value = useRef(currentValue);
   const [error, setError] = useState(undefined);

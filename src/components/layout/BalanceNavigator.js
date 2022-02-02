@@ -6,6 +6,12 @@ import { IconButton } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
+/**
+ * Balance navigator
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function BalanceNavigator(props) {
   return (
     <NavigatorWrapper>

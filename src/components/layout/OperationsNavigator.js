@@ -7,6 +7,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
+/**
+ * Operation navigator
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function OperationsNavigator(props) {
   return (
     <NavigatorWrapper>

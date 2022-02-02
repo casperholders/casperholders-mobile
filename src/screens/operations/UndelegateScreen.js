@@ -17,6 +17,13 @@ import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
 
+/**
+ * Undelegate screen
+ * @param navigation
+ * @param route
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function UndelegateScreen({ navigation, route }) {
   const minAmount = 1;
   const unstakeFee = 0.00001;

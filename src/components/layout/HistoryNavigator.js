@@ -4,6 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
+/**
+ * History navigator
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function HistoryNavigator() {
   return (
     <NavigatorWrapper>
