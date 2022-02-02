@@ -12,19 +12,37 @@ export default function useAsyncData(resolver, deps = []) {
   const [result, setResult] = useState(undefined);
 
   useEffect(() => {
+    let destroyed = false;
+    const onlyIfMounted = (callback) => {
+      if (!destroyed) {
+        callback();
+      }
+    };
+
     (async () => {
       setLoading(true);
 
       try {
-        setResult(await resolver());
-        setError(undefined);
+        const result = await resolver();
+        onlyIfMounted(() => {
+          setResult(result);
+          setError(undefined);
+        });
       } catch (effectError) {
-        setError(effectError);
-        setResult(undefined);
+        onlyIfMounted(() => {
+          setError(effectError);
+          setResult(undefined);
+        });
       } finally {
-        setLoading(false);
+        onlyIfMounted(() => {
+          setLoading(false);
+        });
       }
     })();
+
+    return () => {
+      destroyed = true;
+    };
   }, deps);
 
   return [loading, result, error];
