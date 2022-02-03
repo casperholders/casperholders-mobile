@@ -8,7 +8,7 @@ import { AbstractKeyManager } from '@casperholders/core/dist/services/keys/abstr
  */
 export default class ReduxKeyManager extends AbstractKeyManager {
   static get activeKey() {
-    const state = getStore.getState();
+    const state = getStore().getState();
     if (selectConnected(state)) {
       return selectPublicKey(state);
     }

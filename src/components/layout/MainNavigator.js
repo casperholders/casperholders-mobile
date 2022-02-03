@@ -2,9 +2,11 @@ import Icon from '@/components/common/Icon';
 import BalanceNavigator from '@/components/layout/BalanceNavigator';
 import HistoryNavigator from '@/components/layout/HistoryNavigator';
 import OperationsNavigator from '@/components/layout/OperationsNavigator';
+import useDispatchClearDeployResults from '@/hooks/actions/useDispatchClearDeployResults';
 import useDeployResultsCount from '@/hooks/operations/useDeployResultsCount';
 import useDeploysResultNotification from '@/hooks/useDeploysResultNotification';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useEffect } from 'react';
 import { useTheme } from 'react-native-paper';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -17,6 +19,11 @@ const Tab = createMaterialBottomTabNavigator();
  */
 export default function MainNavigator({ navigation }) {
   useDeploysResultNotification({ navigation });
+
+  const dispatchClearDeployResults = useDispatchClearDeployResults();
+  useEffect(() => () => {
+    dispatchClearDeployResults();
+  }, []);
 
   const theme = useTheme();
   const deployResultsCount = useDeployResultsCount();

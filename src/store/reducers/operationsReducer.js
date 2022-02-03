@@ -20,6 +20,9 @@ const operationsSlice = createSlice({
         delete state.deployResultsByHash[lowerHash];
       }
     },
+    clearDeployResults: (state) => {
+      state.deployResultsByHash = {};
+    },
     setPendingNotificationId: (state, action) => {
       state.pendingNotificationId = action.payload.notificationId;
     },
@@ -29,6 +32,7 @@ const operationsSlice = createSlice({
 export const {
   setDeployResult,
   unsetDeployResult,
+  clearDeployResults,
   setPendingNotificationId,
 } = operationsSlice.actions;
 

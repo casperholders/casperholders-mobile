@@ -4,7 +4,7 @@ import usePendingNotificationId from '@/hooks/operations/usePendingNotificationI
 import { setPendingNotificationId } from '@/store/reducers/operationsReducer';
 import { TabActions } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 /**
@@ -16,12 +16,13 @@ export default function useDeploysResultNotification({ navigation }) {
   const pendingDeployResultsCount = usePendingDeployResultsCount();
   const pendingNotificationId = usePendingNotificationId();
   const [notificationSubscription, setNotificationSubscription] = useState();
+  const pendingNotificationIdRef = useRef(pendingNotificationId);
 
   useEffect(() => {
     const dismissNotificationIfExists = async () => {
-      if (pendingNotificationId) {
-        await Notifications.dismissNotificationAsync(pendingNotificationId);
-        setPendingNotificationId({ notificationId: undefined });
+      if (pendingNotificationIdRef.current) {
+        await Notifications.dismissNotificationAsync(pendingNotificationIdRef.current);
+        dispatch(setPendingNotificationId({ notificationId: undefined }));
       }
     };
 
@@ -54,6 +55,8 @@ export default function useDeploysResultNotification({ navigation }) {
   }, [pendingDeployResultsCount]);
 
   useEffect(() => {
+    pendingNotificationIdRef.current = pendingNotificationId;
+
     const unsubscribeNotification = () => {
       if (notificationSubscription) {
         notificationSubscription.remove();
