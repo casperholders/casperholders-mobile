@@ -1,4 +1,4 @@
-import store from '@/store';
+import { getStore } from '@/store';
 import { selectConnected, selectPublicKey } from '@/store/reducers/authReducer';
 import { NoActiveKeyError } from '@casperholders/core/dist/services/errors/noActiveKeyError';
 import { AbstractKeyManager } from '@casperholders/core/dist/services/keys/abstractKeyManager';
@@ -8,7 +8,7 @@ import { AbstractKeyManager } from '@casperholders/core/dist/services/keys/abstr
  */
 export default class ReduxKeyManager extends AbstractKeyManager {
   static get activeKey() {
-    const state = store.getState();
+    const state = getStore.getState();
     if (selectConnected(state)) {
       return selectPublicKey(state);
     }

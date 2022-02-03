@@ -2,11 +2,15 @@ import AppProvider from '@/AppProvider';
 import Main from '@/Main';
 import TestnetAdapter from '@/services/networks/testnetAdapter';
 import LocalAdapter from '@/services/signers/localAdapter';
-import store from '@/store';
+import { getStore, resetStore } from '@/store';
 import { connect } from '@/store/reducers/authReducer';
 import { setNetwork } from '@/store/reducers/networkReducer';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
-import { render } from '@testing-library/react-native';
+import { render, waitFor } from '@testing-library/react-native';
+
+beforeEach(() => {
+  resetStore();
+});
 
 describe('Main.js', () => {
   test('should render login when disconnected', () => {
@@ -21,8 +25,8 @@ describe('Main.js', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-  test('should render navigator when connected to mainnet', () => {
-    store.dispatch(connect({
+  test('should render navigator when connected to mainnet', async () => {
+    getStore().dispatch(connect({
       adapterId: LocalAdapter.ID,
       options: { privateKey: TEST_LOCAL_SIGNER_KEY },
     }));
@@ -31,16 +35,26 @@ describe('Main.js', () => {
       wrapper: AppProvider,
     });
 
+    await waitFor(() => {
+      expect(queryByText('Loading...')).toBeFalsy();
+    });
+
     expect(queryByText('Connect with Ledger')).toBeFalsy();
     expect(queryByText('Connect locally')).toBeFalsy();
     expect(queryAllByText('Balance')).toBeTruthy();
     expect(queryAllByText('Mainnet')).toBeTruthy();
+    expect(queryByText('Testnet')).toBeFalsy();
 
     expect(toJSON()).toMatchSnapshot();
   });
 
-  test('should render navigator when connected to testnet', () => {
-    store.dispatch(setNetwork({
+  test('should render navigator when connected to testnet', async () => {
+    getStore().dispatch(connect({
+      adapterId: LocalAdapter.ID,
+      options: { privateKey: TEST_LOCAL_SIGNER_KEY },
+    }));
+
+    getStore().dispatch(setNetwork({
       network: TestnetAdapter.ID,
     }));
 
@@ -48,9 +62,14 @@ describe('Main.js', () => {
       wrapper: AppProvider,
     });
 
+    await waitFor(() => {
+      expect(queryByText('Loading...')).toBeFalsy();
+    });
+
     expect(queryByText('Connect with Ledger')).toBeFalsy();
     expect(queryByText('Connect locally')).toBeFalsy();
     expect(queryAllByText('Balance')).toBeTruthy();
+    expect(queryByText('Mainnet')).toBeFalsy();
     expect(queryAllByText('Testnet')).toBeTruthy();
 
     expect(toJSON()).toMatchSnapshot();
