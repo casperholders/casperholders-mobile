@@ -1,3 +1,6 @@
+// This file' name starts with a 0 to ensure it is always first even when
+// reordering imports in App.js.
+
 import Big from 'big.js';
 import 'node-libs-react-native/globals';
 import { LogBox } from 'react-native';
