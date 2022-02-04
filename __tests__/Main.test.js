@@ -6,7 +6,7 @@ import { getStore, resetStore } from '@/store';
 import { connect } from '@/store/reducers/authReducer';
 import { setNetwork } from '@/store/reducers/networkReducer';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
-import { render, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 
 beforeEach(() => {
   resetStore();
@@ -71,7 +71,42 @@ describe('Main.js', () => {
     expect(queryAllByText('Balance')).toBeTruthy();
     expect(queryByText('Mainnet')).toBeFalsy();
     expect(queryAllByText('Testnet')).toBeTruthy();
-
     expect(toJSON()).toMatchSnapshot();
+  });
+
+
+  test('should render navigator operations', async () => {
+    getStore().dispatch(connect({
+      adapterId: LocalAdapter.ID,
+      options: { privateKey: TEST_LOCAL_SIGNER_KEY },
+    }));
+
+    getStore().dispatch(setNetwork({
+      network: TestnetAdapter.ID,
+    }));
+
+    const {
+      debug,
+      findByText,
+      findAllByText,
+      getAllByText,
+      queryByText,
+      queryAllByText,
+      queryAllByTestId,
+      getByText,
+      toJSON,
+    } = render(
+      <Main />, {
+        wrapper: AppProvider,
+      });
+
+    const toClick = getAllByText('Operations');
+    console.log(toClick);
+    fireEvent(toClick[0], 'press');
+    fireEvent(toClick[1], 'press');
+
+    const transfer = await findByText('Choose an operation to execute from the list bellow');
+    console.log(transfer);
+    expect(transfer).toBeTruthy();
   });
 });
