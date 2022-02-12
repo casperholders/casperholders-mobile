@@ -39,6 +39,7 @@ export default function MainNavigator({ navigation }) {
         name="BalanceTab"
         component={BalanceNavigator}
         options={{
+          tabBarTestID: 'goToBalance',
           tabBarLabel: 'Balance',
           tabBarIcon: ({ color }) => (
             <Icon
@@ -53,6 +54,7 @@ export default function MainNavigator({ navigation }) {
         name="OperationsTab"
         component={OperationsNavigator}
         options={{
+          tabBarTestID: 'goToOperations',
           tabBarLabel: 'Operations',
           tabBarIcon: ({ color }) => (
             <Icon
@@ -67,6 +69,7 @@ export default function MainNavigator({ navigation }) {
         name="HistoryTab"
         component={HistoryNavigator}
         options={{
+          tabBarTestID: 'goToHistory',
           tabBarLabel: 'History',
           tabBarBadge: deployResultsBadge,
           tabBarIcon: ({ color }) => (

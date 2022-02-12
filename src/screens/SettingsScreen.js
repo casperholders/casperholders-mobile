@@ -103,6 +103,7 @@ export default function SettingsScreen() {
                 icon="switch"
                 style={{ marginBottom: 20 }}
                 onPress={switchToNetwork}
+                testID='toggleNetwork'
               >
                 Switch to {switchNetwork.name}
               </Button>

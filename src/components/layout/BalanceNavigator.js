@@ -22,6 +22,7 @@ export default function BalanceNavigator(props) {
           options={{
             headerRight: () => (
               <IconButton
+                testID='goToSettings'
                 icon="cog"
                 onPress={() => props.navigation.navigate('Settings')}
               />
