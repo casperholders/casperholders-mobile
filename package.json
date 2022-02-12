@@ -29,13 +29,12 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/coverage/**",
-      "!**/node_modules/**",
-      "!**/babel.config.js",
-      "!**/jest.setup.js",
-      "!**/android/**",
-      "!**/ios/**"
+      "**/src/**/*.{js,jsx}",
+      "!**/ledger/**",
+      "!**/torus/**",
+      "!**/src/0bootstrap.js",
+      "!**/src/theme.js",
+      "!**/src/**/PrivateKeyInput.js"
     ]
   },
   "dependencies": {

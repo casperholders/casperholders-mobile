@@ -7,9 +7,10 @@ import { HelperText } from 'react-native-paper';
  * @returns {JSX.Element}
  * @constructor
  */
-export default function InputMessages({ error, hint }) {
+export default function InputMessages({ testID, error, hint }) {
   return (
     <HelperText
+      testID={testID}
       type={error ? 'error' : 'info'}
       visible={!!error || !!hint}
     >

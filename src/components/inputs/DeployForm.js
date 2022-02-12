@@ -44,6 +44,7 @@ export default function DeployForm(
       <Button
         mode="contained"
         icon={icon}
+        testID={`${name}Submit`}
         style={styles.submitButton}
         disabled={disabled}
         loading={loading}

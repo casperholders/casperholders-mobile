@@ -162,6 +162,7 @@ export default function BalanceScreen({ navigation }) {
               left
             />}
             right={detailsStake}
+            testID="detailsStake"
           >
             <BalanceLoaderOrAmount
               loading={stakeLoading}

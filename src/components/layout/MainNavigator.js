@@ -14,10 +14,11 @@ const Tab = createMaterialBottomTabNavigator();
 /**
  * Main bottom tab navigator
  * @param navigation
+ * @param initialRoute
  * @returns {JSX.Element}
  * @constructor
  */
-export default function MainNavigator({ navigation }) {
+export default function MainNavigator({ navigation, initialRoute = 'BalanceTab' }) {
   useDeploysResultNotification({ navigation });
 
   const dispatchClearDeployResults = useDispatchClearDeployResults();
@@ -30,9 +31,9 @@ export default function MainNavigator({ navigation }) {
   const deployResultsBadge = deployResultsCount
     ? (deployResultsCount > 9 ? '9+' : deployResultsCount)
     : undefined;
-
   return (
     <Tab.Navigator
+      initialRouteName={initialRoute.initialRoute}
       barStyle={{ backgroundColor: theme.colors.primary }}
     >
       <Tab.Screen

@@ -26,6 +26,7 @@ export default function TransferIdInput({ form, label, hint, value, onChangeValu
     <InputWrapper>
       <TextInput
         label={label}
+        testID="transferIDInput"
         activeUnderlineColor="white"
         keyboardType="numeric"
         error={!!error}
@@ -41,6 +42,7 @@ export default function TransferIdInput({ form, label, hint, value, onChangeValu
         />}
       />
       <InputMessages
+        testID="transferIDErrorMessage"
         error={error}
         hint={hint}
       />

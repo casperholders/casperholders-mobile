@@ -23,18 +23,21 @@ export default function OperationsScreen({ navigation }) {
       route: 'Transfer',
       icon: 'send',
       name: 'Transfer',
+      testID: 'goToTransfer',
       description: 'Transfer funds to another address',
     },
     {
       route: 'Unstake',
       icon: 'lock-open',
       name: 'Unstake',
+      testID: 'goToStake',
       description: 'Unstake your tokens from the network.',
     },
     {
       route: 'Stake',
       icon: 'safe',
       name: 'Stake',
+      testID: 'goToUnstake',
       description: 'Stake your tokens to secure the network.',
     },
   ];
@@ -51,13 +54,14 @@ export default function OperationsScreen({ navigation }) {
         />
       }
       <GridRow>
-        {operations.map(({ route, name, description, icon, disabled }, index) => (
+        {operations.map(({ route, name, testID, description, icon, disabled }, index) => (
           <GridCol
             key={index}
             width={1 / 2}
           >
             <OperationsChoiceCard
               name={name}
+              testID={testID}
               description={description}
               icon={icon}
               disabled={disabled || readOnly}

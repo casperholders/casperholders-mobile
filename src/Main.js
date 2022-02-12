@@ -9,7 +9,7 @@ import { useTheme } from 'react-native-paper';
  * @returns {JSX.Element}
  * @constructor
  */
-export default function Main() {
+export default function Main(initialRoute = 'BalanceTab') {
   const theme = useTheme();
   const connected = useConnected();
   const navigationRef = useNavigationContainerRef();
@@ -19,7 +19,10 @@ export default function Main() {
       ref={navigationRef}
       theme={theme}
     >
-      {!connected ? <LoginScreen /> : <MainNavigator navigation={navigationRef} />}
+      {!connected ? <LoginScreen /> : <MainNavigator
+        navigation={navigationRef}
+        initialRoute={initialRoute}
+      />}
     </NavigationContainer>
   );
 };

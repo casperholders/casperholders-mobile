@@ -5,6 +5,7 @@ import { Caption, Card, Title, useTheme } from 'react-native-paper';
 /**
  * Abstract Operation card choice
  * @param name
+ * @param testID
  * @param description
  * @param icon
  * @param disabled
@@ -12,7 +13,14 @@ import { Caption, Card, Title, useTheme } from 'react-native-paper';
  * @returns {JSX.Element}
  * @constructor
  */
-export default function OperationsChoiceCard({ name, description, icon, disabled, onPress }) {
+export default function OperationsChoiceCard({
+                                               name,
+                                               testID,
+                                               description,
+                                               icon,
+                                               disabled,
+                                               onPress,
+                                             }) {
   const theme = useTheme();
   const color = disabled ? theme.colors.disabled : theme.colors.text;
   const styles = StyleSheet.create({
@@ -29,11 +37,11 @@ export default function OperationsChoiceCard({ name, description, icon, disabled
   });
 
   const handlePress = disabled ? undefined : onPress;
-
   return (
     <Card
       style={styles.operationCard}
       onPress={handlePress}
+      testID={testID}
     >
       <Card.Content style={styles.operationCardContent}>
         <Icon

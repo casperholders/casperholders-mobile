@@ -37,6 +37,7 @@ export default function AddressInput({ form, label, hint, value, onChangeValue }
         label={label}
         activeUnderlineColor="white"
         error={!!error}
+        testID="addressInput"
         value={internalValue.current}
         dense
         onChangeText={setInternalValue}
@@ -49,6 +50,7 @@ export default function AddressInput({ form, label, hint, value, onChangeValue }
         />}
       />
       <InputMessages
+        testID="addressErrorMessage"
         error={error}
         hint={hint}
       />

@@ -78,6 +78,7 @@ export default function AmountInput({ form, label, hint, min, fee, funds, value,
     <InputWrapper>
       <TextInput
         label={label}
+        testID="amountInput"
         activeUnderlineColor="white"
         keyboardType="numeric"
         error={!!error}
@@ -103,6 +104,7 @@ export default function AmountInput({ form, label, hint, min, fee, funds, value,
         }
       />
       <InputMessages
+        testID="amountErrorMessage"
         error={error}
         hint={hint}
       />

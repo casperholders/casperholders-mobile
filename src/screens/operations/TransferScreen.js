@@ -79,7 +79,10 @@ export default function TransferScreen({ navigation, route }) {
         name="Transfer"
         disabled={balanceError}
         dialogChildren={<>
-          <Paragraph style={{ marginBottom: 12 }}>
+          <Paragraph
+            testID="amountConfirmation"
+            style={{ marginBottom: 12 }}
+          >
             You are about to transfer {formatCasperAmount(deployForm.form.values.amount)} to the
             following address:
           </Paragraph>
