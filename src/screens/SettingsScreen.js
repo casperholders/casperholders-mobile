@@ -103,7 +103,7 @@ export default function SettingsScreen() {
                 icon="switch"
                 style={{ marginBottom: 20 }}
                 onPress={switchToNetwork}
-                testID='toggleNetwork'
+                testID="toggleNetwork"
               >
                 Switch to {switchNetwork.name}
               </Button>
@@ -115,6 +115,7 @@ export default function SettingsScreen() {
       <Button
         mode="contained"
         icon="logout"
+        testID="logoutButton"
         style={styles.logoutBtn}
         onPress={dispatchDisconnect}
       >

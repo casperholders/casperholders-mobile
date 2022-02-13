@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validator card should render Validator card 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "rgba(0, 0, 0, 0.12)",
+        "borderRadius": 4,
+        "elevation": 1,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 0.5,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 0.75,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexGrow": 1,
+          "flexShrink": 1,
+        }
+      }
+      testID="0124bfdae2ed128fa5e4057bc398e4933329570e47240e57fc92f5611a6178eba5"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "paddingHorizontal": 16,
+            },
+            Object {
+              "paddingVertical": 16,
+            },
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignSelf": "center",
+              "paddingLeft": 0,
+              "paddingRight": 12,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "white",
+                  "borderRadius": 17.5,
+                  "height": 35,
+                  "width": 35,
+                },
+                Object {
+                  "backgroundColor": "white",
+                },
+              ]
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://node.casperholders.com/.well-known/casper/squarelogo256.png",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 17.5,
+                  "height": 35,
+                  "width": 35,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#f6f6f6",
+                "borderRadius": 8,
+                "paddingHorizontal": 8,
+                "paddingVertical": 4,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              CasperHolders
+            </Text>
+          </View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Array [
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.54)",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 12,
+                      "letterSpacing": 0.4,
+                      "lineHeight": 20,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "marginLeft": 4,
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            0124bfdae2ed128fa5e4057bc398e4933329570e47240e57fc92f5611a6178eba5
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Array [
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.54)",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 12,
+                      "letterSpacing": 0.4,
+                      "lineHeight": 20,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "marginLeft": 4,
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Active
+             - 
+            0
+            % Fee - 
+            - CSPR
+             CSPR Staked
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(0, 0, 0, 0.12)",
+          "height": 0.5,
+        },
+        undefined,
+        undefined,
+      ]
+    }
+  />,
+]
+`;

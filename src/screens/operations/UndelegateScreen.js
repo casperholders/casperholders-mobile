@@ -78,7 +78,10 @@ export default function UndelegateScreen({ navigation, route }) {
         name="Unstake"
         disabled={balanceError}
         dialogChildren={<>
-          <Paragraph style={{ marginBottom: 12 }}>
+          <Paragraph
+            testID="amountConfirmation"
+            style={{ marginBottom: 12 }}
+          >
             You are about to unstake {formatCasperAmount(deployForm.form.values.amount)} from the
             following address:
           </Paragraph>

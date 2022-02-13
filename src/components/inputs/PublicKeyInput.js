@@ -2,10 +2,11 @@ import InputMessages from '@/components/inputs/InputMessages';
 import InputWrapper from '@/components/inputs/InputWrapper';
 import useInput from '@/hooks/inputs/useInput';
 import usePasteHandler from '@/hooks/inputs/usePasteHandler';
+import { CLPublicKey } from 'casper-js-sdk';
 import { TextInput } from 'react-native-paper';
 
 /**
- * Private key input, for testing only !!
+ * Public key input
  * @param form
  * @param label
  * @param hint
@@ -14,10 +15,18 @@ import { TextInput } from 'react-native-paper';
  * @returns {JSX.Element}
  * @constructor
  */
-export default function PrivateKeyInput({ form, label, hint, value, onChangeValue }) {
+export default function PublicKeyInput({ form, label, hint, value, onChangeValue }) {
   const [internalValue, setInternalValue, error] = useInput(form, value, [
-    (a) => !!a || 'Private key is required',
-    (a) => a.length >= 2 || 'Private key is too short',
+    (a) => !!a || 'Public key is required',
+    (a) => a.length >= 2 || 'Public key is too short',
+    (a) => {
+      try {
+        CLPublicKey.fromHex(a);
+        return true;
+      } catch (e) {
+        return e.toString();
+      }
+    },
   ], onChangeValue);
 
   const handlePaste = usePasteHandler(setInternalValue);
@@ -27,6 +36,7 @@ export default function PrivateKeyInput({ form, label, hint, value, onChangeValu
       <TextInput
         label={label}
         activeUnderlineColor="white"
+        testID="publicKeyInput"
         error={!!error}
         value={internalValue.current}
         dense

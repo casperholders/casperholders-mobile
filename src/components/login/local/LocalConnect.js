@@ -1,5 +1,5 @@
 import Alert from '@/components/common/Alert';
-import PrivateKeyInput from '@/components/inputs/PrivateKeyInput';
+import PublicKeyInput from '@/components/inputs/PublicKeyInput';
 import useDispatchConnect from '@/hooks/actions/useDispatchConnect';
 import useForm from '@/hooks/inputs/useForm';
 import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
@@ -35,7 +35,7 @@ export default function LocalConnect() {
         type="info"
         message="You will connect in Read Only mode. You won't be able to make any operations."
       />
-      <PrivateKeyInput
+      <PublicKeyInput
         label="Public key"
         form={form}
         value={form.values.publicKey}
@@ -44,6 +44,7 @@ export default function LocalConnect() {
       <Button
         mode="contained"
         icon="login"
+        testID="localConnectSubmit"
         loading={loading}
         onPress={handleConnect}
       >

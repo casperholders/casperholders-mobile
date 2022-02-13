@@ -45,6 +45,7 @@ export default function ValidatorCard({ validator, onPress }) {
           left
         /> : undefined}
         onPress={onPress}
+        testID={validator.publicKey}
       >
         <View style={{ ...styles.validatorName, backgroundColor: theme.colors.background }}>
           <Text>

@@ -30,14 +30,14 @@ export default function OperationsScreen({ navigation }) {
       route: 'Unstake',
       icon: 'lock-open',
       name: 'Unstake',
-      testID: 'goToStake',
+      testID: 'goToUnstake',
       description: 'Unstake your tokens from the network.',
     },
     {
       route: 'Stake',
       icon: 'safe',
       name: 'Stake',
-      testID: 'goToUnstake',
+      testID: 'goToStake',
       description: 'Stake your tokens to secure the network.',
     },
   ];

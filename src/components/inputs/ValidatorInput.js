@@ -98,16 +98,19 @@ export default function ValidatorInput({ form, label, hint, value, onChangeValue
     ),
     [],
   );
-
   return (
     <InputWrapper>
-      <Pressable onPress={() => handleSnapPress(2)}>
+      <Pressable
+        testID="validatorPress"
+        onPress={() => handleSnapPress(2)}
+      >
         <View pointerEvents="none">
           <TextInput
             label={label}
+            testID="validatorInput"
             activeUnderlineColor="white"
             error={!!error}
-            editable={false}
+            editable={process.env.NODE_ENV === 'test'}
             value={internalValue.current}
             dense
             onChangeText={setInternalValue}
@@ -116,6 +119,7 @@ export default function ValidatorInput({ form, label, hint, value, onChangeValue
         </View>
       </Pressable>
       <InputMessages
+        testID="validatorErrorMessage"
         error={error}
         hint={hint}
       />
@@ -134,6 +138,7 @@ export default function ValidatorInput({ form, label, hint, value, onChangeValue
         >
           <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
             <TextInput
+              testID="validatorSearch"
               label="Search a validator"
               activeUnderlineColor="white"
               value={search}

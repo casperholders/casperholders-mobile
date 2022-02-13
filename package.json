@@ -34,7 +34,18 @@
       "!**/torus/**",
       "!**/src/0bootstrap.js",
       "!**/src/theme.js",
-      "!**/src/**/PrivateKeyInput.js"
+      "!**/src/**/ledgerAdapter.js",
+      "!**/src/**/abstract*.js",
+      "!**/src/**/deployConnection.js",
+      "!**/src/**/usePasteHandler.js",
+      "!**/src/**/BottomSheetModalContainer.js",
+      "!**/src/**/ensureNotificationsPermission.js",
+      "!**/src/**/truncateInMiddle.js",
+      "!**/src/**/useAsyncHandler.js",
+      "!**/src/**/deployManager.js",
+      "!**/src/**/useValidatorList.js",
+      "!**/src/**/useEventSource.js",
+      "!**/src/**/OperationsResult.js"
     ]
   },
   "dependencies": {
