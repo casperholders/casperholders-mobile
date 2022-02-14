@@ -29,11 +29,12 @@
     "android": {
       "package": "com.casperholders.wallet",
       "permissions": [],
-      "versionCode": 2
+      "versionCode": 6
     },
     "ios": {
       "bundleIdentifier": "com.casperholders.wallet",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "5"
     }
   }
 }
