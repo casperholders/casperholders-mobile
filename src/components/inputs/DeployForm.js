@@ -16,6 +16,7 @@ import { Button } from 'react-native-paper';
  * @param handleDialogOpen
  * @param handleDialogClose
  * @param handleDialogConfirm
+ * @param testID
  * @returns {JSX.Element}
  * @constructor
  */
@@ -32,6 +33,7 @@ export default function DeployForm(
     handleDialogOpen,
     handleDialogClose,
     handleDialogConfirm,
+    testID,
   },
 ) {
   return (
@@ -44,7 +46,7 @@ export default function DeployForm(
       <Button
         mode="contained"
         icon={icon}
-        testID={`${name}Submit`}
+        testID={testID}
         style={styles.submitButton}
         disabled={disabled}
         loading={loading}

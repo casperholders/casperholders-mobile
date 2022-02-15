@@ -77,6 +77,7 @@ export default function TransferScreen({ navigation, route }) {
       <DeployForm
         icon="send"
         name="Transfer"
+        testID="TransferSubmit"
         disabled={balanceError}
         dialogChildren={<>
           <Paragraph

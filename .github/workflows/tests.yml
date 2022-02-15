@@ -17,4 +17,5 @@ jobs:
         with:
           node-version: 16.x
       - run: yarn install
+      - run: echo "TEST_LOCAL_SIGNER_KEY=${{ secrets.TEST_LOCAL_SIGNER_KEY }}" > .env.local
       - run: yarn test

@@ -6,7 +6,7 @@ import { getStore, resetStore } from '@/store';
 import { connect } from '@/store/reducers/authReducer';
 import { setNetwork } from '@/store/reducers/networkReducer';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 
 beforeEach(() => {
   resetStore();
@@ -40,10 +40,8 @@ describe('Main.js', () => {
     expect(transfer).toBeTruthy();
 
     fireEvent.press(transfer);
-    await act(async () => {
-    });
 
-    const transferSubmit = await findByTestId(/transferSubmit/i);
+    const transferSubmit = await findByTestId(/TransferSubmit/i, {}, { timeout: 5000 });
     const addressErrorMessage = await findByTestId(/addressErrorMessage/i);
     const amountErrorMessage = await findByTestId(/amountErrorMessage/i);
 

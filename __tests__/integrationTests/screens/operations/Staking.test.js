@@ -6,7 +6,7 @@ import { getStore, resetStore } from '@/store';
 import { connect } from '@/store/reducers/authReducer';
 import { setNetwork } from '@/store/reducers/networkReducer';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 
 beforeEach(() => {
   resetStore();
@@ -42,10 +42,8 @@ describe('Main.js', () => {
     expect(stake).toBeTruthy();
 
     fireEvent.press(stake);
-    await act(async () => {
-    });
 
-    const StakeSubmit = await findByTestId(/StakeSubmit/i);
+    const StakeSubmit = await findByTestId(/StakeSubmit/i, {}, { timeout: 5000 });
     const validatorErrorMessage = await findByTestId(/validatorErrorMessage/i);
     const amountErrorMessage = await findByTestId(/amountErrorMessage/i);
 

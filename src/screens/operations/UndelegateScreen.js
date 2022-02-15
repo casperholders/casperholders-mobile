@@ -76,6 +76,7 @@ export default function UndelegateScreen({ navigation, route }) {
       <DeployForm
         icon="send"
         name="Unstake"
+        testID="UnstakeSubmit"
         disabled={balanceError}
         dialogChildren={<>
           <Paragraph

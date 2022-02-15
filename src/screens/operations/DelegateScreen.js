@@ -72,6 +72,7 @@ export default function DelegateScreen({ navigation, route }) {
       <DeployForm
         icon="send"
         name="Stake"
+        testID="StakeSubmit"
         disabled={balanceError}
         dialogChildren={<>
           <Paragraph style={{ marginBottom: 12 }}>

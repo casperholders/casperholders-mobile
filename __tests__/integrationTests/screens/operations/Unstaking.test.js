@@ -6,7 +6,7 @@ import { getStore, resetStore } from '@/store';
 import { connect } from '@/store/reducers/authReducer';
 import { setNetwork } from '@/store/reducers/networkReducer';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import { View } from 'react-native';
 
 jest.mock('react-native-paper', () => {
@@ -55,10 +55,8 @@ describe('Main.js', () => {
     expect(unstake).toBeTruthy();
 
     fireEvent.press(unstake);
-    await act(async () => {
-    });
 
-    const unstakeSubmit = await findByTestId(/UnstakeSubmit/i);
+    const unstakeSubmit = await findByTestId(/UnstakeSubmit/i, {}, { timeout: 5000 });
     const validatorErrorMessage = await findByTestId(/validatorErrorMessage/i);
     const amountErrorMessage = await findByTestId(/amountErrorMessage/i);
 
