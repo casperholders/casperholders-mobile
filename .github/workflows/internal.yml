@@ -25,6 +25,8 @@ jobs:
       - run: echo "TEST_LOCAL_SIGNER_KEY=${{ secrets.TEST_LOCAL_SIGNER_KEY }}" > .env.local
       - run: yarn test
       - run: npx eas-cli build --platform all --auto-submit --non-interactive
-        env:
-            EAS_BUILD_AUTOCOMMIT: 1
+      - uses: EndBug/add-and-commit@v8
+        with:
+          default_author: github_actions
+          message: 'Update build number'
 
