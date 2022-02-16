@@ -19,6 +19,9 @@ export default function LocalConnect() {
   });
 
   const handleConnect = () => {
+    if (!form.validate()) {
+      return;
+    }
     if (!loading) {
       setLoading(true);
 
