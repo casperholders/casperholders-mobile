@@ -3,7 +3,6 @@ name: Tests and Deploy
 on:
   push:
     branches:
-      - develop
       - main
 
   workflow_dispatch:

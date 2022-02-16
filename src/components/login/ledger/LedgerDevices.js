@@ -4,7 +4,7 @@ import LedgerKeys from '@/components/login/ledger/LedgerKeys';
 import TransportHID from '@ledgerhq/react-native-hid';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
 import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { Button, Card, Text, useTheme } from 'react-native-paper';
 
 
@@ -39,23 +39,28 @@ export default function LedgerDevices() {
         },
       });
 
-      const usb = TransportHID.listen({
-        next: async (event) => {
-          if (event.type === 'add') {
-            const device = event;
-            if (!usbDevices.some((d) => d.descriptor.deviceId === device.descriptor.deviceId)) {
-              setUsbDevices([...usbDevices, device]);
-            }
-          }
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
+      let usb;
 
+      if (Platform.OS === 'android') {
+        usb = TransportHID.listen({
+          next: async (event) => {
+            if (event.type === 'add') {
+              const device = event;
+              if (!usbDevices.some((d) => d.descriptor.deviceId === device.descriptor.deviceId)) {
+                setUsbDevices([...usbDevices, device]);
+              }
+            }
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      }
       const timeout = setTimeout(() => {
         subscription.unsubscribe();
-        usb.unsubscribe();
+        if (Platform.OS === 'android') {
+          usb.unsubscribe();
+        }
         setScanning(false);
       }, SCAN_TIMEOUT_IN_SECONDS * 1000);
 
