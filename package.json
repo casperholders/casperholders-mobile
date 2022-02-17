@@ -8,8 +8,9 @@
     "ios": "expo run:ios -d",
     "eject": "expo eject",
     "publish": "dotenv -e .env.local -- cross-var expo publish",
-    "apk": "eas build -p android --local --profile preview --output=dist/casperholders.apk",
+    "apk": "eas build --platform android --local --profile preview --output=dist/casperholders.apk",
     "aab": "eas build --platform android --local --output=dist/casperholders.aab",
+    "app": "eas build --platform ios --local --profile preview --output=dist/casperholders.tar.gz",
     "ipa": "eas build --platform ios --local --output=dist/casperholders.ipa"
   },
   "jest": {
@@ -75,6 +76,7 @@
     "expo-notifications": "~0.14.0",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
+    "expo-system-ui": "~1.1.0",
     "expo-web-browser": "~10.1.0",
     "jest": "^26.6.3",
     "jest-expo": "^44.0.1",
