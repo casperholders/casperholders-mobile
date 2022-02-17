@@ -67,7 +67,9 @@ export default function LedgerDevices() {
       return () => {
         clearTimeout(timeout);
         subscription.unsubscribe();
-        usb.unsubscribe();
+        if (Platform.OS === 'android') {
+          usb.unsubscribe();
+        }
       };
     }
   }, [scanning]);
