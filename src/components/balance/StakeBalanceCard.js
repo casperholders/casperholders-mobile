@@ -18,7 +18,7 @@ import { Button, Caption, Paragraph, useTheme } from 'react-native-paper';
  * @returns {JSX.Element}
  */
 export default function (
-  { navigation, validator, staked, image, formattedPercentOfTotal, delegationRate },
+  { navigation, validator, publicKey, staked, image, formattedPercentOfTotal, delegationRate },
 ) {
   const theme = useTheme();
   const adapter = useAdapter();
@@ -53,7 +53,7 @@ export default function (
           disabled={readOnly}
           onPress={() => navigation.jumpTo('OperationsTab', {
             screen: 'Stake',
-            address: validator,
+            address: publicKey,
             initial: false,
           })}
         >
@@ -64,7 +64,7 @@ export default function (
           disabled={readOnly}
           onPress={() => navigation.jumpTo('OperationsTab', {
             screen: 'Unstake',
-            address: validator,
+            address: publicKey,
             initial: false,
           })}
         >

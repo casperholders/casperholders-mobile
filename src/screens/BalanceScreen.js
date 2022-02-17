@@ -50,6 +50,7 @@ export default function BalanceScreen({ navigation }) {
     let totalFees = Big(0);
     let totalStaked = Big(0);
     validators.forEach(({ validator, stakedTokens }) => {
+      const publicKey = validator
       const validatorInfo = validatorsInfo.filter((v) => v.publicKey === validator);
       let image = undefined;
       let delegationRate = 0;
@@ -60,6 +61,7 @@ export default function BalanceScreen({ navigation }) {
       }
       stakes.push({
         validator,
+        publicKey,
         staked: stakedTokens,
         image,
         delegationRate,
