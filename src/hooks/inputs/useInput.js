@@ -11,11 +11,16 @@ import { useEffect, useRef, useState } from 'react';
 export default function useInput(form, currentValue, rules, onChange) {
   const value = useRef(currentValue);
   const [error, setError] = useState(undefined);
+  const rulesRef = useRef(rules);
+
+  useEffect(() => {
+    rulesRef.current = rules;
+  }, [rules])
 
   const validate = () => {
     setError(undefined);
 
-    const hasError = rules.some((rule) => {
+    const hasError = rulesRef.current.some((rule) => {
       const result = rule(value.current);
       if (result !== true) {
         setError(result);

@@ -4,8 +4,9 @@ import LedgerKeys from '@/components/login/ledger/LedgerKeys';
 import TransportHID from '@ledgerhq/react-native-hid';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
 import { useCallback, useEffect, useState } from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import {PermissionsAndroid, Platform, StyleSheet} from 'react-native';
 import { Button, Card, Text, useTheme } from 'react-native-paper';
+import * as Location from "expo-location";
 
 
 const SCAN_TIMEOUT_IN_SECONDS = 10;
@@ -24,6 +25,32 @@ export default function LedgerDevices() {
 
   useEffect(() => {
     if (scanning) {
+      const enableLocation = async () => {
+        if (Platform.OS === 'android') {
+          const locationGranted = await PermissionsAndroid.check(
+              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          );
+          if (!locationGranted) {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                  title: 'Casper Holders Location Permission',
+                  message:
+                      'Casper Holders needs access to your location ' +
+                      'to scan ledger devices.',
+                  buttonNeutral: 'Ask Me Later',
+                  buttonNegative: 'Cancel',
+                  buttonPositive: 'OK',
+                },
+            );
+            if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+              return;
+            }
+          }
+        }
+        await Location.enableNetworkProviderAsync();
+      }
+      enableLocation();
       setUsbDevices([]);
       const subscription = TransportBLE.listen({
         next: (event) => {

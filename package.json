@@ -5,11 +5,12 @@
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "test": "jest",
-    "ios": "expo run:ios",
+    "ios": "expo run:ios -d",
     "eject": "expo eject",
     "publish": "dotenv -e .env.local -- cross-var expo publish",
     "apk": "eas build -p android --local --profile preview --output=dist/casperholders.apk",
-    "aab": "eas build --platform android --local --output=dist/casperholders.aab"
+    "aab": "eas build --platform android --local --output=dist/casperholders.aab",
+    "ipa": "eas build --platform ios --local --output=dist/casperholders.ipa"
   },
   "jest": {
     "preset": "jest-expo",
