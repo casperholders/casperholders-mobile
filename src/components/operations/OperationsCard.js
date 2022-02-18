@@ -43,7 +43,7 @@ export default function OperationsCard(
   const icon = RESULT_STATUSES_ICONS[status];
   const color = RESULT_STATUSES_COLORS[status];
   const url = useMemo(() => `${network.csprLiveUrl}/deploy/${hash}`, [network]);
-  const details = `Amount: ${formatCasperAmount(amount)} ꞏ Cost: ${formatCasperAmount(cost)}`;
+  const details = `Amount: ${formatCasperAmount(amount)} - Cost: ${formatCasperAmount(cost)}`;
   const loading = status === STATUS_UNKNOWN;
 
   return (
