@@ -16,8 +16,8 @@
             "peripheral",
             "central"
           ],
-          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices",
-          "bluetoothPeripheralPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device.",
+          "bluetoothPeripheralPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device."
         }
       ],
       "./gradle-config"
@@ -48,6 +48,11 @@
       "buildNumber": "18",
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to access your location. This is only needed to detect your Ledger device.",
+        "NSLocationAlwaysUsageDescription": "Allow $(PRODUCT_NAME) to access your location. This is only needed to detect your Ledger device.",
+        "NSLocationWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to access your location. This is only needed to detect your Ledger device."
       }
     }
   }
