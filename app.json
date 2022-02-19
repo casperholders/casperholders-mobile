@@ -40,12 +40,12 @@
     "android": {
       "package": "com.casperholders.wallet",
       "permissions": [],
-      "versionCode": 19
+      "versionCode": 21
     },
     "ios": {
       "bundleIdentifier": "com.casperholders.wallet",
       "supportsTablet": true,
-      "buildNumber": "19",
+      "buildNumber": "21",
       "config": {
         "usesNonExemptEncryption": false
       },
