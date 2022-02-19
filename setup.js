@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler/jestSetup';
-
+import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 global.__reanimatedWorkletInit = jest.fn();
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
@@ -14,7 +14,7 @@ jest.mock('react-native-reanimated', () => {
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
-
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 jest.mock('@gorhom/bottom-sheet', () => {
   const React = require('react');
   const RN = require('react-native');

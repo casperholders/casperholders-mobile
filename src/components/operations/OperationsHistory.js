@@ -12,6 +12,7 @@ import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currenc
 import { STATUS_KO, STATUS_OK } from '@casperholders/core/dist/services/results/deployResult';
 import { useEffect, useMemo, useState } from 'react';
 import { Button, useTheme } from 'react-native-paper';
+import { ScrollView } from 'react-native';
 
 const QUICK_FILTERS = [
   { text: 'Transfer', query: 'type=eq.transfer' },
@@ -92,18 +93,20 @@ export default function OperationsHistory() {
         description={historyDescription}
       />
       <GridCol>
-        <ButtonGroup>
-          {QUICK_FILTERS.map((quickFilter, index) => (
-            <Button
-              key={index}
-              mode={filter === quickFilter && 'contained'}
-              color={filter === quickFilter ? theme.colors.primary : theme.colors.text}
-              onPress={() => handleToggleFilter(quickFilter)}
-            >
-              {quickFilter.text}
-            </Button>
-          ))}
-        </ButtonGroup>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <ButtonGroup>
+            {QUICK_FILTERS.map((quickFilter, index) => (
+                <Button
+                    key={index}
+                    mode={filter === quickFilter && 'contained'}
+                    color={filter === quickFilter ? theme.colors.primary : theme.colors.text}
+                    onPress={() => handleToggleFilter(quickFilter)}
+                >
+                  {quickFilter.text}
+                </Button>
+            ))}
+          </ButtonGroup>
+        </ScrollView>
       </GridCol>
       {historyLoading && (
         <>

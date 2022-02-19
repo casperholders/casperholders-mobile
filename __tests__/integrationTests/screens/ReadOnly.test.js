@@ -1,7 +1,7 @@
 import AppProvider from '@/AppProvider';
 import Main from '@/Main';
 import { resetStore } from '@/store';
-import { fireEvent, render } from '@testing-library/react-native';
+import {act, fireEvent, render} from '@testing-library/react-native';
 import { View } from 'react-native';
 
 jest.mock('react-native-paper', () => {
@@ -27,6 +27,7 @@ describe('Read only', () => {
     const { queryByText, queryAllByText, getByTestId, debug, toJSON } = render(<Main />, {
       wrapper: AppProvider,
     });
+
     expect(queryAllByText(/connect with ledger/i)).toBeTruthy();
     expect(queryAllByText(/connect locally/i)).toBeTruthy();
     expect(queryByText(/balance/i)).toBeFalsy();
@@ -37,7 +38,8 @@ describe('Read only', () => {
     fireEvent.changeText(publicKeyInput, '01270a577d2d106c4d29402775f3dffcb9f04aad542579dd4d1cfad20572ebcb7c');
 
     fireEvent.press(localConnectSubmit);
-
+    await act(async () => {
+    });
     expect(queryByText(/connect with test key/i)).toBeFalsy();
     expect(queryByText(/connect with ledger/i)).toBeFalsy();
     expect(queryByText(/connect locally/i)).toBeFalsy();

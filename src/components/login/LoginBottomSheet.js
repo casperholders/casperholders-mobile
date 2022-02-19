@@ -11,12 +11,13 @@ import { Portal, Title } from 'react-native-paper';
  * @param icon
  * @param title
  * @param children
+ * @param index
  * @returns {JSX.Element}
  */
-export default function ({ icon, title, children }) {
+export default function ({ icon, title, children, index = 0 }) {
   const bottomSheetRef = useRef(null);
   const handleOpenBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.snapToIndex(0);
+    bottomSheetRef.current?.snapToIndex(index);
   }, []);
   const styles = StyleSheet.create({
     container: {

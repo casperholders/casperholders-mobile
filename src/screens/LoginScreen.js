@@ -60,6 +60,7 @@ export default function LoginScreen({ navigation }) {
         <LoginBottomSheet
           icon="account"
           title="Connect locally"
+          index={2}
         >
           <LocalConnect />
         </LoginBottomSheet>
