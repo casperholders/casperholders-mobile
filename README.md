@@ -20,7 +20,7 @@ Features :
 
 - History
 
-Android : https://play.google.com/store/apps/details?id=com.casperholders.wallet
+Android : https://play.google.com/store/apps/details?id=com.casperholders.wallet  
 iOS : https://apps.apple.com/us/app/casper-holders/id1609981086
 
 # User demo
