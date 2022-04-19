@@ -1,5 +1,28 @@
 # CasperHolders Mobile
 
+The native mobile wallet for the Casper Network.
+
+
+Use your Ledger device to transfer or manage your staking operations on mobile !
+
+
+Features :
+
+- Testnet / Mainnet network support
+
+- Ledger device support (Bluetooth)
+
+- Balance & staking overview
+
+- Transfer funds
+
+- Stake / unstake funds
+
+- History
+
+Android : https://play.google.com/store/apps/details?id=com.casperholders.wallet
+iOS : https://apps.apple.com/us/app/casper-holders/id1609981086
+
 # User demo
 
 https://www.youtube.com/watch?v=EPzYFJrPqzM
