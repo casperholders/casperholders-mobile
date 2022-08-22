@@ -1,5 +1,10 @@
 {
   "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "f049deed-3b0a-4921-9009-0bf8f19b8daf"
+      }
+    },
     "owner": "casperholders",
     "name": "Casper Holders",
     "slug": "casperholders-mobile",
@@ -40,12 +45,12 @@
     "android": {
       "package": "com.casperholders.wallet",
       "permissions": [],
-      "versionCode": 22
+      "versionCode": 23
     },
     "ios": {
       "bundleIdentifier": "com.casperholders.wallet",
       "supportsTablet": true,
-      "buildNumber": "22",
+      "buildNumber": "23",
       "config": {
         "usesNonExemptEncryption": false
       },
