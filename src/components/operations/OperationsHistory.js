@@ -11,8 +11,8 @@ import useHistory from '@/hooks/useHistory';
 import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
 import { STATUS_KO, STATUS_OK } from '@casperholders/core/dist/services/results/deployResult';
 import { useEffect, useMemo, useState } from 'react';
-import { Button, useTheme } from 'react-native-paper';
 import { ScrollView } from 'react-native';
+import { Button, useTheme } from 'react-native-paper';
 
 const QUICK_FILTERS = [
   { text: 'Transfer', query: 'type=eq.transfer' },
@@ -93,17 +93,20 @@ export default function OperationsHistory() {
         description={historyDescription}
       />
       <GridCol>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
           <ButtonGroup>
             {QUICK_FILTERS.map((quickFilter, index) => (
-                <Button
-                    key={index}
-                    mode={filter === quickFilter && 'contained'}
-                    color={filter === quickFilter ? theme.colors.primary : theme.colors.text}
-                    onPress={() => handleToggleFilter(quickFilter)}
-                >
-                  {quickFilter.text}
-                </Button>
+              <Button
+                key={index}
+                mode={filter === quickFilter && 'contained'}
+                color={filter === quickFilter ? theme.colors.primary : theme.colors.text}
+                onPress={() => handleToggleFilter(quickFilter)}
+              >
+                {quickFilter.text}
+              </Button>
             ))}
           </ButtonGroup>
         </ScrollView>
@@ -128,10 +131,10 @@ export default function OperationsHistory() {
           {history.operations.map((deployData) => (
             <GridCol key={deployData.hash}>
               <OperationsCard
-                type={deployData.type}
+                type={deployData.metadata_type}
                 hash={deployData.hash}
                 status={deployData.result ? STATUS_OK : STATUS_KO}
-                amount={convertMotesToCasper(deployData.data.amount)}
+                amount={convertMotesToCasper(deployData.metadata?.amount)}
                 cost={convertMotesToCasper(deployData.cost)}
               />
             </GridCol>
