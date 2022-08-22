@@ -48,7 +48,7 @@ describe('Main.js', () => {
 
     await waitFor(() => {
       expect(queryByText(/Loading operations/i)).toBeFalsy();
-    });
+    }, { timeout: 10000 });
 
     await act(async () => {
       getStore().dispatch(setDeployResult({
