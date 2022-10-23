@@ -15,14 +15,14 @@ import { ScrollView } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 
 const QUICK_FILTERS = [
-  { text: 'Transfer', query: 'type=eq.transfer' },
-  { text: 'Stake', query: 'type=eq.delegate' },
-  { text: 'Unstake', query: 'type=eq.undelegate' },
+  { text: 'Transfer', query: 'metadata_type=eq.transfer' },
+  { text: 'Stake', query: 'metadata_type=eq.delegate' },
+  { text: 'Unstake', query: 'metadata_type=eq.undelegate' },
 ];
 
 QUICK_FILTERS.push({
-  text: 'Other', query: `type=not.in.(${QUICK_FILTERS.map(
-    ({ query }) => `"${query.replace('type=eq.', '')}"`,
+  text: 'Other', query: `metadata_type=not.in.(${QUICK_FILTERS.map(
+    ({ query }) => `"${query.replace('metadata_type=eq.', '')}"`,
   ).join(',')})`,
 });
 
