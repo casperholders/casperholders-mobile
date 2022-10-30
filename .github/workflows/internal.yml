@@ -1,10 +1,6 @@
 name: Tests and Deploy
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
 
 jobs:
@@ -21,8 +17,6 @@ jobs:
           expo-cache: true
           token: ${{ secrets.EXPO_TOKEN }}
       - run: yarn install
-      - run: echo "TEST_LOCAL_SIGNER_KEY=${{ secrets.TEST_LOCAL_SIGNER_KEY }}" > .env.local
-      - run: yarn test
       - run: npx eas-cli build --platform all --auto-submit --non-interactive
       - uses: EndBug/add-and-commit@v8
         with:
