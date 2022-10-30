@@ -13,6 +13,8 @@
       "ios"
     ],
     "plugins": [
+      "./gradle-config-jnilibs",
+      "./gradle-config",
       [
         "@config-plugins/react-native-ble-plx",
         {
@@ -24,8 +26,7 @@
           "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device.",
           "bluetoothPeripheralPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device."
         }
-      ],
-      "./gradle-config"
+      ]
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",

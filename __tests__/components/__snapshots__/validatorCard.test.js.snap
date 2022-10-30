@@ -3,6 +3,7 @@
 exports[`Validator card should render Validator card 1`] = `
 Array [
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -20,6 +21,11 @@ Array [
     }
   >
     <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
       accessible={true}
       focusable={false}
       onClick={[Function]}
