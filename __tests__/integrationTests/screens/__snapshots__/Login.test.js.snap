@@ -868,6 +868,8 @@ exports[`Login should render when connected to mainnet 1`] = `
                       </RNSScreenStackHeaderSubview>
                     </RNSScreenStackHeaderConfig>
                     <View
+                      accessibilityElementsHidden={false}
+                      importantForAccessibility="auto"
                       style={
                         Object {
                           "flex": 1,
@@ -1145,8 +1147,8 @@ exports[`Login should render when connected to mainnet 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -1172,10 +1174,10 @@ exports[`Login should render when connected to mainnet 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -1192,12 +1194,12 @@ exports[`Login should render when connected to mainnet 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -1216,8 +1218,8 @@ exports[`Login should render when connected to mainnet 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -1413,8 +1415,8 @@ exports[`Login should render when connected to mainnet 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -1440,10 +1442,10 @@ exports[`Login should render when connected to mainnet 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -1460,12 +1462,12 @@ exports[`Login should render when connected to mainnet 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -1484,8 +1486,8 @@ exports[`Login should render when connected to mainnet 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -1635,8 +1637,8 @@ exports[`Login should render when connected to mainnet 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -1662,10 +1664,10 @@ exports[`Login should render when connected to mainnet 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -1682,12 +1684,12 @@ exports[`Login should render when connected to mainnet 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -1706,8 +1708,8 @@ exports[`Login should render when connected to mainnet 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -2906,6 +2908,8 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       </RNSScreenStackHeaderSubview>
                     </RNSScreenStackHeaderConfig>
                     <View
+                      accessibilityElementsHidden={false}
+                      importantForAccessibility="auto"
                       style={
                         Object {
                           "flex": 1,
@@ -3183,8 +3187,8 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -3210,10 +3214,10 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -3230,12 +3234,12 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -3254,8 +3258,8 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -3451,8 +3455,8 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -3478,10 +3482,10 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -3498,12 +3502,12 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -3522,8 +3526,8 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -3673,8 +3677,8 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -3700,10 +3704,10 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -3720,12 +3724,12 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -3744,8 +3748,8 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -4944,6 +4948,8 @@ exports[`Login should render when connected to testnet 1`] = `
                       </RNSScreenStackHeaderSubview>
                     </RNSScreenStackHeaderConfig>
                     <View
+                      accessibilityElementsHidden={false}
+                      importantForAccessibility="auto"
                       style={
                         Object {
                           "flex": 1,
@@ -5221,8 +5227,8 @@ exports[`Login should render when connected to testnet 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -5248,10 +5254,10 @@ exports[`Login should render when connected to testnet 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -5268,12 +5274,12 @@ exports[`Login should render when connected to testnet 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -5292,8 +5298,8 @@ exports[`Login should render when connected to testnet 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -5489,8 +5495,8 @@ exports[`Login should render when connected to testnet 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -5516,10 +5522,10 @@ exports[`Login should render when connected to testnet 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -5536,12 +5542,12 @@ exports[`Login should render when connected to testnet 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -5560,8 +5566,8 @@ exports[`Login should render when connected to testnet 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
@@ -5711,8 +5717,8 @@ exports[`Login should render when connected to testnet 1`] = `
                                         }
                                       >
                                         <RNSVGSvgView
-                                          bbHeight={28}
-                                          bbWidth={150}
+                                          bbHeight="28"
+                                          bbWidth="150"
                                           focusable={false}
                                           height={28}
                                           interval={0.25}
@@ -5738,10 +5744,10 @@ exports[`Login should render when connected to testnet 1`] = `
                                             <RNSVGRect
                                               clipPath="text-loader-150-28-animated-diff"
                                               fill={
-                                                Array [
-                                                  1,
-                                                  "text-loader-150-28-diff",
-                                                ]
+                                                Object {
+                                                  "brushRef": "text-loader-150-28-diff",
+                                                  "type": 1,
+                                                }
                                               }
                                               height="100%"
                                               propList={
@@ -5758,12 +5764,12 @@ exports[`Login should render when connected to testnet 1`] = `
                                                 name="text-loader-150-28-animated-diff"
                                               >
                                                 <RNSVGRect
-                                                  height={28}
-                                                  rx={8}
-                                                  ry={8}
-                                                  width={150}
-                                                  x={0}
-                                                  y={0}
+                                                  height="28"
+                                                  rx="8"
+                                                  ry="8"
+                                                  width="150"
+                                                  x="0"
+                                                  y="0"
                                                 />
                                               </RNSVGClipPath>
                                               <RNSVGLinearGradient
@@ -5782,8 +5788,8 @@ exports[`Login should render when connected to testnet 1`] = `
                                                 name="text-loader-150-28-diff"
                                                 x1="-100%"
                                                 x2="0%"
-                                                y1={0}
-                                                y2={0}
+                                                y1="0"
+                                                y2="0"
                                               />
                                             </RNSVGDefs>
                                           </RNSVGGroup>
