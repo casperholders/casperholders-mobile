@@ -7,7 +7,7 @@ import { getStore, resetStore } from '@/store';
 import { connect } from '@/store/reducers/authReducer';
 import { setNetwork } from '@/store/reducers/networkReducer';
 import { setDeployResult, unsetDeployResult } from '@/store/reducers/operationsReducer';
-import { TransferResult } from '@casperholders/core/dist/services/results/transferResult';
+import { TransferResult } from '@casperholders/core';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
 import { act, render, waitFor } from '@testing-library/react-native';
 
