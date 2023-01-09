@@ -1230,14 +1230,17 @@
     deepmerge "^3.2.0"
     hoist-non-react-statics "^3.3.0"
 
-"@casperholders/core@1.14.2":
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/@casperholders/core/-/core-1.14.2.tgz#a746ed35420d96887887b3ea023a81d2239912e4"
-  integrity sha512-LSRSwfIFFYIO8MywM6pYdQBGsKqN3FyQVRKuzbAVkpmhP9ZzBKR3Il+prGY+Fh75RUXuUcta4kuYRAIRZ/CcYA==
+"@casperholders/core@3.13.3":
+  version "3.13.3"
+  resolved "https://registry.yarnpkg.com/@casperholders/core/-/core-3.13.3.tgz#938ec6b78cfa05399f1a32a098dc7528272e3421"
+  integrity sha512-R4+F48MnljJNg4kBAsn7FUsosxXjP6eKfJWyBtQOb9uMZ4hlcg+9SZpJDlzeUMiKSw+XevbIpAbNbSYtpKQfxA==
   dependencies:
     "@ethersproject/bignumber" "^5.5.0"
+    "@ethersproject/bytes" "^5.6.1"
     big.js "^6.1.1"
-    casper-js-sdk "^2.7.4"
+    blakejs "^1.2.1"
+    casper-js-sdk "^2.9.1"
+    ts-results "^3.3.0"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -1268,7 +1271,7 @@
     "@ethersproject/logger" "^5.7.0"
     bn.js "^5.2.1"
 
-"@ethersproject/bytes@^5.0.5", "@ethersproject/bytes@^5.7.0":
+"@ethersproject/bytes@^5.0.5", "@ethersproject/bytes@^5.6.1", "@ethersproject/bytes@^5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/bytes/-/bytes-5.7.0.tgz#a00f6ea8d7e7534d6d87f47188af1148d71f155d"
   integrity sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==
@@ -4045,7 +4048,7 @@ bl@^4.1.0:
     inherits "^2.0.4"
     readable-stream "^3.4.0"
 
-blakejs@^1.1.0:
+blakejs@^1.1.0, blakejs@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/blakejs/-/blakejs-1.2.1.tgz#5057e4206eadb4a97f7c0b6e197a505042fc3814"
   integrity sha512-QXUSXI3QVc/gJME0dBpXrag1kbzOqCjCX8/b54ntNyW6sjtoqxqRk3LTmXzaJoh71zMsDCjM+47jS7XiwN/+fQ==
@@ -4408,7 +4411,7 @@ capture-exit@^2.0.0:
   dependencies:
     rsvp "^4.8.4"
 
-casper-js-sdk@^2.7.2, casper-js-sdk@^2.7.4:
+casper-js-sdk@^2.7.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/casper-js-sdk/-/casper-js-sdk-2.10.0.tgz#5aab937fbe4b839b998158e58afc70215843aad7"
   integrity sha512-UYOxsIiAAekfR+OaC5rU84iCouWPrnIGEvXzcvXlh5TurI9KingC536fTrztR06Q3DVN1scTsnCy9imDHxTMbQ==
@@ -4428,6 +4431,31 @@ casper-js-sdk@^2.7.2, casper-js-sdk@^2.7.4:
     key-encoder "^2.0.3"
     reflect-metadata "^0.1.13"
     ts-results "^3.2.1"
+    tweetnacl-ts "^1.0.3"
+    tweetnacl-util "^0.15.0"
+    typedjson "^1.6.0-rc2"
+    webpack "^5.24.3"
+
+casper-js-sdk@^2.9.1:
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/casper-js-sdk/-/casper-js-sdk-2.10.1.tgz#c134f25e790e2e412fcdf3a901712463c568487f"
+  integrity sha512-JRL25Sw1rcYkQhIDND6mh/8LbuSVmx0Y+SMFFgcz6buVBPbkx2B7+7lwBEEDEbG03msl4uh7Q4Xn3sDyZG5h2g==
+  dependencies:
+    "@ethersproject/bignumber" "^5.0.8"
+    "@ethersproject/bytes" "^5.0.5"
+    "@ethersproject/constants" "^5.0.5"
+    "@open-rpc/client-js" "^1.6.2"
+    "@types/eccrypto" "^1.1.2"
+    "@types/ws" "^8.2.2"
+    blakejs "^1.1.0"
+    eccrypto "^1.1.6"
+    eslint-plugin-prettier "^3.4.0"
+    ethereum-cryptography "^0.1.3"
+    glob "^7.1.6"
+    humanize-duration "^3.24.0"
+    key-encoder "^2.0.3"
+    reflect-metadata "^0.1.13"
+    ts-results "npm:@casperlabs/ts-results@^3.3.4"
     tweetnacl-ts "^1.0.3"
     tweetnacl-util "^0.15.0"
     typedjson "^1.6.0-rc2"
@@ -11050,10 +11078,15 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
-ts-results@^3.2.1:
+ts-results@^3.2.1, ts-results@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/ts-results/-/ts-results-3.3.0.tgz#68623a6c18e65556287222dab76498a28154922f"
   integrity sha512-FWqxGX2NHp5oCyaMd96o2y2uMQmSu8Dey6kvyuFdRJ2AzfmWo3kWa4UsPlCGlfQ/qu03m09ZZtppMoY8EMHuiA==
+
+"ts-results@npm:@casperlabs/ts-results@^3.3.4":
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/@casperlabs/ts-results/-/ts-results-3.3.4.tgz#fc8cdaa8c8628faf94e77bb55aea35c5fc3a66ea"
+  integrity sha512-R4b8gKDSX3EVni4o8ORZh2cyN+B4PfJmsZPzXOiuwWwk5pgPDo4JGi7q+IJ8FZqW9sO6hk273qgYxu2onSLzoQ==
 
 tslib@^1, tslib@^1.10.0, tslib@^1.9.0:
   version "1.14.1"

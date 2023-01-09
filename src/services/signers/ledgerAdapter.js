@@ -1,6 +1,6 @@
 import AbstractAdapter from '@/services/signers/abstractAdapter';
 import DeployConnection from '@/services/signers/deployConnection';
-import { LedgerSigner } from '@casperholders/core/dist/services/signers/ledgerSigner';
+import { LedgerSigner } from '@casperholders/core';
 import TransportHID from '@ledgerhq/react-native-hid';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
 import CasperApp from '@zondax/ledger-casper';

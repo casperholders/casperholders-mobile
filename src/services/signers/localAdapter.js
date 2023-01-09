@@ -1,7 +1,7 @@
 import AbstractAdapter from '@/services/signers/abstractAdapter';
 import DeployConnection from '@/services/signers/deployConnection';
 import generateAsymmetricKey from '@/services/signers/generateAsymmetricKey';
-import { LocalSigner } from '@casperholders/core/dist/services/signers/localSigner';
+import { LocalSigner } from '@casperholders/core';
 
 /**
  * Local Adapter used with a private key string for testing purpose only !!

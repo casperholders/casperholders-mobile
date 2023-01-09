@@ -14,7 +14,7 @@ import useStakeBalance from '@/hooks/useStakeBalance';
 import useUniqueKey from '@/hooks/useUniqueKey';
 import useValidatorInfos from '@/hooks/useValidatorInfos';
 import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
-import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/noStakeBalanceError';
+import { NoStakeBalanceError } from '@casperholders/core';
 import Big from 'big.js';
 import { orderBy } from 'lodash';
 import { useMemo, useState } from 'react';
@@ -50,7 +50,7 @@ export default function BalanceScreen({ navigation }) {
     let totalFees = Big(0);
     let totalStaked = Big(0);
     validators.forEach(({ validator, stakedTokens }) => {
-      const publicKey = validator
+      const publicKey = validator;
       const validatorInfo = validatorsInfo.filter((v) => v.publicKey === validator);
       let image = undefined;
       let delegationRate = 0;

@@ -1,4 +1,4 @@
-import { ClientCasper } from '@casperholders/core/dist/services/clients/clientCasper';
+import { ClientCasper } from '@casperholders/core';
 
 /**
  * ClientCasper from the CasperHolders core lib

@@ -1,5 +1,5 @@
 import clientCasper from '@/services/clientCasper';
-import { DeployManager } from '@casperholders/core/dist/services/deploys/deployManager';
+import { DeployManager } from '@casperholders/core';
 
 /**
  * DeployManager from the CasperHolders core lib

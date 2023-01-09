@@ -12,7 +12,7 @@ import useBalance from '@/hooks/useBalance';
 import useBalanceValidator from '@/hooks/useBalanceValidator';
 import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
-import { Undelegate } from '@casperholders/core/dist/services/deploys/auction/actions/undelegate';
+import { Undelegate } from '@casperholders/core';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';

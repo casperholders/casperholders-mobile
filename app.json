@@ -24,8 +24,7 @@
             "peripheral",
             "central"
           ],
-          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device.",
-          "bluetoothPeripheralPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device."
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device."
         }
       ]
     ],

@@ -8,8 +8,7 @@ import OperationsCard from '@/components/operations/OperationsCard';
 import useDispatchUnsetDeployResult from '@/hooks/actions/useDispatchUnsetDeployResult';
 import useDeployResultsHashs from '@/hooks/operations/useDeployResultsHashs';
 import useHistory from '@/hooks/useHistory';
-import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
-import { STATUS_KO, STATUS_OK } from '@casperholders/core/dist/services/results/deployResult';
+import { CurrencyUtils, DeployResult } from '@casperholders/core';
 import { useEffect, useMemo, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
@@ -133,7 +132,7 @@ export default function OperationsHistory() {
               <OperationsCard
                 type={deployData.metadata_type}
                 hash={deployData.hash}
-                status={deployData.result ? STATUS_OK : STATUS_KO}
+                status={deployData.result ? DeployResult.STATUS_OK : DeployResult.STATUS_KO}
                 amount={convertMotesToCasper(deployData.metadata?.amount)}
                 cost={convertMotesToCasper(deployData.cost)}
               />

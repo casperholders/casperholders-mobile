@@ -5,7 +5,7 @@ import useEventSource from '@/hooks/useEventSource';
 import useInterval from '@/hooks/useInterval';
 import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
-import { STATUS_KO, STATUS_UNKNOWN } from '@casperholders/core/dist/services/results/deployResult';
+import { CurrencyUtils, DeployResult } from '@casperholders/core';
 import { useEffect, useState } from 'react';
 
 const WATCHER_MAX_WAIT_IN_SECONDS = 180;
@@ -40,7 +40,7 @@ export default function OperationsResult({ hash }) {
 
   const dispatchSetDeployResult = useDispatchSetDeployResult();
   const updateDeployResult = async () => {
-    if (deployResult.status !== STATUS_UNKNOWN) {
+    if (deployResult.status !== DeployResult.STATUS_UNKNOWN) {
       return deployResult;
     }
 
@@ -53,7 +53,10 @@ export default function OperationsResult({ hash }) {
         message: deployResult.message,
         amount: deployResult.amount,
       });
-      if (updatedDeployResult.status !== STATUS_UNKNOWN) {
+      if (updatedDeployResult.amount) {
+        updatedDeployResult.amount = CurrencyUtils.convertMotesToCasper(updatedDeployResult.amount);
+      }
+      if (updatedDeployResult.status !== DeployResult.STATUS_UNKNOWN) {
         dispatchSetDeployResult({ deployResult: updatedDeployResult });
       }
 
@@ -65,14 +68,14 @@ export default function OperationsResult({ hash }) {
 
   useEffect(() => {
     (async () => {
-      if (secondsBeforeTimeout === 0 && deployResult.status === STATUS_UNKNOWN) {
+      if (secondsBeforeTimeout === 0 && deployResult.status === DeployResult.STATUS_UNKNOWN) {
         stopDeployListening();
         const updatedDeployResult = await updateDeployResult();
-        if (!updatedDeployResult || updatedDeployResult.status === STATUS_UNKNOWN) {
+        if (!updatedDeployResult || updatedDeployResult.status === DeployResult.STATUS_UNKNOWN) {
           dispatchSetDeployResult({
             deployResult: {
               ...(updatedDeployResult || deployResult),
-              status: STATUS_KO,
+              status: DeployResult.STATUS_KO,
               message: 'No deploy result from the network. Please check on cspr.live or reach someone on the discord with the deploy hash.',
             },
           });
@@ -89,7 +92,7 @@ export default function OperationsResult({ hash }) {
     cost={deployResult.cost}
     message={deployResult.message}
     additionalInfo={(
-      deployResult.status === STATUS_UNKNOWN && secondsBeforeTimeout !== 0
+      deployResult.status === DeployResult.STATUS_UNKNOWN && secondsBeforeTimeout !== 0
         ? `Waiting event: ${secondsBeforeTimeout}sec before forced fetch`
         : undefined
     )}
