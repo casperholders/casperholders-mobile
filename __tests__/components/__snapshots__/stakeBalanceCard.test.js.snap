@@ -182,7 +182,9 @@ exports[`Stake balance card should render stake balance card 1`] = `
                         "lineHeight": 20,
                         "marginVertical": 2,
                       },
-                      undefined,
+                      Object {
+                        "fontWeight": "bold",
+                      },
                     ],
                   ],
                 ]

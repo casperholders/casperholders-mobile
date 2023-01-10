@@ -1273,6 +1273,247 @@ exports[`Login should render when connected to mainnet 1`] = `
                                   }
                                 }
                               >
+                                <View
+                                  style={
+                                    Object {
+                                      "flexDirection": "row",
+                                      "flexWrap": "wrap",
+                                      "margin": -8,
+                                    }
+                                  }
+                                >
+                                  <View
+                                    style={
+                                      Object {
+                                        "padding": 8,
+                                        "width": "100%",
+                                      }
+                                    }
+                                  >
+                                    <View
+                                      collapsable={false}
+                                      style={
+                                        Object {
+                                          "backgroundColor": "rgba(13, 14, 53, 1)",
+                                          "borderColor": "rgba(255, 255, 255, 0.12)",
+                                          "borderRadius": 8,
+                                          "elevation": 1,
+                                          "shadowColor": "#000000",
+                                          "shadowOffset": Object {
+                                            "height": 0.5,
+                                            "width": 0,
+                                          },
+                                          "shadowOpacity": 0.24,
+                                          "shadowRadius": 0.75,
+                                        }
+                                      }
+                                    >
+                                      <View
+                                        accessibilityState={
+                                          Object {
+                                            "disabled": true,
+                                          }
+                                        }
+                                        accessible={true}
+                                        focusable={false}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                        style={
+                                          Object {
+                                            "flexGrow": 1,
+                                            "flexShrink": 1,
+                                          }
+                                        }
+                                        testID="erc20Toggle"
+                                      >
+                                        <View
+                                          style={
+                                            Array [
+                                              Object {
+                                                "paddingHorizontal": 16,
+                                              },
+                                              Object {
+                                                "paddingVertical": 16,
+                                              },
+                                              Object {
+                                                "alignItems": "center",
+                                                "flexDirection": "row",
+                                              },
+                                            ]
+                                          }
+                                        >
+                                          <View
+                                            style={
+                                              Object {
+                                                "alignSelf": "center",
+                                                "paddingLeft": 0,
+                                                "paddingRight": 12,
+                                              }
+                                            }
+                                          >
+                                            <Text
+                                              allowFontScaling={false}
+                                              selectable={false}
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "color": "#ffffff",
+                                                    "fontSize": 24,
+                                                  },
+                                                  undefined,
+                                                  Object {
+                                                    "fontFamily": "material-community",
+                                                    "fontStyle": "normal",
+                                                    "fontWeight": "normal",
+                                                  },
+                                                  Object {},
+                                                ]
+                                              }
+                                            >
+                                              󰚕
+                                            </Text>
+                                          </View>
+                                          <View
+                                            style={
+                                              Object {
+                                                "flex": 1,
+                                              }
+                                            }
+                                          >
+                                            <RNSVGSvgView
+                                              bbHeight="28"
+                                              bbWidth="150"
+                                              focusable={false}
+                                              height={28}
+                                              interval={0.25}
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "backgroundColor": "transparent",
+                                                    "borderWidth": 0,
+                                                  },
+                                                  Object {
+                                                    "width": "100%",
+                                                  },
+                                                  Object {
+                                                    "flex": 0,
+                                                    "height": 28,
+                                                    "width": 150,
+                                                  },
+                                                ]
+                                              }
+                                              width={150}
+                                            >
+                                              <RNSVGGroup>
+                                                <RNSVGRect
+                                                  clipPath="text-loader-150-28-animated-diff"
+                                                  fill={
+                                                    Object {
+                                                      "brushRef": "text-loader-150-28-diff",
+                                                      "type": 1,
+                                                    }
+                                                  }
+                                                  height="100%"
+                                                  propList={
+                                                    Array [
+                                                      "fill",
+                                                    ]
+                                                  }
+                                                  width="100%"
+                                                  x="0"
+                                                  y="0"
+                                                />
+                                                <RNSVGDefs>
+                                                  <RNSVGClipPath
+                                                    name="text-loader-150-28-animated-diff"
+                                                  >
+                                                    <RNSVGRect
+                                                      height="28"
+                                                      rx="8"
+                                                      ry="8"
+                                                      width="150"
+                                                      x="0"
+                                                      y="0"
+                                                    />
+                                                  </RNSVGClipPath>
+                                                  <RNSVGLinearGradient
+                                                    gradient={
+                                                      Array [
+                                                        0,
+                                                        -16776918,
+                                                        0.5,
+                                                        -15921611,
+                                                        1,
+                                                        -16776918,
+                                                      ]
+                                                    }
+                                                    gradientTransform={null}
+                                                    gradientUnits={0}
+                                                    name="text-loader-150-28-diff"
+                                                    x1="-100%"
+                                                    x2="0%"
+                                                    y1="0"
+                                                    y2="0"
+                                                  />
+                                                </RNSVGDefs>
+                                              </RNSVGGroup>
+                                            </RNSVGSvgView>
+                                            <Text
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "color": "#ffffff",
+                                                    "fontFamily": "System",
+                                                    "fontWeight": "400",
+                                                  },
+                                                  Object {
+                                                    "textAlign": "left",
+                                                  },
+                                                  Array [
+                                                    Object {
+                                                      "textAlign": "left",
+                                                    },
+                                                    Object {
+                                                      "color": "rgba(255, 255, 255, 0.54)",
+                                                      "fontFamily": "System",
+                                                      "fontWeight": "400",
+                                                      "writingDirection": "ltr",
+                                                    },
+                                                    Array [
+                                                      Object {
+                                                        "fontSize": 12,
+                                                        "letterSpacing": 0.4,
+                                                        "lineHeight": 20,
+                                                        "marginVertical": 2,
+                                                      },
+                                                      undefined,
+                                                    ],
+                                                  ],
+                                                ]
+                                              }
+                                            >
+                                              ERC20 tokens
+                                            </Text>
+                                          </View>
+                                        </View>
+                                      </View>
+                                    </View>
+                                  </View>
+                                </View>
+                              </View>
+                              <View
+                                style={
+                                  Object {
+                                    "padding": 8,
+                                    "width": "100%",
+                                  }
+                                }
+                              >
                                 <Text
                                   style={
                                     Array [
@@ -3313,6 +3554,247 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                                   }
                                 }
                               >
+                                <View
+                                  style={
+                                    Object {
+                                      "flexDirection": "row",
+                                      "flexWrap": "wrap",
+                                      "margin": -8,
+                                    }
+                                  }
+                                >
+                                  <View
+                                    style={
+                                      Object {
+                                        "padding": 8,
+                                        "width": "100%",
+                                      }
+                                    }
+                                  >
+                                    <View
+                                      collapsable={false}
+                                      style={
+                                        Object {
+                                          "backgroundColor": "rgba(13, 14, 53, 1)",
+                                          "borderColor": "rgba(255, 255, 255, 0.12)",
+                                          "borderRadius": 8,
+                                          "elevation": 1,
+                                          "shadowColor": "#000000",
+                                          "shadowOffset": Object {
+                                            "height": 0.5,
+                                            "width": 0,
+                                          },
+                                          "shadowOpacity": 0.24,
+                                          "shadowRadius": 0.75,
+                                        }
+                                      }
+                                    >
+                                      <View
+                                        accessibilityState={
+                                          Object {
+                                            "disabled": true,
+                                          }
+                                        }
+                                        accessible={true}
+                                        focusable={false}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                        style={
+                                          Object {
+                                            "flexGrow": 1,
+                                            "flexShrink": 1,
+                                          }
+                                        }
+                                        testID="erc20Toggle"
+                                      >
+                                        <View
+                                          style={
+                                            Array [
+                                              Object {
+                                                "paddingHorizontal": 16,
+                                              },
+                                              Object {
+                                                "paddingVertical": 16,
+                                              },
+                                              Object {
+                                                "alignItems": "center",
+                                                "flexDirection": "row",
+                                              },
+                                            ]
+                                          }
+                                        >
+                                          <View
+                                            style={
+                                              Object {
+                                                "alignSelf": "center",
+                                                "paddingLeft": 0,
+                                                "paddingRight": 12,
+                                              }
+                                            }
+                                          >
+                                            <Text
+                                              allowFontScaling={false}
+                                              selectable={false}
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "color": "#ffffff",
+                                                    "fontSize": 24,
+                                                  },
+                                                  undefined,
+                                                  Object {
+                                                    "fontFamily": "material-community",
+                                                    "fontStyle": "normal",
+                                                    "fontWeight": "normal",
+                                                  },
+                                                  Object {},
+                                                ]
+                                              }
+                                            >
+                                              󰚕
+                                            </Text>
+                                          </View>
+                                          <View
+                                            style={
+                                              Object {
+                                                "flex": 1,
+                                              }
+                                            }
+                                          >
+                                            <RNSVGSvgView
+                                              bbHeight="28"
+                                              bbWidth="150"
+                                              focusable={false}
+                                              height={28}
+                                              interval={0.25}
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "backgroundColor": "transparent",
+                                                    "borderWidth": 0,
+                                                  },
+                                                  Object {
+                                                    "width": "100%",
+                                                  },
+                                                  Object {
+                                                    "flex": 0,
+                                                    "height": 28,
+                                                    "width": 150,
+                                                  },
+                                                ]
+                                              }
+                                              width={150}
+                                            >
+                                              <RNSVGGroup>
+                                                <RNSVGRect
+                                                  clipPath="text-loader-150-28-animated-diff"
+                                                  fill={
+                                                    Object {
+                                                      "brushRef": "text-loader-150-28-diff",
+                                                      "type": 1,
+                                                    }
+                                                  }
+                                                  height="100%"
+                                                  propList={
+                                                    Array [
+                                                      "fill",
+                                                    ]
+                                                  }
+                                                  width="100%"
+                                                  x="0"
+                                                  y="0"
+                                                />
+                                                <RNSVGDefs>
+                                                  <RNSVGClipPath
+                                                    name="text-loader-150-28-animated-diff"
+                                                  >
+                                                    <RNSVGRect
+                                                      height="28"
+                                                      rx="8"
+                                                      ry="8"
+                                                      width="150"
+                                                      x="0"
+                                                      y="0"
+                                                    />
+                                                  </RNSVGClipPath>
+                                                  <RNSVGLinearGradient
+                                                    gradient={
+                                                      Array [
+                                                        0,
+                                                        -16776918,
+                                                        0.5,
+                                                        -15921611,
+                                                        1,
+                                                        -16776918,
+                                                      ]
+                                                    }
+                                                    gradientTransform={null}
+                                                    gradientUnits={0}
+                                                    name="text-loader-150-28-diff"
+                                                    x1="-100%"
+                                                    x2="0%"
+                                                    y1="0"
+                                                    y2="0"
+                                                  />
+                                                </RNSVGDefs>
+                                              </RNSVGGroup>
+                                            </RNSVGSvgView>
+                                            <Text
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "color": "#ffffff",
+                                                    "fontFamily": "System",
+                                                    "fontWeight": "400",
+                                                  },
+                                                  Object {
+                                                    "textAlign": "left",
+                                                  },
+                                                  Array [
+                                                    Object {
+                                                      "textAlign": "left",
+                                                    },
+                                                    Object {
+                                                      "color": "rgba(255, 255, 255, 0.54)",
+                                                      "fontFamily": "System",
+                                                      "fontWeight": "400",
+                                                      "writingDirection": "ltr",
+                                                    },
+                                                    Array [
+                                                      Object {
+                                                        "fontSize": 12,
+                                                        "letterSpacing": 0.4,
+                                                        "lineHeight": 20,
+                                                        "marginVertical": 2,
+                                                      },
+                                                      undefined,
+                                                    ],
+                                                  ],
+                                                ]
+                                              }
+                                            >
+                                              ERC20 tokens
+                                            </Text>
+                                          </View>
+                                        </View>
+                                      </View>
+                                    </View>
+                                  </View>
+                                </View>
+                              </View>
+                              <View
+                                style={
+                                  Object {
+                                    "padding": 8,
+                                    "width": "100%",
+                                  }
+                                }
+                              >
                                 <Text
                                   style={
                                     Array [
@@ -5340,6 +5822,247 @@ exports[`Login should render when connected to testnet 1`] = `
                                         >
                                           Total CSPR funds
                                         </Text>
+                                      </View>
+                                    </View>
+                                  </View>
+                                </View>
+                              </View>
+                              <View
+                                style={
+                                  Object {
+                                    "padding": 8,
+                                    "width": "100%",
+                                  }
+                                }
+                              >
+                                <View
+                                  style={
+                                    Object {
+                                      "flexDirection": "row",
+                                      "flexWrap": "wrap",
+                                      "margin": -8,
+                                    }
+                                  }
+                                >
+                                  <View
+                                    style={
+                                      Object {
+                                        "padding": 8,
+                                        "width": "100%",
+                                      }
+                                    }
+                                  >
+                                    <View
+                                      collapsable={false}
+                                      style={
+                                        Object {
+                                          "backgroundColor": "rgba(13, 14, 53, 1)",
+                                          "borderColor": "rgba(255, 255, 255, 0.12)",
+                                          "borderRadius": 8,
+                                          "elevation": 1,
+                                          "shadowColor": "#000000",
+                                          "shadowOffset": Object {
+                                            "height": 0.5,
+                                            "width": 0,
+                                          },
+                                          "shadowOpacity": 0.24,
+                                          "shadowRadius": 0.75,
+                                        }
+                                      }
+                                    >
+                                      <View
+                                        accessibilityState={
+                                          Object {
+                                            "disabled": true,
+                                          }
+                                        }
+                                        accessible={true}
+                                        focusable={false}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                        style={
+                                          Object {
+                                            "flexGrow": 1,
+                                            "flexShrink": 1,
+                                          }
+                                        }
+                                        testID="erc20Toggle"
+                                      >
+                                        <View
+                                          style={
+                                            Array [
+                                              Object {
+                                                "paddingHorizontal": 16,
+                                              },
+                                              Object {
+                                                "paddingVertical": 16,
+                                              },
+                                              Object {
+                                                "alignItems": "center",
+                                                "flexDirection": "row",
+                                              },
+                                            ]
+                                          }
+                                        >
+                                          <View
+                                            style={
+                                              Object {
+                                                "alignSelf": "center",
+                                                "paddingLeft": 0,
+                                                "paddingRight": 12,
+                                              }
+                                            }
+                                          >
+                                            <Text
+                                              allowFontScaling={false}
+                                              selectable={false}
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "color": "#ffffff",
+                                                    "fontSize": 24,
+                                                  },
+                                                  undefined,
+                                                  Object {
+                                                    "fontFamily": "material-community",
+                                                    "fontStyle": "normal",
+                                                    "fontWeight": "normal",
+                                                  },
+                                                  Object {},
+                                                ]
+                                              }
+                                            >
+                                              󰚕
+                                            </Text>
+                                          </View>
+                                          <View
+                                            style={
+                                              Object {
+                                                "flex": 1,
+                                              }
+                                            }
+                                          >
+                                            <RNSVGSvgView
+                                              bbHeight="28"
+                                              bbWidth="150"
+                                              focusable={false}
+                                              height={28}
+                                              interval={0.25}
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "backgroundColor": "transparent",
+                                                    "borderWidth": 0,
+                                                  },
+                                                  Object {
+                                                    "width": "100%",
+                                                  },
+                                                  Object {
+                                                    "flex": 0,
+                                                    "height": 28,
+                                                    "width": 150,
+                                                  },
+                                                ]
+                                              }
+                                              width={150}
+                                            >
+                                              <RNSVGGroup>
+                                                <RNSVGRect
+                                                  clipPath="text-loader-150-28-animated-diff"
+                                                  fill={
+                                                    Object {
+                                                      "brushRef": "text-loader-150-28-diff",
+                                                      "type": 1,
+                                                    }
+                                                  }
+                                                  height="100%"
+                                                  propList={
+                                                    Array [
+                                                      "fill",
+                                                    ]
+                                                  }
+                                                  width="100%"
+                                                  x="0"
+                                                  y="0"
+                                                />
+                                                <RNSVGDefs>
+                                                  <RNSVGClipPath
+                                                    name="text-loader-150-28-animated-diff"
+                                                  >
+                                                    <RNSVGRect
+                                                      height="28"
+                                                      rx="8"
+                                                      ry="8"
+                                                      width="150"
+                                                      x="0"
+                                                      y="0"
+                                                    />
+                                                  </RNSVGClipPath>
+                                                  <RNSVGLinearGradient
+                                                    gradient={
+                                                      Array [
+                                                        0,
+                                                        -16776918,
+                                                        0.5,
+                                                        -15921611,
+                                                        1,
+                                                        -16776918,
+                                                      ]
+                                                    }
+                                                    gradientTransform={null}
+                                                    gradientUnits={0}
+                                                    name="text-loader-150-28-diff"
+                                                    x1="-100%"
+                                                    x2="0%"
+                                                    y1="0"
+                                                    y2="0"
+                                                  />
+                                                </RNSVGDefs>
+                                              </RNSVGGroup>
+                                            </RNSVGSvgView>
+                                            <Text
+                                              style={
+                                                Array [
+                                                  Object {
+                                                    "color": "#ffffff",
+                                                    "fontFamily": "System",
+                                                    "fontWeight": "400",
+                                                  },
+                                                  Object {
+                                                    "textAlign": "left",
+                                                  },
+                                                  Array [
+                                                    Object {
+                                                      "textAlign": "left",
+                                                    },
+                                                    Object {
+                                                      "color": "rgba(255, 255, 255, 0.54)",
+                                                      "fontFamily": "System",
+                                                      "fontWeight": "400",
+                                                      "writingDirection": "ltr",
+                                                    },
+                                                    Array [
+                                                      Object {
+                                                        "fontSize": 12,
+                                                        "letterSpacing": 0.4,
+                                                        "lineHeight": 20,
+                                                        "marginVertical": 2,
+                                                      },
+                                                      undefined,
+                                                    ],
+                                                  ],
+                                                ]
+                                              }
+                                            >
+                                              ERC20 tokens
+                                            </Text>
+                                          </View>
+                                        </View>
                                       </View>
                                     </View>
                                   </View>
