@@ -39,7 +39,7 @@ export default function (
         <Paragraph>
           Validator {truncateInMiddle(validator)}
         </Paragraph>
-        <Paragraph>
+        <Paragraph style={{ fontWeight: 'bold' }}>
           {formatCasperAmount(staked)}
         </Paragraph>
         <Caption>

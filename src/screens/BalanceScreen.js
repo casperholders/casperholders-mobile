@@ -1,4 +1,5 @@
 import BalanceLoaderOrAmount from '@/components/balance/BalanceLoaderOrAmount';
+import Erc20Balances from '@/components/balance/Erc20Balances';
 import StakeBalanceCard from '@/components/balance/StakeBalanceCard';
 import Alert from '@/components/common/Alert';
 import CardWithIcons from '@/components/common/CardWithIcons';
@@ -96,7 +97,7 @@ export default function BalanceScreen({ navigation }) {
       size={24}
       right
     />
-  ), [stakeData]);
+  ), [stakeData, stakeDetails]);
 
   const handleDetailsStakeToggle = detailsStake ? () => {
     setStakeDetails(!stakeDetails);
@@ -137,6 +138,9 @@ export default function BalanceScreen({ navigation }) {
             </Caption>
           </CardWithIcons>
         </GridCol>
+        <GridCol>
+          <Erc20Balances uniqueKey={uniqueKey} />
+        </GridCol>
         <SectionHeading title="Details" />
         <GridCol>
           <CardWithIcons
@@ -149,6 +153,7 @@ export default function BalanceScreen({ navigation }) {
             <BalanceLoaderOrAmount
               loading={balanceLoading}
               amount={balance}
+              style={{ fontWeight: 'bold' }}
             />
             <Caption>
               Unstaked CSPR funds
@@ -169,6 +174,7 @@ export default function BalanceScreen({ navigation }) {
             <BalanceLoaderOrAmount
               loading={stakeLoading}
               amount={stakeData?.totalStaked || '0'}
+              style={{ fontWeight: 'bold' }}
             />
             <Caption>
               Total staked CSPR funds
