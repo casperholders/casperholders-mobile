@@ -139,7 +139,7 @@ export default function BalanceScreen({ navigation }) {
           </CardWithIcons>
         </GridCol>
         <GridCol>
-          <Erc20Balances uniqueKey={uniqueKey} />
+          <Erc20Balances key={uniqueKey} />
         </GridCol>
         <SectionHeading title="Details" />
         <GridCol>

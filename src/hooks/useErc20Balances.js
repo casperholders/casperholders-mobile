@@ -32,5 +32,5 @@ export default function useErc20Balances(deps = []) {
     );
 
     return data;
-  }, [activeKey, network, ...deps]);
+  }, [network, activeKey, ...deps]);
 }

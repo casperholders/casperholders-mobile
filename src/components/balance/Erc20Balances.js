@@ -9,8 +9,8 @@ import useErc20Balances from '@/hooks/useErc20Balances';
 import { useMemo, useState } from 'react';
 import { Caption, Subheading } from 'react-native-paper';
 
-export default function Erc20Balances({ uniqueKey }) {
-  const [loading, tokensData, tokensError] = useErc20Balances([uniqueKey]);
+export default function Erc20Balances() {
+  const [loading, tokensData, tokensError] = useErc20Balances();
   const [opened, setOpened] = useState(false);
 
   const canOpen = useMemo(() => !loading && !!tokensData.tokens.length, [loading, tokensData]);
@@ -51,11 +51,11 @@ export default function Erc20Balances({ uniqueKey }) {
           </Caption>
         </CardWithIcons>
       </GridCol>
+      {tokensError && <Alert
+        type="error"
+        message={`An unknown error occurred while fetching your ERC20 tokens: ${tokensError.message}`}
+      />}
       {opened && <GridCol>
-        {tokensError && <Alert
-          type="error"
-          message={`An unknown error occurred while fetching your ERC20 tokens: ${tokensError.message}`}
-        />}
         {tokensData.tokens.map((token) => (
           <Erc20TokenBalance
             key={token.id}
