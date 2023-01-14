@@ -1,6 +1,7 @@
 import Icon from '@/components/common/Icon';
 import BalanceNavigator from '@/components/layout/BalanceNavigator';
 import HistoryNavigator from '@/components/layout/HistoryNavigator';
+import NFTsNavigator from '@/components/layout/NFTsNavigator';
 import OperationsNavigator from '@/components/layout/OperationsNavigator';
 import useDispatchClearDeployResults from '@/hooks/actions/useDispatchClearDeployResults';
 import useDeployResultsCount from '@/hooks/operations/useDeployResultsCount';
@@ -60,6 +61,21 @@ export default function MainNavigator({ navigation, initialRoute = 'BalanceTab' 
           tabBarIcon: ({ color }) => (
             <Icon
               name="transfer"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="NFTsTab"
+        component={NFTsNavigator}
+        options={{
+          tabBarTestID: 'goToNfts',
+          tabBarLabel: 'NFTs',
+          tabBarIcon: ({ color }) => (
+            <Icon
+              name="image"
               color={color}
               size={26}
             />
