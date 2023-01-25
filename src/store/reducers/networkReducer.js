@@ -1,6 +1,5 @@
 import MainnetAdapter from '@/services/networks/mainnetAdapter';
 import NetworkManager from '@/services/networks/networkManager';
-import TestnetAdapter from '@/services/networks/testnetAdapter';
 import { createSlice } from '@reduxjs/toolkit';
 
 /**
@@ -10,7 +9,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const networkSlice = createSlice({
   name: 'network',
   initialState: {
-    networkId: TestnetAdapter.ID,
+    networkId: MainnetAdapter.ID,
   },
   reducers: {
     setNetwork: (state, action) => {
