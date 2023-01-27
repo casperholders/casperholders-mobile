@@ -1,18 +1,21 @@
 function getImage(nft) {
-  if (nft.loading === false) {
-    if (nft.metadata?.get('image')) {
-      const image = nft.metadata.get('image').replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
-      return image.match(/^http(s)*:\/\//) ? image : `https://gateway.ipfs.io/ipfs/${image}`;
-    }
-    if (nft.metadata?.get('ipfs_url')) {
-      return nft.metadata.get('ipfs_url').replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
-    }
-    if (nft.metadata?.get('pictureIpfs')) {
-      return `https://gateway.ipfs.io/ipfs/${nft.metadata.get('pictureIpfs').replace('ipfs://', '')}`;
-    }
-    if (nft.metadata?.get('asset') && !nft.metadata?.get('asset').match(/\.json$/)) {
-      return nft.metadata.get('asset').replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
-    }
+  if (nft.metadata?.get('image')) {
+    const image = nft.metadata.get('image')
+      .replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
+    return image.match(/^http(s)*:\/\//) ? image : `https://gateway.ipfs.io/ipfs/${image}`;
+  }
+  if (nft.metadata?.get('ipfs_url')) {
+    return nft.metadata.get('ipfs_url')
+      .replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
+  }
+  if (nft.metadata?.get('pictureIpfs')) {
+    return `https://gateway.ipfs.io/ipfs/${nft.metadata.get('pictureIpfs')
+      .replace('ipfs://', '')}`;
+  }
+  if (nft.metadata?.get('asset') && !nft.metadata?.get('asset')
+    .match(/\.json$/)) {
+    return nft.metadata.get('asset')
+      .replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
   }
   return undefined;
 }
@@ -20,7 +23,8 @@ function getImage(nft) {
 function getAnimation(nft) {
   if (nft) {
     if (nft.metadata?.get('animation_url')) {
-      return nft.metadata.get('animation_url').replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
+      return nft.metadata.get('animation_url')
+        .replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
     }
   }
   return null;

@@ -1,9 +1,12 @@
 import Icon from '@/components/common/Icon';
 import { upperFirst } from 'lodash';
-import { Card, DataTable } from 'react-native-paper';
+import React from 'react';
+import { Linking, StyleSheet, View } from 'react-native';
+import { Card, DataTable, Paragraph, Text } from 'react-native-paper';
 
 export default function NftCollectionItem({ nft }) {
-  const characteristicsEntries = Array.from(nft.characteristics.entries());
+  const characteristicsEntries = Array.from((nft.characteristics ?? new Map()).entries());
+  const attributesEntries = Array.from((nft.attributes ?? new Map()).entries());
 
   return (
     <Card>
@@ -17,22 +20,61 @@ export default function NftCollectionItem({ nft }) {
           size={56}
         />}
       </Card.Content>}
-      <Card.Title
-        title={nft.name}
-        subtitle={nft.description}
-      />
+      <Card.Title title={nft.name} />
+      {!!nft.description && <Card.Content>
+        <Paragraph>{nft.description}</Paragraph>
+      </Card.Content>}
       {!!characteristicsEntries.length && <>
-        <DataTable.Row>
-          <DataTable.Cell>Characteristic</DataTable.Cell>
-          <DataTable.Cell numeric>Value</DataTable.Cell>
-        </DataTable.Row>
+        <DataTable.Header>
+          <DataTable.Title>Characteristic</DataTable.Title>
+          <DataTable.Title numeric>Value</DataTable.Title>
+        </DataTable.Header>
         {characteristicsEntries.map(([k, v]) =>
           <DataTable.Row key={k}>
-            <DataTable.Cell>{upperFirst(k)}</DataTable.Cell>
-            <DataTable.Cell numeric>{v}</DataTable.Cell>
+            <DataTable.Cell>{upperFirst(k.replace('_', ' '))}</DataTable.Cell>
+            <DataTable.Cell numeric>
+              {(typeof v !== 'object' || Array.isArray(v)) ? (
+                /^http(s)?:\/\//.test(v.toString())
+                  ? <Text
+                    style={styles.link}
+                    onPress={() => Linking.openURL(v.toString())}
+                  >
+                    Link
+                    <Icon
+                      name="open-in-new"
+                      size={12}
+                    />
+                  </Text>
+                  : v.toString()
+              ) : (
+                typeof v === 'object' && v !== null
+                  ? <View>
+                    {Object.entries(v).map(([sk, sv]) => <Text key={sk}>{sk}: {sv}</Text>)}
+                  </View>
+                  : 'N/A'
+              )}
+            </DataTable.Cell>
           </DataTable.Row>,
         )}
+      </>}
+      {!!attributesEntries.length && <>
+        <DataTable.Header>
+          <DataTable.Title>Attribute</DataTable.Title>
+          <DataTable.Title numeric>Value</DataTable.Title>
+        </DataTable.Header>
+        {attributesEntries.map(([k, v]) => (
+          <DataTable.Row key={k}>
+            <DataTable.Cell>{k}</DataTable.Cell>
+            <DataTable.Cell numeric>{v}</DataTable.Cell>
+          </DataTable.Row>
+        ))}
       </>}
     </Card>
   );
 }
+
+const styles = StyleSheet.create({
+  link: {
+    textDecorationLine: 'underline',
+  },
+});

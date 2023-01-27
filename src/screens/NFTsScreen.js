@@ -1,3 +1,4 @@
+import CardLoader from '@/components/common/CardLoader';
 import GridCol from '@/components/grid/GridCol';
 import GridRow from '@/components/grid/GridRow';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
@@ -7,8 +8,10 @@ import usePublicKey from '@/hooks/auth/usePublicKey';
 import useTrackedNftTokens from '@/hooks/nft/useTrackedNftTokens';
 import useNetwork from '@/hooks/useNetwork';
 import fetchTokens from '@/services/tokens/fetchTokens';
+import { range } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Subheading } from 'react-native-paper';
 
 /**
  * NFTs screen, display NFTs
@@ -18,10 +21,13 @@ import { Button } from 'react-native-paper';
 export default function NFTsScreen() {
   const network = useNetwork();
   const activeKey = usePublicKey();
+  const [loading, setLoading] = useState(true);
   const [trackedTokens, setTrackedTokens] = useState([]);
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
+
       const trackedTokensIds = await useTrackedNftTokens(activeKey).get();
       if (trackedTokensIds && trackedTokensIds.length) {
         const { data } = await fetchTokens(network, {
@@ -30,6 +36,8 @@ export default function NFTsScreen() {
 
         setTrackedTokens(data);
       }
+
+      setLoading(false);
     })();
   }, [network, activeKey]);
 
@@ -46,23 +54,21 @@ export default function NFTsScreen() {
     await changeTrackedNft(trackedTokens.filter(({ id }) => id !== token.id));
   }, [trackedTokens]);
 
-  const [myTestKey, setMyTestKey] = useState(0);
-
   return (
     <ScreenWrapper>
-      <GridRow key={myTestKey}>
-        <GridCol>
-          <Button onPress={() => setMyTestKey(myTestKey+1)}>
-            Reset {myTestKey}
-          </Button>
-        </GridCol>
+      <GridRow>
         <GridCol>
           <NftTokenSelector
             notIds={trackedTokens.map(({ id }) => id)}
             onSelect={handleSelectNft}
           />
         </GridCol>
-        {trackedTokens.map((token) => (
+        {loading && range(3).map((i) => (
+          <GridCol key={i}>
+            <CardLoader height={56} />
+          </GridCol>
+        ))}
+        {!loading && trackedTokens.map((token) => (
           <GridCol key={token.id}>
             <NftCollectionCard
               token={token}
@@ -70,7 +76,18 @@ export default function NFTsScreen() {
             />
           </GridCol>
         ))}
+        {!loading && !trackedTokens.length && <GridCol>
+          <Subheading style={styles.noData}>
+            No tracked NFTs collection for now.
+          </Subheading>
+        </GridCol>}
       </GridRow>
     </ScreenWrapper>
   );
 }
+
+const styles = StyleSheet.create({
+  noData: {
+    textAlign: 'center',
+  },
+});

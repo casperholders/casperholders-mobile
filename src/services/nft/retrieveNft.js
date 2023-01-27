@@ -31,7 +31,6 @@ export default async function retrieveNft(network, stateRootHash, contractKey, u
         const burn = await getDictionaryItemByURef(network, stateRootHash, contractKey, uref, 'burnt_tokens');
         nft.burn = burn.result?.stored_value?.CLValue?.cl_type === 'Unit';
       }
-      nft.loading = false;
       const data = r.result?.stored_value?.CLValue?.parsed;
       try {
         const parsed = JSON.parse(data);
@@ -54,22 +53,18 @@ export default async function retrieveNft(network, stateRootHash, contractKey, u
             // Ignore error
           }
         }
-        nft.loading = true;
 
-        Promise.all([
+        const allMetadata = await Promise.all([
           parseTokenUri(nft, 'token_uri'),
           parseTokenUri(nft, 'ipfs_metadata_url'),
           nft.metadata.get('asset') && nft.metadata.get('asset')
             .match(/\.json$/)
             ? parseTokenUri(nft, 'asset')
             : nft.metadata,
-        ])
-          .then((allMetadata) => {
-            nft.metadata = allMetadata.reduce((newMetadata, metadata) => new Map(
-              [...newMetadata, ...metadata],
-            ), nft.metadata);
-            nft.loading = false;
-          });
+        ]);
+        nft.metadata = allMetadata.reduce((newMetadata, metadata) => new Map(
+          [...newMetadata, ...metadata],
+        ), nft.metadata);
         if (typeof nft.metadata.get('properties') === 'object') {
           const propMeta = new Map(Object.entries(nft.metadata.get('properties')));
           nft.metadata.delete('properties');
@@ -89,7 +84,7 @@ export default async function retrieveNft(network, stateRootHash, contractKey, u
       }
       return nft;
     }
-  } catch(error) {
+  } catch (error) {
     // Ignore error
   }
   return undefined;
