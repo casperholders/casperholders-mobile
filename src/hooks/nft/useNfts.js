@@ -34,7 +34,7 @@ export default function useNfts(token) {
     return await fetchOwnedNfts(network, srh, token, activeKey);
   }, [network, activeKey]);
 
-  const [nftLoading, _, nftError] = useAsyncData(async () => {
+  const [nftLoading, , nftError] = useAsyncData(async () => {
     const total = ownedNfts?.length || 0;
     if (total === 0) {
       setMore(false);

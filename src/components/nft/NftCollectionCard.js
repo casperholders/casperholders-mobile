@@ -70,8 +70,8 @@ export default function NftCollectionCard({ token, onRemove }) {
           {!loading && !nfts?.length ? <Subheading>
             You don't have any NFTs in this collection.
           </Subheading> : <GridRow>
-            {nfts.map((nft, index) => (
-              <GridCol key={index}>
+            {nfts.map((nft) => (
+              <GridCol key={nft.id}>
                 <NftCollectionItem nft={nft} />
               </GridCol>
             ))}

@@ -68,6 +68,22 @@ export default function NftTokenSelector({ notIds, onSelect, style }) {
     </React.Fragment>
   );
 
+  const renderList = () => {
+    if (tokensLoading) {
+      return <SectionHeading title="Loading" />;
+    }
+
+    if (tokensError) {
+      return <SectionHeading title="Could not fetched tokens. Make sure that you're connected to internet." />;
+    }
+
+    if (!tokens.length) {
+      return <SectionHeading title="No matching tokens." />;
+    }
+
+    return tokens.map(renderItem);
+  };
+
   return (
     <>
       <Button
@@ -103,15 +119,7 @@ export default function NftTokenSelector({ notIds, onSelect, style }) {
               />}
               dense
             />
-            {!tokensError && (tokensLoading
-              ? <SectionHeading title="Loading" />
-              : (
-                (tokens ?? []).length
-                  ? tokens.map(renderItem)
-                  : <SectionHeading title="No matching tokens." />
-              ))}
-            {!tokensLoading && tokensError &&
-              <SectionHeading title="Could not fetched tokens. Make sure that you're connected to internet." />}
+            {renderList()}
           </BottomSheetScrollView>
         </BottomSheet>
       </Portal>

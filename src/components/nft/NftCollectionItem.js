@@ -8,6 +8,29 @@ export default function NftCollectionItem({ nft }) {
   const characteristicsEntries = Array.from((nft.characteristics ?? new Map()).entries());
   const attributesEntries = Array.from((nft.attributes ?? new Map()).entries());
 
+  const renderCharacteristic = (value) => {
+    if (typeof value !== 'object' || Array.isArray(value)) {
+      return /^http(s)?:\/\//.test(value.toString())
+        ? <Text
+          style={styles.link}
+          onPress={() => Linking.openURL(value.toString())}
+        >
+          Link
+          <Icon
+            name="open-in-new"
+            size={12}
+          />
+        </Text>
+        : value.toString();
+    }
+
+    return typeof v === 'object' && v !== null
+      ? <View>
+        {Object.entries(v).map(([sk, sv]) => <Text key={sk}>{sk}: {sv}</Text>)}
+      </View>
+      : 'N/A';
+  };
+
   return (
     <Card>
       {nft.imageURL ? <Card.Cover source={{ uri: nft.imageURL }} /> : <Card.Content>
@@ -33,26 +56,7 @@ export default function NftCollectionItem({ nft }) {
           <DataTable.Row key={k}>
             <DataTable.Cell>{upperFirst(k.replace('_', ' '))}</DataTable.Cell>
             <DataTable.Cell numeric>
-              {(typeof v !== 'object' || Array.isArray(v)) ? (
-                /^http(s)?:\/\//.test(v.toString())
-                  ? <Text
-                    style={styles.link}
-                    onPress={() => Linking.openURL(v.toString())}
-                  >
-                    Link
-                    <Icon
-                      name="open-in-new"
-                      size={12}
-                    />
-                  </Text>
-                  : v.toString()
-              ) : (
-                typeof v === 'object' && v !== null
-                  ? <View>
-                    {Object.entries(v).map(([sk, sv]) => <Text key={sk}>{sk}: {sv}</Text>)}
-                  </View>
-                  : 'N/A'
-              )}
+              {renderCharacteristic(v)}
             </DataTable.Cell>
           </DataTable.Row>,
         )}

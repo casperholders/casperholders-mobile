@@ -12,6 +12,38 @@ import { useTheme } from 'react-native-paper';
 
 const Tab = createMaterialBottomTabNavigator();
 
+function BalanceIcon({ color }) {
+  return <Icon
+    name="wallet"
+    color={color}
+    size={26}
+  />;
+}
+
+function OperationsIcon({ color }) {
+  return <Icon
+    name="transfer"
+    color={color}
+    size={26}
+  />;
+}
+
+function NFTsIcon({ color }) {
+  return <Icon
+    name="image"
+    color={color}
+    size={26}
+  />;
+}
+
+function HistoryIcon({ color }) {
+  return <Icon
+    name="history"
+    color={color}
+    size={26}
+  />;
+}
+
 /**
  * Main bottom tab navigator
  * @param navigation
@@ -32,6 +64,7 @@ export default function MainNavigator({ navigation, initialRoute = 'BalanceTab' 
   const deployResultsBadge = deployResultsCount
     ? (deployResultsCount > 9 ? '9+' : deployResultsCount)
     : undefined;
+
   return (
     <Tab.Navigator
       initialRouteName={initialRoute.initialRoute}
@@ -43,13 +76,7 @@ export default function MainNavigator({ navigation, initialRoute = 'BalanceTab' 
         options={{
           tabBarTestID: 'goToBalance',
           tabBarLabel: 'Balance',
-          tabBarIcon: ({ color }) => (
-            <Icon
-              name="wallet"
-              color={color}
-              size={26}
-            />
-          ),
+          tabBarIcon: BalanceIcon,
         }}
       />
       <Tab.Screen
@@ -58,13 +85,7 @@ export default function MainNavigator({ navigation, initialRoute = 'BalanceTab' 
         options={{
           tabBarTestID: 'goToOperations',
           tabBarLabel: 'Operations',
-          tabBarIcon: ({ color }) => (
-            <Icon
-              name="transfer"
-              color={color}
-              size={26}
-            />
-          ),
+          tabBarIcon: OperationsIcon,
         }}
       />
       <Tab.Screen
@@ -73,13 +94,7 @@ export default function MainNavigator({ navigation, initialRoute = 'BalanceTab' 
         options={{
           tabBarTestID: 'goToNfts',
           tabBarLabel: 'NFTs',
-          tabBarIcon: ({ color }) => (
-            <Icon
-              name="image"
-              color={color}
-              size={26}
-            />
-          ),
+          tabBarIcon: NFTsIcon,
         }}
       />
       <Tab.Screen
@@ -89,13 +104,7 @@ export default function MainNavigator({ navigation, initialRoute = 'BalanceTab' 
           tabBarTestID: 'goToHistory',
           tabBarLabel: 'History',
           tabBarBadge: deployResultsBadge,
-          tabBarIcon: ({ color }) => (
-            <Icon
-              name="history"
-              color={color}
-              size={26}
-            />
-          ),
+          tabBarIcon: HistoryIcon,
         }}
       />
     </Tab.Navigator>
