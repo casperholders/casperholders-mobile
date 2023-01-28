@@ -22,13 +22,14 @@ export default function NFTsScreen() {
   const network = useNetwork();
   const activeKey = usePublicKey();
   const [loading, setLoading] = useState(true);
+  const trackedTokensStorage = useTrackedNftTokens(activeKey);
   const [trackedTokens, setTrackedTokens] = useState([]);
 
   useEffect(() => {
     (async () => {
       setLoading(true);
 
-      const trackedTokensIds = await useTrackedNftTokens(activeKey).get();
+      const trackedTokensIds = await trackedTokensStorage.get();
       if (trackedTokensIds && trackedTokensIds.length) {
         const { data } = await fetchTokens(network, {
           ids: trackedTokensIds,
@@ -43,7 +44,7 @@ export default function NFTsScreen() {
 
   const changeTrackedNft = async (tokens) => {
     setTrackedTokens(tokens);
-    await useTrackedNftTokens(activeKey).set(tokens.map(({ id }) => id));
+    await trackedTokensStorage.set(tokens.map(({ id }) => id));
   };
 
   const handleSelectNft = useCallback(async (token) => {

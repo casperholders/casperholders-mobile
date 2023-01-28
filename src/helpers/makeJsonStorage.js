@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function useJsonStorage(key) {
+export default function makeJsonStorage(key) {
   return {
     get() {
       return (async () => {
