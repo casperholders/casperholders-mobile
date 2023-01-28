@@ -33,7 +33,7 @@ export default function BalanceScreen({ navigation }) {
   const network = useNetwork();
   const [balanceLoading, balance, balanceError] = useBalance([uniqueKey, network]);
   const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey, network]);
-  const [validatorsInfoLoading, validatorsInfo, validatorsInfoError] = useValidatorInfos([]);
+  const [, validatorsInfo] = useValidatorInfos([]);
   const adapter = useAdapter();
   const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
   const loading = balanceLoading || stakeLoading;

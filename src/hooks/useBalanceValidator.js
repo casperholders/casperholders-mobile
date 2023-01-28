@@ -9,7 +9,7 @@ import balanceService from '@/services/balanceService';
  * @param validator
  * @returns {[boolean,unknown,unknown]|*}
  */
-export default function useBalanceValidator(deps = [], validator) {
+export default function useBalanceValidator(validator, deps = []) {
   const activeKey = usePublicKey();
   const network = useNetwork();
 
