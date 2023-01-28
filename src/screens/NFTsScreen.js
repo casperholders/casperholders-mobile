@@ -56,7 +56,7 @@ export default function NFTsScreen() {
 
   return (
     <ScreenWrapper>
-      <GridRow>
+      <GridRow testID="nftCollections">
         <GridCol>
           <NftTokenSelector
             notIds={trackedTokens.map(({ id }) => id)}

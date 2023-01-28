@@ -48,6 +48,7 @@ export default function NftCollectionCard({ token, onRemove }) {
       </CardWithIcons>
       {opened && <GridCol>
         <Button
+          testID="nftCollectionRemove"
           style={{ marginBottom: 12 }}
           color={theme.colors.error}
           icon="delete"
@@ -76,6 +77,7 @@ export default function NftCollectionCard({ token, onRemove }) {
             ))}
             {more && <GridCol>
               <Button
+                testID="nftCollectionLoad"
                 loading={loading}
                 mode="contained"
                 onPress={handleLoadMore}

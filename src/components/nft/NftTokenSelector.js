@@ -41,8 +41,10 @@ export default function NftTokenSelector({ notIds, onSelect, style }) {
 
   const handleSelectPress = useCallback((token) => {
     onSelect(token);
-    sheetRef.current?.close();
     setSearch('');
+    if (typeof sheetRef.current?.close === 'function') {
+      sheetRef.current?.close();
+    }
   }, [onSelect]);
 
   const renderItem = (item, index) => (
@@ -69,7 +71,6 @@ export default function NftTokenSelector({ notIds, onSelect, style }) {
   return (
     <>
       <Button
-        testID="nftTokenOpenBtn"
         style={style}
         icon="plus"
         mode="contained"
@@ -79,6 +80,7 @@ export default function NftTokenSelector({ notIds, onSelect, style }) {
       </Button>
       <Portal>
         <BottomSheet
+          testID="nftSelector"
           ref={sheetRef}
           index={-1}
           snapPoints={snapPoints}
