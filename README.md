@@ -1,5 +1,12 @@
 # CasperHolders Mobile
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=coverage)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+
 The native mobile wallet for the Casper Network.
 
 Use your Ledger device to transfer or manage your staking operations on mobile !
