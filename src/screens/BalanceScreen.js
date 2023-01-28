@@ -31,8 +31,8 @@ import { Caption, Subheading } from 'react-native-paper';
 export default function BalanceScreen({ navigation }) {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
   const network = useNetwork();
-  const [balanceLoading, balance, balanceError] = useBalance([uniqueKey, network]);
-  const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey, network]);
+  const [balanceLoading, balance, balanceError] = useBalance([uniqueKey]);
+  const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
   const [, validatorsInfo] = useValidatorInfos([]);
   const adapter = useAdapter();
   const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
@@ -188,8 +188,8 @@ export default function BalanceScreen({ navigation }) {
               message="You are in Read Only mode. You can't make any operations."
             />
           }
-          {stakeData.stakes.map((stake, index) => <StakeBalanceCard
-            key={index}
+          {stakeData.stakes.map((stake) => <StakeBalanceCard
+            key={stake.publicKey}
             navigation={navigation}
             {...stake}
           />)}

@@ -88,7 +88,7 @@ export default function LocalConnect() {
             <Title>
               Previous keys
             </Title>
-            {previousKeys.map((key, index) => <GridCol key={index}>
+            {previousKeys.map((key) => <GridCol key={key}>
               <Card style={{ backgroundColor: theme.colors.background }}>
                 <Card.Content>
                   <Paragraph>

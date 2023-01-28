@@ -14,5 +14,5 @@ export default function useStakeBalance(deps = []) {
 
   return useAsyncData(async () => {
     return await balanceService(network.rpcUrl).fetchAllStakeBalance();
-  }, [activeKey, network, ...deps]); //TODO double dep ? see BalanceScreen
+  }, [activeKey, network, ...deps]);
 }

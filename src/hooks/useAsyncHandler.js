@@ -13,8 +13,6 @@ export default function useAsyncHandler(handler) {
       (async () => {
         try {
           await handler();
-        } catch (error) {
-          throw error;
         } finally {
           setSubmitting(false);
         }

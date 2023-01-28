@@ -8,7 +8,6 @@ import {PermissionsAndroid, Platform, StyleSheet} from 'react-native';
 import { Button, Card, Text, useTheme } from 'react-native-paper';
 import * as Location from "expo-location";
 
-
 const SCAN_TIMEOUT_IN_SECONDS = 10;
 
 /**
@@ -142,7 +141,7 @@ export default function LedgerDevices() {
                 </Card.Actions>
               </Card>
             </GridCol>)}
-            {usbDevices.map((device, index) => <GridCol key={index}>
+            {usbDevices.map((device) => <GridCol key={device.id}>
               <Card style={{ backgroundColor: theme.colors.background }}>
                 <Card.Content>
                   <Text>
