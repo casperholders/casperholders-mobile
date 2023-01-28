@@ -9,13 +9,13 @@ import { setNetwork } from '@/store/reducers/networkReducer';
 import { TEST_LOCAL_SIGNER_KEY } from '@env';
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
 
-beforeEach(() => {
-  resetStore();
-});
-
 jest.setTimeout(500000);
 
 describe('Erc20Balances.js', () => {
+  beforeEach(() => {
+    resetStore();
+  });
+
   test('Should show ERC20 balance with tokens', async () => {
     getStore().dispatch(
       connect({
@@ -30,19 +30,23 @@ describe('Erc20Balances.js', () => {
       }),
     );
 
-    const { findByTestId, queryAllByText } = render(<Main initialRoute="BalanceTab" />, {
+    const view = render(<Main initialRoute="BalanceTab" />, {
       wrapper: AppProvider,
     });
 
-    const erc20Toggle = await findByTestId('erc20Toggle');
+    await waitFor(() => expect(view.queryByText(/\d+ tokens with funds/i)).toBeTruthy(), {
+      timeout: 15000,
+    });
 
-    expect(queryAllByText(/ERC20 tokens/i)).toBeTruthy();
-    await waitFor(() => {
-      fireEvent.press(erc20Toggle);
-      expect(queryAllByText(/7 tokens with funds/i)).toBeTruthy();
-      expect(queryAllByText('Wrapped Casper')).toBeTruthy();
-      expect(queryAllByText(/\d+\.\d{5} WCSPR/)).toBeTruthy();
-    }, { timeout: 15000 });
+    const erc20Toggle = view.getByTestId('erc20Toggle');
+
+    expect(erc20Toggle).toBeTruthy();
+
+    fireEvent.press(erc20Toggle);
+
+    expect(view.queryByText(/\d+ tokens with funds/i)).toBeTruthy();
+    expect(view.queryByText('Wrapped Casper')).toBeTruthy();
+    expect(view.queryByText(/\d+\.\d{5} WCSPR/)).toBeTruthy();
   });
 
   test('Should show ERC20 balance without tokens', async () => {
@@ -59,13 +63,12 @@ describe('Erc20Balances.js', () => {
       }),
     );
 
-    const { queryAllByText } = render(<Main initialRoute="BalanceTab" />, {
+    const view = render(<Main initialRoute="BalanceTab" />, {
       wrapper: AppProvider,
     });
 
-    expect(queryAllByText(/ERC20 tokens/i)).toBeTruthy();
-    await waitFor(() => {
-      return expect(queryAllByText(/0 tokens with funds/i)).toBeTruthy();
-    }, { timeout: 15000 });
+    await waitFor(() => expect(view.queryByText(/0 tokens with funds/i)).toBeTruthy(), {
+      timeout: 15000,
+    });
   });
 });
