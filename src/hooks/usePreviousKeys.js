@@ -1,8 +1,5 @@
-import usePublicKey from '@/hooks/auth/usePublicKey';
 import useAsyncData from '@/hooks/useAsyncData';
-import useNetwork from '@/hooks/useNetwork';
-import balanceService from '@/services/balanceService';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Retrieve previous keys

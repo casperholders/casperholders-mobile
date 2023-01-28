@@ -10,6 +10,20 @@ import { TEST_LOCAL_SIGNER_KEY } from '@env';
 import { Image, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Text, Title } from 'react-native-paper';
 
+function TorusIcon() {
+  return <Image
+    source={require('../../assets/torus.png')}
+    style={{ width: 32, height: 32 }}
+  />;
+}
+
+function LedgerIcon() {
+  return <Image
+    source={require('../../assets/ledger_logo.png')}
+    style={{ width: 32, height: 32 }}
+  />;
+}
+
 /**
  * Login screen with Ledger USB & BLE + ReadOnly.
  * @param navigation
@@ -36,23 +50,13 @@ export default function LoginScreen({ navigation }) {
         <Title style={styles.header}>Casper Holders</Title>
         <Text style={styles.text}>The first Casper Network mobile wallet!</Text>
         <LoginBottomSheet
-          icon={() => (
-            <Image
-              source={require('../../assets/torus.png')}
-              style={{ width: 32, height: 32 }}
-            />
-          )}
+          icon={TorusIcon}
           title="Connect with Torus"
         >
           <TorusConnect />
         </LoginBottomSheet>
         <LoginBottomSheet
-          icon={() => (
-            <Image
-              source={require('../../assets/ledger_logo.png')}
-              style={{ width: 32, height: 32 }}
-            />
-          )}
+          icon={LedgerIcon}
           title="Connect with Ledger"
         >
           <LedgerConnect />

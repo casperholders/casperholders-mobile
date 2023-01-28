@@ -35,8 +35,8 @@ export default function SettingsScreen() {
     }
   }, [network]);
   const logo = require('../../assets/logo.png');
-  const copyToClipboard = () => {
-    Clipboard.setString(activeKey);
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(activeKey);
   };
 
   const switchToNetwork = () => {

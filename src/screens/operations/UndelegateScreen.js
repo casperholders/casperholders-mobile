@@ -53,7 +53,7 @@ export default function UndelegateScreen({ navigation, route }) {
   const [balanceLoading, balance, balanceError] = useBalance();
   const [balanceAfter, setBalanceAfter] = useState(undefined);
 
-  const [balanceValidatorLoading, balanceValidator, balanceValidatorError] = useBalanceValidator([deployForm.form.values.address], deployForm.form.values.address);
+  const [, balanceValidator] = useBalanceValidator(deployForm.form.values.address, [deployForm.form.values.address]);
   useEffect(() => {
     try {
       setBalanceAfter(
