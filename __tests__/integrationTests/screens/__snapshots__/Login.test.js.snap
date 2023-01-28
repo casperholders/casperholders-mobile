@@ -2040,7 +2040,7 @@ exports[`Login should render when connected to mainnet 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#00126b",
+              "backgroundColor": "rgba(0, 18, 107, 1)",
               "overflow": "hidden",
             }
           }
@@ -2055,11 +2055,32 @@ exports[`Login should render when connected to mainnet 1`] = `
                 Object {
                   "marginBottom": 0,
                   "marginHorizontal": 0,
-                  "maxWidth": 504,
+                  "maxWidth": 384,
                 },
               ]
             }
           >
+            <View
+              collapsable={false}
+              pointerEvents="none"
+              style={
+                Object {
+                  "backgroundColor": undefined,
+                  "borderRadius": 0,
+                  "height": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "top": 28,
+                  "transform": Array [
+                    Object {
+                      "scale": 0.008,
+                    },
+                  ],
+                  "width": 0,
+                }
+              }
+            />
             <View
               accessibilityRole="button"
               accessibilityState={
@@ -2291,49 +2312,6 @@ exports[`Login should render when connected to mainnet 1`] = `
                       Balance
                     </Text>
                   </View>
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      }
-                    }
-                  >
-                    <Text
-                      maxFontSizeMultiplier={1}
-                      selectable={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#ffffff",
-                            "fontFamily": "System",
-                            "fontWeight": "400",
-                          },
-                          Object {
-                            "textAlign": "left",
-                          },
-                          Array [
-                            Object {
-                              "backgroundColor": "transparent",
-                              "fontSize": 12,
-                              "height": 56,
-                              "textAlign": "center",
-                            },
-                            Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      Balance
-                    </Text>
-                  </View>
                 </View>
               </View>
             </View>
@@ -2374,7 +2352,7 @@ exports[`Login should render when connected to mainnet 1`] = `
                       "marginTop": 2,
                       "transform": Array [
                         Object {
-                          "translateY": 0,
+                          "translateY": 7,
                         },
                       ],
                       "width": 24,
@@ -2520,7 +2498,7 @@ exports[`Login should render when connected to mainnet 1`] = `
                       "paddingBottom": 2,
                       "transform": Array [
                         Object {
-                          "scale": 1,
+                          "scale": 0.5,
                         },
                       ],
                     }
@@ -2568,10 +2546,104 @@ exports[`Login should render when connected to mainnet 1`] = `
                       Operations
                     </Text>
                   </View>
+                </View>
+              </View>
+            </View>
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "selected": false,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "paddingVertical": 6,
+                }
+              }
+              testID="goToNfts"
+            >
+              <View
+                pointerEvents="none"
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "transform": Array [
+                        Object {
+                          "translateY": 7,
+                        },
+                      ],
+                      "width": 24,
+                    }
+                  }
+                >
                   <View
                     collapsable={false}
                     style={
                       Object {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignSelf": "center",
+                          "paddingLeft": 0,
+                          "paddingRight": 0,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={false}
+                        selectable={false}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#ffffff",
+                              "fontSize": 26,
+                            },
+                            undefined,
+                            Object {
+                              "fontFamily": "material-community",
+                              "fontStyle": "normal",
+                              "fontWeight": "normal",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        󰋩
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
                         "opacity": 1,
@@ -2581,9 +2653,106 @@ exports[`Login should render when connected to mainnet 1`] = `
                       }
                     }
                   >
+                    <View
+                      style={
+                        Object {
+                          "alignSelf": "center",
+                          "paddingLeft": 0,
+                          "paddingRight": 0,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={false}
+                        selectable={false}
+                        style={
+                          Array [
+                            Object {
+                              "color": "rgba(255, 255, 255, 0.5)",
+                              "fontSize": 26,
+                            },
+                            undefined,
+                            Object {
+                              "fontFamily": "material-community",
+                              "fontStyle": "normal",
+                              "fontWeight": "normal",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        󰋩
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "left": 0,
+                          "position": "absolute",
+                          "top": -2,
+                        },
+                        Object {
+                          "right": -2,
+                        },
+                      ]
+                    }
+                  >
+                    <Text
+                      collapsable={false}
+                      numberOfLines={1}
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "backgroundColor": "#ff473e",
+                          "borderRadius": 8,
+                          "color": "#ffffff",
+                          "fontFamily": "System",
+                          "fontSize": 8,
+                          "fontWeight": "400",
+                          "height": 16,
+                          "lineHeight": 8,
+                          "minWidth": 16,
+                          "opacity": 0,
+                          "overflow": "hidden",
+                          "paddingHorizontal": 4,
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "height": 16,
+                      "paddingBottom": 2,
+                      "transform": Array [
+                        Object {
+                          "scale": 0.5,
+                        },
+                      ],
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
                     <Text
                       maxFontSizeMultiplier={1}
-                      selectable={false}
                       style={
                         Array [
                           Object {
@@ -2602,13 +2771,13 @@ exports[`Login should render when connected to mainnet 1`] = `
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
+                              "color": "#ffffff",
                             },
                           ],
                         ]
                       }
                     >
-                      Operations
+                      NFTs
                     </Text>
                   </View>
                 </View>
@@ -2651,7 +2820,7 @@ exports[`Login should render when connected to mainnet 1`] = `
                       "marginTop": 2,
                       "transform": Array [
                         Object {
-                          "translateY": 0,
+                          "translateY": 7,
                         },
                       ],
                       "width": 24,
@@ -2797,7 +2966,7 @@ exports[`Login should render when connected to mainnet 1`] = `
                       "paddingBottom": 2,
                       "transform": Array [
                         Object {
-                          "scale": 1,
+                          "scale": 0.5,
                         },
                       ],
                     }
@@ -2837,49 +3006,6 @@ exports[`Login should render when connected to mainnet 1`] = `
                             },
                             Object {
                               "color": "#ffffff",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      History
-                    </Text>
-                  </View>
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 1,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      }
-                    }
-                  >
-                    <Text
-                      maxFontSizeMultiplier={1}
-                      selectable={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#ffffff",
-                            "fontFamily": "System",
-                            "fontWeight": "400",
-                          },
-                          Object {
-                            "textAlign": "left",
-                          },
-                          Array [
-                            Object {
-                              "backgroundColor": "transparent",
-                              "fontSize": 12,
-                              "height": 56,
-                              "textAlign": "center",
-                            },
-                            Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
                             },
                           ],
                         ]
@@ -4321,7 +4447,7 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#00126b",
+              "backgroundColor": "rgba(0, 18, 107, 1)",
               "overflow": "hidden",
             }
           }
@@ -4336,11 +4462,32 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                 Object {
                   "marginBottom": 0,
                   "marginHorizontal": 0,
-                  "maxWidth": 504,
+                  "maxWidth": 384,
                 },
               ]
             }
           >
+            <View
+              collapsable={false}
+              pointerEvents="none"
+              style={
+                Object {
+                  "backgroundColor": undefined,
+                  "borderRadius": 0,
+                  "height": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "top": 28,
+                  "transform": Array [
+                    Object {
+                      "scale": 0.008,
+                    },
+                  ],
+                  "width": 0,
+                }
+              }
+            />
             <View
               accessibilityRole="button"
               accessibilityState={
@@ -4572,49 +4719,6 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       Balance
                     </Text>
                   </View>
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      }
-                    }
-                  >
-                    <Text
-                      maxFontSizeMultiplier={1}
-                      selectable={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#ffffff",
-                            "fontFamily": "System",
-                            "fontWeight": "400",
-                          },
-                          Object {
-                            "textAlign": "left",
-                          },
-                          Array [
-                            Object {
-                              "backgroundColor": "transparent",
-                              "fontSize": 12,
-                              "height": 56,
-                              "textAlign": "center",
-                            },
-                            Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      Balance
-                    </Text>
-                  </View>
                 </View>
               </View>
             </View>
@@ -4655,7 +4759,7 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       "marginTop": 2,
                       "transform": Array [
                         Object {
-                          "translateY": 0,
+                          "translateY": 7,
                         },
                       ],
                       "width": 24,
@@ -4801,7 +4905,7 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       "paddingBottom": 2,
                       "transform": Array [
                         Object {
-                          "scale": 1,
+                          "scale": 0.5,
                         },
                       ],
                     }
@@ -4849,10 +4953,104 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       Operations
                     </Text>
                   </View>
+                </View>
+              </View>
+            </View>
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "selected": false,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "paddingVertical": 6,
+                }
+              }
+              testID="goToNfts"
+            >
+              <View
+                pointerEvents="none"
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "transform": Array [
+                        Object {
+                          "translateY": 7,
+                        },
+                      ],
+                      "width": 24,
+                    }
+                  }
+                >
                   <View
                     collapsable={false}
                     style={
                       Object {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignSelf": "center",
+                          "paddingLeft": 0,
+                          "paddingRight": 0,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={false}
+                        selectable={false}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#ffffff",
+                              "fontSize": 26,
+                            },
+                            undefined,
+                            Object {
+                              "fontFamily": "material-community",
+                              "fontStyle": "normal",
+                              "fontWeight": "normal",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        󰋩
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
                         "opacity": 1,
@@ -4862,9 +5060,106 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       }
                     }
                   >
+                    <View
+                      style={
+                        Object {
+                          "alignSelf": "center",
+                          "paddingLeft": 0,
+                          "paddingRight": 0,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={false}
+                        selectable={false}
+                        style={
+                          Array [
+                            Object {
+                              "color": "rgba(255, 255, 255, 0.5)",
+                              "fontSize": 26,
+                            },
+                            undefined,
+                            Object {
+                              "fontFamily": "material-community",
+                              "fontStyle": "normal",
+                              "fontWeight": "normal",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        󰋩
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "left": 0,
+                          "position": "absolute",
+                          "top": -2,
+                        },
+                        Object {
+                          "right": -2,
+                        },
+                      ]
+                    }
+                  >
+                    <Text
+                      collapsable={false}
+                      numberOfLines={1}
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "backgroundColor": "#ff473e",
+                          "borderRadius": 8,
+                          "color": "#ffffff",
+                          "fontFamily": "System",
+                          "fontSize": 8,
+                          "fontWeight": "400",
+                          "height": 16,
+                          "lineHeight": 8,
+                          "minWidth": 16,
+                          "opacity": 0,
+                          "overflow": "hidden",
+                          "paddingHorizontal": 4,
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "height": 16,
+                      "paddingBottom": 2,
+                      "transform": Array [
+                        Object {
+                          "scale": 0.5,
+                        },
+                      ],
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
                     <Text
                       maxFontSizeMultiplier={1}
-                      selectable={false}
                       style={
                         Array [
                           Object {
@@ -4883,13 +5178,13 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
+                              "color": "#ffffff",
                             },
                           ],
                         ]
                       }
                     >
-                      Operations
+                      NFTs
                     </Text>
                   </View>
                 </View>
@@ -4932,7 +5227,7 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       "marginTop": 2,
                       "transform": Array [
                         Object {
-                          "translateY": 0,
+                          "translateY": 7,
                         },
                       ],
                       "width": 24,
@@ -5078,7 +5373,7 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                       "paddingBottom": 2,
                       "transform": Array [
                         Object {
-                          "scale": 1,
+                          "scale": 0.5,
                         },
                       ],
                     }
@@ -5118,49 +5413,6 @@ exports[`Login should render when connected to mainnet readonly 1`] = `
                             },
                             Object {
                               "color": "#ffffff",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      History
-                    </Text>
-                  </View>
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 1,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      }
-                    }
-                  >
-                    <Text
-                      maxFontSizeMultiplier={1}
-                      selectable={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#ffffff",
-                            "fontFamily": "System",
-                            "fontWeight": "400",
-                          },
-                          Object {
-                            "textAlign": "left",
-                          },
-                          Array [
-                            Object {
-                              "backgroundColor": "transparent",
-                              "fontSize": 12,
-                              "height": 56,
-                              "textAlign": "center",
-                            },
-                            Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
                             },
                           ],
                         ]
@@ -6602,7 +6854,7 @@ exports[`Login should render when connected to testnet 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#00126b",
+              "backgroundColor": "rgba(0, 18, 107, 1)",
               "overflow": "hidden",
             }
           }
@@ -6617,11 +6869,32 @@ exports[`Login should render when connected to testnet 1`] = `
                 Object {
                   "marginBottom": 0,
                   "marginHorizontal": 0,
-                  "maxWidth": 504,
+                  "maxWidth": 384,
                 },
               ]
             }
           >
+            <View
+              collapsable={false}
+              pointerEvents="none"
+              style={
+                Object {
+                  "backgroundColor": undefined,
+                  "borderRadius": 0,
+                  "height": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "top": 28,
+                  "transform": Array [
+                    Object {
+                      "scale": 0.008,
+                    },
+                  ],
+                  "width": 0,
+                }
+              }
+            />
             <View
               accessibilityRole="button"
               accessibilityState={
@@ -6853,49 +7126,6 @@ exports[`Login should render when connected to testnet 1`] = `
                       Balance
                     </Text>
                   </View>
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      }
-                    }
-                  >
-                    <Text
-                      maxFontSizeMultiplier={1}
-                      selectable={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#ffffff",
-                            "fontFamily": "System",
-                            "fontWeight": "400",
-                          },
-                          Object {
-                            "textAlign": "left",
-                          },
-                          Array [
-                            Object {
-                              "backgroundColor": "transparent",
-                              "fontSize": 12,
-                              "height": 56,
-                              "textAlign": "center",
-                            },
-                            Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      Balance
-                    </Text>
-                  </View>
                 </View>
               </View>
             </View>
@@ -6936,7 +7166,7 @@ exports[`Login should render when connected to testnet 1`] = `
                       "marginTop": 2,
                       "transform": Array [
                         Object {
-                          "translateY": 0,
+                          "translateY": 7,
                         },
                       ],
                       "width": 24,
@@ -7082,7 +7312,7 @@ exports[`Login should render when connected to testnet 1`] = `
                       "paddingBottom": 2,
                       "transform": Array [
                         Object {
-                          "scale": 1,
+                          "scale": 0.5,
                         },
                       ],
                     }
@@ -7130,10 +7360,104 @@ exports[`Login should render when connected to testnet 1`] = `
                       Operations
                     </Text>
                   </View>
+                </View>
+              </View>
+            </View>
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "selected": false,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "paddingVertical": 6,
+                }
+              }
+              testID="goToNfts"
+            >
+              <View
+                pointerEvents="none"
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "transform": Array [
+                        Object {
+                          "translateY": 7,
+                        },
+                      ],
+                      "width": 24,
+                    }
+                  }
+                >
                   <View
                     collapsable={false}
                     style={
                       Object {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignSelf": "center",
+                          "paddingLeft": 0,
+                          "paddingRight": 0,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={false}
+                        selectable={false}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#ffffff",
+                              "fontSize": 26,
+                            },
+                            undefined,
+                            Object {
+                              "fontFamily": "material-community",
+                              "fontStyle": "normal",
+                              "fontWeight": "normal",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        󰋩
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
                         "opacity": 1,
@@ -7143,9 +7467,106 @@ exports[`Login should render when connected to testnet 1`] = `
                       }
                     }
                   >
+                    <View
+                      style={
+                        Object {
+                          "alignSelf": "center",
+                          "paddingLeft": 0,
+                          "paddingRight": 0,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={false}
+                        selectable={false}
+                        style={
+                          Array [
+                            Object {
+                              "color": "rgba(255, 255, 255, 0.5)",
+                              "fontSize": 26,
+                            },
+                            undefined,
+                            Object {
+                              "fontFamily": "material-community",
+                              "fontStyle": "normal",
+                              "fontWeight": "normal",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        󰋩
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "left": 0,
+                          "position": "absolute",
+                          "top": -2,
+                        },
+                        Object {
+                          "right": -2,
+                        },
+                      ]
+                    }
+                  >
+                    <Text
+                      collapsable={false}
+                      numberOfLines={1}
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "backgroundColor": "#ff473e",
+                          "borderRadius": 8,
+                          "color": "#ffffff",
+                          "fontFamily": "System",
+                          "fontSize": 8,
+                          "fontWeight": "400",
+                          "height": 16,
+                          "lineHeight": 8,
+                          "minWidth": 16,
+                          "opacity": 0,
+                          "overflow": "hidden",
+                          "paddingHorizontal": 4,
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "height": 16,
+                      "paddingBottom": 2,
+                      "transform": Array [
+                        Object {
+                          "scale": 0.5,
+                        },
+                      ],
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
                     <Text
                       maxFontSizeMultiplier={1}
-                      selectable={false}
                       style={
                         Array [
                           Object {
@@ -7164,13 +7585,13 @@ exports[`Login should render when connected to testnet 1`] = `
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
+                              "color": "#ffffff",
                             },
                           ],
                         ]
                       }
                     >
-                      Operations
+                      NFTs
                     </Text>
                   </View>
                 </View>
@@ -7213,7 +7634,7 @@ exports[`Login should render when connected to testnet 1`] = `
                       "marginTop": 2,
                       "transform": Array [
                         Object {
-                          "translateY": 0,
+                          "translateY": 7,
                         },
                       ],
                       "width": 24,
@@ -7359,7 +7780,7 @@ exports[`Login should render when connected to testnet 1`] = `
                       "paddingBottom": 2,
                       "transform": Array [
                         Object {
-                          "scale": 1,
+                          "scale": 0.5,
                         },
                       ],
                     }
@@ -7399,49 +7820,6 @@ exports[`Login should render when connected to testnet 1`] = `
                             },
                             Object {
                               "color": "#ffffff",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      History
-                    </Text>
-                  </View>
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 1,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      }
-                    }
-                  >
-                    <Text
-                      maxFontSizeMultiplier={1}
-                      selectable={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#ffffff",
-                            "fontFamily": "System",
-                            "fontWeight": "400",
-                          },
-                          Object {
-                            "textAlign": "left",
-                          },
-                          Array [
-                            Object {
-                              "backgroundColor": "transparent",
-                              "fontSize": 12,
-                              "height": 56,
-                              "textAlign": "center",
-                            },
-                            Object {
-                              "color": "rgba(255, 255, 255, 0.5)",
                             },
                           ],
                         ]

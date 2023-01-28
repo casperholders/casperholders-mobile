@@ -190,7 +190,7 @@ exports[`Stake balance card should render stake balance card 1`] = `
                 ]
               }
             >
-              - CSPR
+              100.00000 CSPR
             </Text>
             <Text
               style={
