@@ -6,6 +6,14 @@ import { IconButton } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
+function SettingsIconButton({ navigation }) {
+  return <IconButton
+    testID="goToSettings"
+    icon="cog"
+    onPress={() => navigation.navigate('Settings')}
+  />;
+}
+
 /**
  * Balance navigator
  * @param navigation
@@ -13,19 +21,21 @@ const Stack = createNativeStackNavigator();
  * @constructor
  */
 export default function BalanceNavigator({ navigation }) {
-  const headerRight = <IconButton
-    testID="goToSettings"
-    icon="cog"
-    onPress={() => navigation.navigate('Settings')}
-  />;
-
   return (
     <NavigatorWrapper>
       <Stack.Navigator initialRouteName="Balance">
         <Stack.Screen
           name="Balance"
           component={BalanceScreen}
-          options={{ headerRight: () => headerRight }}
+          options={{
+            headerRight: () => (
+              <IconButton
+                testID="goToSettings"
+                icon="cog"
+                onPress={() => navigation.navigate('Settings')}
+              />
+            ),
+          }}
         />
         <Stack.Screen
           name="Settings"
