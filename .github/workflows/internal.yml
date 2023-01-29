@@ -13,7 +13,7 @@ jobs:
           node-version: 18.x
       - uses: expo/expo-github-action@v7
         with:
-          expo-version: 5.x
+          expo-version: 6.x
           expo-cache: true
           token: ${{ secrets.EXPO_TOKEN }}
       - run: yarn install
