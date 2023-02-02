@@ -24,6 +24,10 @@ export default class MainnetAdapter extends AbstractNetworkAdapter {
     return 'https://node.casperholders.com';
   }
 
+  get eventsUrl() {
+    return 'https://node.casperholders.com';
+  }
+
   get dataApiUrl() {
     return 'https://data.casperholders.com';
   }

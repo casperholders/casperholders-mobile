@@ -3,10 +3,10 @@ import GridRow from '@/components/grid/GridRow';
 import LedgerKeys from '@/components/login/ledger/LedgerKeys';
 import TransportHID from '@ledgerhq/react-native-hid';
 import TransportBLE from '@ledgerhq/react-native-hw-transport-ble';
+import * as Location from 'expo-location';
 import { useCallback, useEffect, useState } from 'react';
-import {PermissionsAndroid, Platform, StyleSheet} from 'react-native';
+import { PermissionsAndroid, Platform, StyleSheet } from 'react-native';
 import { Button, Card, Text, useTheme } from 'react-native-paper';
-import * as Location from "expo-location";
 
 const SCAN_TIMEOUT_IN_SECONDS = 10;
 
@@ -27,20 +27,65 @@ export default function LedgerDevices() {
       const enableLocation = async () => {
         if (Platform.OS === 'android') {
           const locationGranted = await PermissionsAndroid.check(
-              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           );
-          if (!locationGranted) {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          try {
+            const bleGranted = await PermissionsAndroid.check(
+              PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+            );
+            const bleConnectGranted = await PermissionsAndroid.check(
+              PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+            );
+            if (!bleGranted) {
+              const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
                 {
-                  title: 'Casper Holders Location Permission',
+                  title: 'Casper Holders Bluetooth Permission',
                   message:
-                      'Casper Holders needs access to your location ' +
-                      'to scan ledger devices.',
+                    'Casper Holders needs bluetooth ' +
+                    'to scan ledger devices.',
                   buttonNeutral: 'Ask Me Later',
                   buttonNegative: 'Cancel',
                   buttonPositive: 'OK',
                 },
+              );
+              if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+                return;
+              }
+            }
+            if (!bleConnectGranted) {
+              const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+                {
+                  title: 'Casper Holders Bluetooth Permission',
+                  message:
+                    'Casper Holders needs bluetooth ' +
+                    'to scan ledger devices.',
+                  buttonNeutral: 'Ask Me Later',
+                  buttonNegative: 'Cancel',
+                  buttonPositive: 'OK',
+                },
+              );
+              if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+                return;
+              }
+            }
+          } catch (e) {
+            console.log(e);
+            console.log('Error on ble perms');
+          }
+          if (!locationGranted) {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+              {
+                title: 'Casper Holders Location Permission',
+                message:
+                  'Casper Holders needs access to your location ' +
+                  'to scan ledger devices.',
+                buttonNeutral: 'Ask Me Later',
+                buttonNegative: 'Cancel',
+                buttonPositive: 'OK',
+              },
             );
             if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
               return;
@@ -48,7 +93,7 @@ export default function LedgerDevices() {
           }
         }
         await Location.enableNetworkProviderAsync();
-      }
+      };
       enableLocation();
       setUsbDevices([]);
       const subscription = TransportBLE.listen({
@@ -98,6 +143,8 @@ export default function LedgerDevices() {
         }
       };
     }
+    return () => {
+    };
   }, [scanning]);
 
   const handleDeviceSelect = useCallback((device, usb = false) => {

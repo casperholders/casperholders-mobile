@@ -45,7 +45,12 @@
     ],
     "android": {
       "package": "com.casperholders.wallet",
-      "permissions": [],
+      "permissions": [
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN",
+        "BLUETOOTH_SCAN",
+        "BLUETOOTH_CONNECT"
+      ],
       "versionCode": 28
     },
     "ios": {
