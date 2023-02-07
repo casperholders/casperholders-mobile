@@ -1,8 +1,8 @@
 import { getDictionaryItemByURef } from '@/helpers/rpc';
 
 function replaceIpfs(str) {
-  return str.replace('ipfs://', 'https://gateway.ipfs.io/ipfs/')
-    .replace('https://ipfs.io/ipfs/', 'https://gateway.ipfs.io/ipfs/');
+  return str.replace('ipfs://', 'https://w3s.link/ipfs/')
+    .replace('https://ipfs.io/ipfs/', 'https://w3s.link/ipfs/');
 }
 
 async function parseTokenUri(nft, key) {
