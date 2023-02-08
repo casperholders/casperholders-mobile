@@ -51,12 +51,12 @@
         "BLUETOOTH_SCAN",
         "BLUETOOTH_CONNECT"
       ],
-      "versionCode": 29
+      "versionCode": 30
     },
     "ios": {
       "bundleIdentifier": "com.casperholders.wallet",
       "supportsTablet": true,
-      "buildNumber": "29",
+      "buildNumber": "30",
       "config": {
         "usesNonExemptEncryption": false
       },
