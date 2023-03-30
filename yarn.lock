@@ -1237,16 +1237,16 @@
     deepmerge "^3.2.0"
     hoist-non-react-statics "^3.3.0"
 
-"@casperholders/core@3.13.3":
-  version "3.13.3"
-  resolved "https://registry.yarnpkg.com/@casperholders/core/-/core-3.13.3.tgz#938ec6b78cfa05399f1a32a098dc7528272e3421"
-  integrity sha512-R4+F48MnljJNg4kBAsn7FUsosxXjP6eKfJWyBtQOb9uMZ4hlcg+9SZpJDlzeUMiKSw+XevbIpAbNbSYtpKQfxA==
+"@casperholders/core@3.14.8":
+  version "3.14.8"
+  resolved "https://registry.yarnpkg.com/@casperholders/core/-/core-3.14.8.tgz#138dba10352aeafad79219b8956ab0526d88d7f6"
+  integrity sha512-kVBp1RQM2QJHK09VimtJEF7xiFRn8uIGiJJwW522kS7bV7llR+iquzhI2I7skYT8vATnNCLHg87oOaNWNfaaEw==
   dependencies:
-    "@ethersproject/bignumber" "^5.5.0"
-    "@ethersproject/bytes" "^5.6.1"
-    big.js "^6.1.1"
+    "@ethersproject/bignumber" "^5.7.0"
+    "@ethersproject/bytes" "^5.7.0"
+    big.js "^6.2.1"
     blakejs "^1.2.1"
-    casper-js-sdk "^2.9.1"
+    casper-js-sdk "^2.10.2"
     ts-results "^3.3.0"
 
 "@cnakazawa/watch@^1.0.3":
@@ -1269,7 +1269,7 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
-"@ethersproject/bignumber@^5.0.8", "@ethersproject/bignumber@^5.5.0", "@ethersproject/bignumber@^5.7.0":
+"@ethersproject/bignumber@^5.0.8", "@ethersproject/bignumber@^5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/bignumber/-/bignumber-5.7.0.tgz#e2f03837f268ba655ffba03a57853e18a18dc9c2"
   integrity sha512-n1CAdIHRWjSucQO3MC1zPSVgV/6dy/fjL9pMrPP9peL+QxEg9wOsVqwD4+818B6LUEtaXzVHQiuivzRoxPxUGw==
@@ -1278,7 +1278,7 @@
     "@ethersproject/logger" "^5.7.0"
     bn.js "^5.2.1"
 
-"@ethersproject/bytes@^5.0.5", "@ethersproject/bytes@^5.6.1", "@ethersproject/bytes@^5.7.0":
+"@ethersproject/bytes@^5.0.5", "@ethersproject/bytes@^5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/bytes/-/bytes-5.7.0.tgz#a00f6ea8d7e7534d6d87f47188af1148d71f155d"
   integrity sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==
@@ -4022,7 +4022,7 @@ big-integer@1.6.x:
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.51.tgz#0df92a5d9880560d3ff2d5fd20245c889d130686"
   integrity sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==
 
-big.js@^6.1.1:
+big.js@^6.1.1, big.js@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-6.2.1.tgz#7205ce763efb17c2e41f26f121c420c6a7c2744f"
   integrity sha512-bCtHMwL9LeDIozFn+oNhhFoq+yQ3BNdnsLSASUxLciOb1vgvpHsIO1dsENiGMgbb4SkP5TrzWzRiLddn8ahVOQ==
@@ -4415,7 +4415,7 @@ capture-exit@^2.0.0:
   dependencies:
     rsvp "^4.8.4"
 
-casper-js-sdk@^2.10.0, casper-js-sdk@^2.9.1:
+casper-js-sdk@^2.10.0:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/casper-js-sdk/-/casper-js-sdk-2.10.1.tgz#c134f25e790e2e412fcdf3a901712463c568487f"
   integrity sha512-JRL25Sw1rcYkQhIDND6mh/8LbuSVmx0Y+SMFFgcz6buVBPbkx2B7+7lwBEEDEbG03msl4uh7Q4Xn3sDyZG5h2g==
@@ -4439,6 +4439,29 @@ casper-js-sdk@^2.10.0, casper-js-sdk@^2.9.1:
     tweetnacl-util "^0.15.0"
     typedjson "^1.6.0-rc2"
     webpack "^5.24.3"
+
+casper-js-sdk@^2.10.2:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/casper-js-sdk/-/casper-js-sdk-2.12.1.tgz#67f1614cc379334c4726acc32bb75a8e5f96339a"
+  integrity sha512-gpqOgIVqWxqK0lvxMjUz8p488++buGQDB5p0c+eMpgA5zdyywC+PP72hINbFxN8aiHJlQzME4U9atY7Qh047aw==
+  dependencies:
+    "@ethersproject/bignumber" "^5.0.8"
+    "@ethersproject/bytes" "^5.0.5"
+    "@ethersproject/constants" "^5.0.5"
+    "@open-rpc/client-js" "^1.6.2"
+    "@types/eccrypto" "^1.1.2"
+    "@types/ws" "^8.2.2"
+    blakejs "^1.1.0"
+    eccrypto "^1.1.6"
+    ethereum-cryptography "^0.1.3"
+    humanize-duration "^3.24.0"
+    key-encoder "^2.0.3"
+    lodash "^4.17.21"
+    reflect-metadata "^0.1.13"
+    ts-results "npm:@casperlabs/ts-results@^3.3.4"
+    tweetnacl-ts "^1.0.3"
+    tweetnacl-util "^0.15.0"
+    typedjson "^1.6.0-rc2"
 
 chalk@^1.1.3:
   version "1.1.3"

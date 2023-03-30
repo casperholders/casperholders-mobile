@@ -26,7 +26,7 @@ import { Paragraph } from 'react-native-paper';
  */
 export default function UndelegateScreen({ navigation, route }) {
   const minAmount = 1;
-  const unstakeFee = 0.00001;
+  const unstakeFee = 2.5;
   const activeKey = usePublicKey();
   const network = useNetwork();
   const deployForm = useDeployForm(
