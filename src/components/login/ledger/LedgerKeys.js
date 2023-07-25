@@ -26,9 +26,9 @@ export default function LedgerKeys({ selectedDevice, handleCancel }) {
   const [balances, setBalances] = useState([]);
   const network = useNetwork();
 
-  useEffect(async () => {
+  useEffect(() => {
     if (addresses.length === 0) {
-      await loadMoreKeys();
+      loadMoreKeys();
     }
   }, [selectedDevice]);
 
@@ -90,7 +90,7 @@ export default function LedgerKeys({ selectedDevice, handleCancel }) {
             </GridCol>
           </>
         )}
-        {addresses.map((address, index) => <GridCol key={index}>
+        {addresses.map((address, index) => <GridCol key={address}>
           <Card style={{ backgroundColor: theme.colors.background }}>
             <Card.Content>
               <Paragraph>

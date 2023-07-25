@@ -1,10 +1,15 @@
 # CasperHolders Mobile
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=coverage)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=casperholders_casperholders-mobile&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=casperholders_casperholders-mobile)
+
 The native mobile wallet for the Casper Network.
 
-
 Use your Ledger device to transfer or manage your staking operations on mobile !
-
 
 Features :
 
@@ -36,6 +41,7 @@ https://www.youtube.com/watch?v=EPzYFJrPqzM
 - Node LTS release
 - Git
 - Watchman (see the installation documentation )
+- Java SDK 11
 - [Android](https://docs.expo.dev/workflow/android-studio-emulator/)
   / [iOs simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - Expo / eas cli
@@ -48,12 +54,15 @@ yarn global add expo-cli eas-cli
 
 # First build or modifications to the native files
 
-Casper Holders is created with expo and use the managed workflow. However we use some native libraries so you can't use the expo go app and you must compile the application for Android or iOS (require a Mac).
+Casper Holders is created with expo and use the managed workflow. However we use some native
+libraries so you can't use the expo go app and you must compile the application for Android or iOS (
+require a Mac).
 
 For android
 
 ```bash
 yarn install
+expo prebuild -p android
 yarn android
 ```
 
@@ -61,6 +70,7 @@ For iOS
 
 ```bash
 yarn install
+expo prebuild -p ios
 yarn ios
 ```
 
@@ -86,9 +96,11 @@ content :
 TEST_LOCAL_SIGNER_KEY="<TestnetPrivateKeyWithoutPem>"
 ```
 
-This env variable will enable you to test all users interactions (Transfer / Stake / Unstake) without ledger and will add a button "Connect with test key" on the login screen.
+This env variable will enable you to test all users interactions (Transfer / Stake / Unstake)
+without ledger and will add a button "Connect with test key" on the login screen.
 
-If the application is slow / stuck on the simulator that's because of a bug from an HTTP interceptor lib.  
+If the application is slow / stuck on the simulator that's because of a bug from an HTTP interceptor
+lib.
 
 This bug isn't present in the production build or on real devices.
 

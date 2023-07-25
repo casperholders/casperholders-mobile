@@ -1,7 +1,6 @@
 import { getStore } from '@/store';
 import { selectConnected, selectPublicKey } from '@/store/reducers/authReducer';
-import { NoActiveKeyError } from '@casperholders/core/dist/services/errors/noActiveKeyError';
-import { AbstractKeyManager } from '@casperholders/core/dist/services/keys/abstractKeyManager';
+import { AbstractKeyManager, NoActiveKeyError } from '@casperholders/core';
 
 /**
  * ReduxKeyManager get the active public key

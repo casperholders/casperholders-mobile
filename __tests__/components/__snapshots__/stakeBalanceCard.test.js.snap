@@ -11,6 +11,7 @@ exports[`Stake balance card should render stake balance card 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(13, 14, 53, 1)",
@@ -30,6 +31,11 @@ exports[`Stake balance card should render stake balance card 1`] = `
     }
   >
     <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
       accessible={true}
       focusable={false}
       onClick={[Function]}
@@ -176,13 +182,15 @@ exports[`Stake balance card should render stake balance card 1`] = `
                         "lineHeight": 20,
                         "marginVertical": 2,
                       },
-                      undefined,
+                      Object {
+                        "fontWeight": "bold",
+                      },
                     ],
                   ],
                 ]
               }
             >
-              - CSPR
+              100.00000 CSPR
             </Text>
             <Text
               style={
@@ -231,6 +239,7 @@ exports[`Stake balance card should render stake balance card 1`] = `
             }
           >
             <View
+              collapsable={false}
               style={
                 Object {
                   "backgroundColor": "transparent",
@@ -241,6 +250,13 @@ exports[`Stake balance card should render stake balance card 1`] = `
                   "elevation": 0,
                   "marginRight": 8,
                   "minWidth": 64,
+                  "shadowColor": "#000000",
+                  "shadowOffset": Object {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0,
+                  "shadowRadius": 0,
                 }
               }
             >
@@ -327,6 +343,7 @@ exports[`Stake balance card should render stake balance card 1`] = `
               </View>
             </View>
             <View
+              collapsable={false}
               style={
                 Object {
                   "backgroundColor": "transparent",
@@ -336,6 +353,13 @@ exports[`Stake balance card should render stake balance card 1`] = `
                   "borderWidth": 0,
                   "elevation": 0,
                   "minWidth": 64,
+                  "shadowColor": "#000000",
+                  "shadowOffset": Object {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0,
+                  "shadowRadius": 0,
                 }
               }
             >

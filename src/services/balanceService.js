@@ -1,6 +1,6 @@
 import clientCasper from '@/services/clientCasper';
 import ReduxKeyManager from '@/services/reduxKeyManager';
-import { Balance } from '@casperholders/core/dist/services/balance/balance';
+import { Balance } from '@casperholders/core';
 
 /**
  * BalanceService from the CasperHolders core lib

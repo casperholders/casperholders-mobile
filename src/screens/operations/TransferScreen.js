@@ -13,9 +13,7 @@ import useDeployForm from '@/hooks/inputs/useDeployForm';
 import useBalance from '@/hooks/useBalance';
 import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
-import {
-  TransferDeployParameters,
-} from '@casperholders/core/dist/services/deploys/transfer/TransferDeployParameters';
+import { TransferDeployParameters } from '@casperholders/core';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';

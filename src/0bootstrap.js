@@ -1,14 +1,10 @@
 // This file' name starts with a 0 to ensure it is always first even when
 // reordering imports in App.js.
 
-import Big from 'big.js';
 import 'node-libs-react-native/globals';
 import { LogBox } from 'react-native';
-import toFormat from 'toformat';
 
 global.Buffer = require('buffer').Buffer;
-
-toFormat(Big);
 
 LogBox.ignoreLogs([
   'The provided value \'moz-chunked-arraybuffer\'',

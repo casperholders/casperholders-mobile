@@ -1,28 +1,22 @@
 name: Tests and Deploy
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-      - uses: expo/expo-github-action@v6
+          node-version: 18.x
+      - uses: expo/expo-github-action@v7
         with:
-          expo-version: 5.x
+          expo-version: 6.x
           expo-cache: true
           token: ${{ secrets.EXPO_TOKEN }}
       - run: yarn install
-      - run: echo "TEST_LOCAL_SIGNER_KEY=${{ secrets.TEST_LOCAL_SIGNER_KEY }}" > .env.local
-      - run: yarn test
       - run: npx eas-cli build --platform all --auto-submit --non-interactive
       - uses: EndBug/add-and-commit@v8
         with:

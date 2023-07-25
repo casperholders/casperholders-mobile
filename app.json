@@ -1,5 +1,11 @@
 {
   "expo": {
+    "jsEngine": "hermes",
+    "extra": {
+      "eas": {
+        "projectId": "f049deed-3b0a-4921-9009-0bf8f19b8daf"
+      }
+    },
     "owner": "casperholders",
     "name": "Casper Holders",
     "slug": "casperholders-mobile",
@@ -8,6 +14,8 @@
       "ios"
     ],
     "plugins": [
+      "./gradle-config-jnilibs",
+      "./gradle-config",
       [
         "@config-plugins/react-native-ble-plx",
         {
@@ -16,11 +24,9 @@
             "peripheral",
             "central"
           ],
-          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device.",
-          "bluetoothPeripheralPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device."
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices. This is only needed to detect your Ledger device."
         }
-      ],
-      "./gradle-config"
+      ]
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -39,13 +45,18 @@
     ],
     "android": {
       "package": "com.casperholders.wallet",
-      "permissions": [],
-      "versionCode": 22
+      "permissions": [
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN",
+        "BLUETOOTH_SCAN",
+        "BLUETOOTH_CONNECT"
+      ],
+      "versionCode": 32
     },
     "ios": {
       "bundleIdentifier": "com.casperholders.wallet",
       "supportsTablet": true,
-      "buildNumber": "22",
+      "buildNumber": "32",
       "config": {
         "usesNonExemptEncryption": false
       },

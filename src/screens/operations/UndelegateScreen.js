@@ -12,7 +12,7 @@ import useBalance from '@/hooks/useBalance';
 import useBalanceValidator from '@/hooks/useBalanceValidator';
 import useNetwork from '@/hooks/useNetwork';
 import deployManager from '@/services/deployManager';
-import { Undelegate } from '@casperholders/core/dist/services/deploys/auction/actions/undelegate';
+import { Undelegate } from '@casperholders/core';
 import Big from 'big.js';
 import { useEffect, useState } from 'react';
 import { Paragraph } from 'react-native-paper';
@@ -26,7 +26,7 @@ import { Paragraph } from 'react-native-paper';
  */
 export default function UndelegateScreen({ navigation, route }) {
   const minAmount = 1;
-  const unstakeFee = 0.00001;
+  const unstakeFee = 2.5;
   const activeKey = usePublicKey();
   const network = useNetwork();
   const deployForm = useDeployForm(
@@ -53,7 +53,7 @@ export default function UndelegateScreen({ navigation, route }) {
   const [balanceLoading, balance, balanceError] = useBalance();
   const [balanceAfter, setBalanceAfter] = useState(undefined);
 
-  const [balanceValidatorLoading, balanceValidator, balanceValidatorError] = useBalanceValidator([deployForm.form.values.address], deployForm.form.values.address);
+  const [, balanceValidator] = useBalanceValidator(deployForm.form.values.address, [deployForm.form.values.address]);
   useEffect(() => {
     try {
       setBalanceAfter(

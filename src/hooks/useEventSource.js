@@ -21,7 +21,7 @@ export default function useEventSource(listener) {
 
   useEffect(() => {
     if (!APP_DISABLE_EVENT_SOURCES) {
-      setEventSource(new RNEventSource(`${network.rpcUrl}/events/?start_from=0`));
+      setEventSource(new RNEventSource(`${network.eventsUrl}/events/main?start_from=0`));
 
       return stopListening;
     }

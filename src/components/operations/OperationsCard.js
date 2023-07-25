@@ -2,11 +2,7 @@ import CardWithIcons from '@/components/common/CardWithIcons';
 import Icon from '@/components/common/Icon';
 import formatCasperAmount from '@/helpers/formatCasperAmount';
 import useNetwork from '@/hooks/useNetwork';
-import {
-  STATUS_KO,
-  STATUS_OK,
-  STATUS_UNKNOWN,
-} from '@casperholders/core/dist/services/results/deployResult';
+import { DeployResult } from '@casperholders/core';
 import { upperFirst } from 'lodash';
 import { useMemo } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
@@ -30,21 +26,22 @@ export default function OperationsCard(
   const theme = useTheme();
   const network = useNetwork();
   const RESULT_STATUSES_ICONS = {
-    [STATUS_UNKNOWN]: 'help-circle',
-    [STATUS_OK]: 'check-circle',
-    [STATUS_KO]: 'alert-circle',
+    [DeployResult.STATUS_UNKNOWN]: 'help-circle',
+    [DeployResult.STATUS_OK]: 'check-circle',
+    [DeployResult.STATUS_KO]: 'alert-circle',
   };
   const RESULT_STATUSES_COLORS = {
-    [STATUS_UNKNOWN]: 'white',
-    [STATUS_OK]: theme.colors.success,
-    [STATUS_KO]: theme.colors.error,
+    [DeployResult.STATUS_UNKNOWN]: 'white',
+    [DeployResult.STATUS_OK]: theme.colors.success,
+    [DeployResult.STATUS_KO]: theme.colors.error,
   };
 
   const icon = RESULT_STATUSES_ICONS[status];
   const color = RESULT_STATUSES_COLORS[status];
   const url = useMemo(() => `${network.csprLiveUrl}/deploy/${hash}`, [network]);
   const details = `Amount: ${formatCasperAmount(amount)} - Cost: ${formatCasperAmount(cost)}`;
-  const loading = status === STATUS_UNKNOWN;
+
+  const loading = status === DeployResult.STATUS_UNKNOWN;
 
   return (
     <CardWithIcons

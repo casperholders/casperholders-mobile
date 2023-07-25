@@ -3,9 +3,7 @@ import useAsyncData from '@/hooks/useAsyncData';
 import useNetwork from '@/hooks/useNetwork';
 import balanceService from '@/services/balanceService';
 import clientCasper from '@/services/clientCasper';
-import { NoActiveKeyError } from '@casperholders/core/dist/services/errors/noActiveKeyError';
-import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/noStakeBalanceError';
-import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
+import { CurrencyUtils, NoActiveKeyError, NoStakeBalanceError } from '@casperholders/core';
 import Big from 'big.js';
 
 /**

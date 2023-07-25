@@ -8,21 +8,20 @@ import OperationsCard from '@/components/operations/OperationsCard';
 import useDispatchUnsetDeployResult from '@/hooks/actions/useDispatchUnsetDeployResult';
 import useDeployResultsHashs from '@/hooks/operations/useDeployResultsHashs';
 import useHistory from '@/hooks/useHistory';
-import { CurrencyUtils } from '@casperholders/core/dist/services/helpers/currencyUtils';
-import { STATUS_KO, STATUS_OK } from '@casperholders/core/dist/services/results/deployResult';
+import { CurrencyUtils, DeployResult } from '@casperholders/core';
 import { useEffect, useMemo, useState } from 'react';
-import { Button, useTheme } from 'react-native-paper';
 import { ScrollView } from 'react-native';
+import { Button, useTheme } from 'react-native-paper';
 
 const QUICK_FILTERS = [
-  { text: 'Transfer', query: 'type=eq.transfer' },
-  { text: 'Stake', query: 'type=eq.delegate' },
-  { text: 'Unstake', query: 'type=eq.undelegate' },
+  { text: 'Transfer', query: 'metadata_type=eq.transfer' },
+  { text: 'Stake', query: 'metadata_type=eq.delegate' },
+  { text: 'Unstake', query: 'metadata_type=eq.undelegate' },
 ];
 
 QUICK_FILTERS.push({
-  text: 'Other', query: `type=not.in.(${QUICK_FILTERS.map(
-    ({ query }) => `"${query.replace('type=eq.', '')}"`,
+  text: 'Other', query: `metadata_type=not.in.(${QUICK_FILTERS.map(
+    ({ query }) => `"${query.replace('metadata_type=eq.', '')}"`,
   ).join(',')})`,
 });
 
@@ -93,17 +92,20 @@ export default function OperationsHistory() {
         description={historyDescription}
       />
       <GridCol>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
           <ButtonGroup>
             {QUICK_FILTERS.map((quickFilter, index) => (
-                <Button
-                    key={index}
-                    mode={filter === quickFilter && 'contained'}
-                    color={filter === quickFilter ? theme.colors.primary : theme.colors.text}
-                    onPress={() => handleToggleFilter(quickFilter)}
-                >
-                  {quickFilter.text}
-                </Button>
+              <Button
+                key={index}
+                mode={filter === quickFilter && 'contained'}
+                color={filter === quickFilter ? theme.colors.primary : theme.colors.text}
+                onPress={() => handleToggleFilter(quickFilter)}
+              >
+                {quickFilter.text}
+              </Button>
             ))}
           </ButtonGroup>
         </ScrollView>
@@ -128,10 +130,10 @@ export default function OperationsHistory() {
           {history.operations.map((deployData) => (
             <GridCol key={deployData.hash}>
               <OperationsCard
-                type={deployData.type}
+                type={deployData.metadata_type}
                 hash={deployData.hash}
-                status={deployData.result ? STATUS_OK : STATUS_KO}
-                amount={convertMotesToCasper(deployData.data.amount)}
+                status={deployData.result ? DeployResult.STATUS_OK : DeployResult.STATUS_KO}
+                amount={convertMotesToCasper(deployData.metadata?.amount)}
                 cost={convertMotesToCasper(deployData.cost)}
               />
             </GridCol>

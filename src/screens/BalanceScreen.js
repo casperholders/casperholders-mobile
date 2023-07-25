@@ -1,4 +1,5 @@
 import BalanceLoaderOrAmount from '@/components/balance/BalanceLoaderOrAmount';
+import Erc20Balances from '@/components/balance/Erc20Balances';
 import StakeBalanceCard from '@/components/balance/StakeBalanceCard';
 import Alert from '@/components/common/Alert';
 import CardWithIcons from '@/components/common/CardWithIcons';
@@ -14,7 +15,7 @@ import useStakeBalance from '@/hooks/useStakeBalance';
 import useUniqueKey from '@/hooks/useUniqueKey';
 import useValidatorInfos from '@/hooks/useValidatorInfos';
 import ReadOnlyAdapter from '@/services/signers/readOnlyAdapter';
-import { NoStakeBalanceError } from '@casperholders/core/dist/services/errors/noStakeBalanceError';
+import { NoStakeBalanceError } from '@casperholders/core';
 import Big from 'big.js';
 import { orderBy } from 'lodash';
 import { useMemo, useState } from 'react';
@@ -30,9 +31,9 @@ import { Caption, Subheading } from 'react-native-paper';
 export default function BalanceScreen({ navigation }) {
   const [uniqueKey, updateUniqueKey] = useUniqueKey();
   const network = useNetwork();
-  const [balanceLoading, balance, balanceError] = useBalance([uniqueKey, network]);
-  const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey, network]);
-  const [validatorsInfoLoading, validatorsInfo, validatorsInfoError] = useValidatorInfos([]);
+  const [balanceLoading, balance, balanceError] = useBalance([uniqueKey]);
+  const [stakeLoading, validators, stakeError] = useStakeBalance([uniqueKey]);
+  const [, validatorsInfo] = useValidatorInfos([]);
   const adapter = useAdapter();
   const readOnly = adapter.constructor.ID === ReadOnlyAdapter.ID;
   const loading = balanceLoading || stakeLoading;
@@ -50,11 +51,11 @@ export default function BalanceScreen({ navigation }) {
     let totalFees = Big(0);
     let totalStaked = Big(0);
     validators.forEach(({ validator, stakedTokens }) => {
-      const publicKey = validator
-      const validatorInfo = validatorsInfo.filter((v) => v.publicKey === validator);
+      const publicKey = validator;
+      const validatorInfo = validatorsInfo?.filter((v) => v.publicKey === validator);
       let image = undefined;
       let delegationRate = 0;
-      if (validatorInfo.length > 0) {
+      if (validatorInfo?.length > 0) {
         validator = validatorInfo[0].name;
         image = validatorInfo[0].png;
         delegationRate = validatorInfo[0].delegation_rate;
@@ -96,7 +97,7 @@ export default function BalanceScreen({ navigation }) {
       size={24}
       right
     />
-  ), [stakeData]);
+  ), [stakeData, stakeDetails]);
 
   const handleDetailsStakeToggle = detailsStake ? () => {
     setStakeDetails(!stakeDetails);
@@ -137,6 +138,9 @@ export default function BalanceScreen({ navigation }) {
             </Caption>
           </CardWithIcons>
         </GridCol>
+        <GridCol>
+          <Erc20Balances key={uniqueKey} />
+        </GridCol>
         <SectionHeading title="Details" />
         <GridCol>
           <CardWithIcons
@@ -149,6 +153,7 @@ export default function BalanceScreen({ navigation }) {
             <BalanceLoaderOrAmount
               loading={balanceLoading}
               amount={balance}
+              style={{ fontWeight: 'bold' }}
             />
             <Caption>
               Unstaked CSPR funds
@@ -169,6 +174,7 @@ export default function BalanceScreen({ navigation }) {
             <BalanceLoaderOrAmount
               loading={stakeLoading}
               amount={stakeData?.totalStaked || '0'}
+              style={{ fontWeight: 'bold' }}
             />
             <Caption>
               Total staked CSPR funds
@@ -182,8 +188,8 @@ export default function BalanceScreen({ navigation }) {
               message="You are in Read Only mode. You can't make any operations."
             />
           }
-          {stakeData.stakes.map((stake, index) => <StakeBalanceCard
-            key={index}
+          {stakeData.stakes.map((stake) => <StakeBalanceCard
+            key={stake.publicKey}
             navigation={navigation}
             {...stake}
           />)}

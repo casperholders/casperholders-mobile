@@ -21,7 +21,11 @@ export default class TestnetAdapter extends AbstractNetworkAdapter {
   }
 
   get rpcUrl() {
-    return 'https://node.testnet.casperholders.com';
+    return 'https://rpc.testnet.casperholders.com/rpc';
+  }
+
+  get eventsUrl() {
+    return 'http://78.46.68.30:9999';
   }
 
   get dataApiUrl() {
