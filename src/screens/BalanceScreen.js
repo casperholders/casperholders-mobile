@@ -52,10 +52,10 @@ export default function BalanceScreen({ navigation }) {
     let totalStaked = Big(0);
     validators.forEach(({ validator, stakedTokens }) => {
       const publicKey = validator;
-      const validatorInfo = validatorsInfo.filter((v) => v.publicKey === validator);
+      const validatorInfo = validatorsInfo?.filter((v) => v.publicKey === validator);
       let image = undefined;
       let delegationRate = 0;
-      if (validatorInfo.length > 0) {
+      if (validatorInfo?.length > 0) {
         validator = validatorInfo[0].name;
         image = validatorInfo[0].png;
         delegationRate = validatorInfo[0].delegation_rate;
